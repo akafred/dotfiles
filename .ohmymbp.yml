@@ -1,0 +1,202 @@
+# Prereqs:
+#    xcode-select --install
+#    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+#    brew doctor
+#    brew install ansible
+#    sudo mkdir -p /etc/ansible
+#    curl https://raw.github.com/ansible/ansible/devel/examples/ansible.cfg | grep -v 'library        = /usr/share/ansible' | sudo tee .ansible.cfg > /dev/null
+#    echo 'localhost ansible_connection=local' | sudo tee /etc/ansible/hosts >> /dev/null
+# Then you can run this setup with:
+#     ansible-playbook -Kv .ohmymbp.yml
+#
+# Norsk stavekontroll: http://www.applehjelp.no/eplekart/lion-stavekontroll/
+
+- hosts: localhost
+  tasks:
+    - name: install tap homebrew cask
+      command: >
+        /usr/local/bin/brew tap phinze/homebrew-cask
+        creates=/usr/local/Library/Taps/phinze-cask
+    
+    - name: install homebrew cask after updating Homebrew
+      homebrew: name=brew-cask update_homebrew=yes
+
+    - name: upgrade brew installed tools
+      command: /usr/local/bin/brew upgrade
+
+    - name: install common tools using brew
+      homebrew: name={{ item }}
+      with_items:
+       - tree    
+
+    - name: create dotfiles-directory in Dropbox
+      file: path={{ ansible_env.HOME }}/Dropbox/dotfiles/{{ansible_user_id}}/dotfiles state=directory
+
+    - name: setup syslog to log cron to /var/log/cron.log
+      sudo: true
+      lineinfile: >
+        dest=/etc/syslog.conf
+        regexp=^cron.*
+        line="cron.*      /var/log/cron.log"
+
+    - name: touch /etc/crontab due to osx cron launcd setup (starts cron)
+      sudo: true
+      command: touch /etc/crontab creates=/etc/crontab
+
+    - name: create rsync-exclude-file
+      command: touch {{ ansible_env.HOME }}/.rsync-exclude creates={{ ansible_env.HOME }}/.rsync-exclude
+
+    - name: add entries to .rsync-exclude
+      lineinfile: dest={{ ansible_env.HOME }}/.rsync-exclude line={{ item }}
+      with_items:
+        - "*.log"
+        - "*.swo"
+        - "*.swp"
+        - .*.retry
+        - .CFUserTextEncoding
+        - .DS_Store
+        - .RData
+        - .Rhistory
+        - .Trash
+        - .ansible
+        - .anslible.cfg
+        - .bash_history
+        - .dropbox
+        - .freemind
+        - .gem
+        - .gitconfig
+        - .gitignore-global
+        - .lesshst
+        - .rstudio-desktop
+        - .rsync-exclude
+        - .ssh
+        - .subversion
+        - .vagrant.d
+        - .viminfo
+
+    - name: setup cron based rsync of dotfiles to Dropbox-dotfiles
+      cron: > 
+        name="copy dotfiles to Dropbox" 
+        minute="*/10" 
+        job="/usr/bin/rsync -av --delete --delete-excluded --exclude-from={{ ansible_env.HOME }}/.rsync-exclude {{ ansible_env.HOME }}/.??* {{ ansible_env.HOME }}/Dropbox/dotfiles/{{ansible_user_id}}/dotfiles >> {{ ansible_env.HOME }}/.rsync.log"
+
+    - name: install applications
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+        - alfred
+        - dropbox
+        - spotify
+        - evernote
+        - skitch
+        - sublime-text
+        - dash
+        - divvy
+        - jumpcut
+        - right-zoom
+        - appcleaner
+        - light-table
+        - vagrant
+        - caffeine
+        - java
+        - freemind
+
+    - name: install half decent browser - chromium
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+        - chromium
+
+    - name: install codecs for HTML5 video
+      homebrew: name={{ item }}
+      with_items:
+       - ffmpeg    
+
+    - name: create personal bin folder
+      file: mode=0750 path={{ ansible_env.HOME }}/bin state=directory
+
+    - name: add personal bin folder to path
+      sudo: true
+      lineinfile: >
+        dest=/etc/path.d/personal-bin
+        line=~/bin
+        regexp=~/bin
+        mode=0644 
+        create=yes
+
+    - name: install sublime-text executable soft link
+      file: >
+        src="{{ ansible_env.HOME }}/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl"
+        dest={{ ansible_env.HOME }}/bin/subl
+        mode=0750
+        state=link
+
+
+    - name: install applications needing sudo
+      sudo: true
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+        - virtualbox
+        - xtrafinder
+        - lastpass-universal
+
+    - name: install vagrant plugin for caching
+      command: /usr/bin/vagrant plugin install vagrant-cachier creates=.vagrant.d/gems/gems/vagrant-cachier-0.5.1
+
+    - name: setup git - name
+      command: git config --global user.name "akafred"
+
+    - name: setup git - email
+      command: git config --global user.email "github@akafred.com" 
+  
+    - name: create .gitignore_global
+      command: touch {{ ansible_env.HOME }}/.gitignore_global creates={{ ansible_env.HOME }}/.gitignore_global
+
+    - name: add entries to .gitignore_global
+      lineinfile: dest={{ ansible_env.HOME }}/.gitignore_global line={{ item }}
+      with_items:
+        - .DS_Store
+
+    - name: config immediate autocorrect in git
+      command: git config --global {{ item }}
+      with_items:
+       - core.excludesfile ~/.gitignore_global
+       - push.default simple
+       - help.autocorrect -1
+       - alias.co checkout
+       - alias.ci commit
+       - alias.st status
+       - alias.br branch
+       - alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+       - alias.type 'cat-file -t'
+       - alias.dump 'cat-file -p'
+       - color.diff auto
+       - color.status auto
+       - color.branch auto
+
+    - name: install r using brew - install science-tap
+      command: >
+        /usr/local/bin/brew tap homebrew/science
+        creates=/usr/local/Library/Taps/homebrew-science
+ 
+    - name: install r using brew - we need X11 - installing XQuartz
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+       - xquartz
+
+    - name: install r using brew - install r
+      homebrew: name={{ item }}
+      with_items:
+       - r
+ 
+    - name: link r into standard location on osx
+      sudo: true
+      file: >
+        src="/usr/local/opt/r/R.framework"
+        dest="/Library/Frameworks/R.framework"
+        mode=0755
+        state=link
+
+    - name: install RStudio
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+       - rstudio
+
