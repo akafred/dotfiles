@@ -1,0 +1,4 @@
+- name: install common tools using brew
+  homebrew: name={{ item }}
+  with_items:
+   - tree    

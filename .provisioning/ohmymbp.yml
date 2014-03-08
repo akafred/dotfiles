@@ -1,0 +1,43 @@
+# Prereqs:
+#     Run .provisioning/bootstrap.sh
+#
+# Then you can run this setup with:
+#     ansible-playbook -Kv .provisioning/ohmymbp.yml
+#
+# Norsk stavekontroll: http://www.applehjelp.no/eplekart/lion-stavekontroll/
+
+- hosts: localhost
+  roles:
+    - perfectly_brewed
+    - caskready
+    - cronable
+    - dropboxy
+    - rsync_dots_to_dropbox
+    - personal-bin
+    - cli-tools
+    - git-mods
+    - os-tools
+    - a_more_usable_ui
+    - browsers_and_tweaks
+    - productivity
+    - sublime
+    - r-development
+    - vagrantready
+    - spotify
+
+# Things not yet ready to be certain parts of ohmymbp
+
+- hosts: localhost
+  tasks:
+    - name: install applications
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+        - dash
+        - appcleaner
+        - light-table
+
+    - name: install applications needing sudo
+      sudo: true
+      command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+      with_items:
+        - xtrafinder

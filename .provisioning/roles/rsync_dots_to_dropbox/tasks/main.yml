@@ -1,0 +1,40 @@
+
+- name: create dotfiles-directory in Dropbox
+  file: path={{ ansible_env.HOME }}/Dropbox/dotfiles/{{ansible_user_id}}/dotfiles state=directory
+
+- name: create rsync-exclude-file
+  command: touch {{ ansible_env.HOME }}/.rsync-exclude creates={{ ansible_env.HOME }}/.rsync-exclude
+
+- name: add entries to .rsync-exclude
+  lineinfile: dest={{ ansible_env.HOME }}/.rsync-exclude line={{ item }}
+  with_items:
+    - "*.log"
+    - "*.swo"
+    - "*.swp"
+    - .*.retry
+    - .CFUserTextEncoding
+    - .DS_Store
+    - .RData
+    - .Rhistory
+    - .Trash
+    - .ansible
+    - .ansible.cfg
+    - .bash_history
+    - .dropbox
+    - .freemind
+    - .gem
+    - .gitconfig
+    - .gitignore_global
+    - .lesshst
+    - .rstudio-desktop
+    - .rsync-exclude
+    - .ssh
+    - .subversion
+    - .vagrant.d
+    - .viminfo
+
+- name: setup cron based rsync of dotfiles to Dropbox-dotfiles
+  cron: > 
+    name="copy dotfiles to Dropbox" 
+    minute="*/10" 
+    job="/usr/bin/rsync -av --delete --delete-excluded --exclude-from={{ ansible_env.HOME }}/.rsync-exclude {{ ansible_env.HOME }}/.??* {{ ansible_env.HOME }}/Dropbox/dotfiles/{{ansible_user_id}}/dotfiles >> {{ ansible_env.HOME }}/.rsync.log"

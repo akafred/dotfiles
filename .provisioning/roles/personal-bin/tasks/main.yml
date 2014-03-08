@@ -1,0 +1,14 @@
+
+- name: create personal bin folder
+  file: mode=0750 path={{ ansible_env.HOME }}/bin state=directory
+
+# Does this work??
+- name: add personal bin folder to path
+  sudo: true
+  lineinfile: >
+    dest=/etc/path.d/personal-bin
+    line=~/bin
+    regexp=~/bin
+    mode=0644 
+    create=yes
+

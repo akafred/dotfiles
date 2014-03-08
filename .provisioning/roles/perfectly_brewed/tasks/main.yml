@@ -1,0 +1,7 @@
+
+- name: update homebrew (and install tree)
+  homebrew: name=tree update_homebrew=yes
+
+- name: upgrade installed brews
+  command: /usr/local/bin/brew upgrade
+

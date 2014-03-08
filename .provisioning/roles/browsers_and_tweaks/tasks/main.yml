@@ -1,0 +1,16 @@
+
+- name: install half decent browser - chromium
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+    - chromium
+
+- name: install codecs for HTML5 video
+  homebrew: name={{ item }}
+  with_items:
+   - ffmpeg    
+
+- name: install lastpass
+  sudo: true
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+    - lastpass-universal

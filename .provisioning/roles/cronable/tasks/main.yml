@@ -1,0 +1,11 @@
+
+- name: setup syslog to log cron to /var/log/cron.log
+  sudo: true
+  lineinfile: >
+    dest=/etc/syslog.conf
+    regexp=^cron.*
+    line="cron.*      /var/log/cron.log"
+
+- name: touch /etc/crontab due to osx cron launchd setup (starts cron)
+  sudo: true
+  command: touch /etc/crontab creates=/etc/crontab

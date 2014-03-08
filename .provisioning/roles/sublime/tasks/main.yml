@@ -1,0 +1,12 @@
+
+- name: install applications
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+    - sublime-text
+
+- name: install sublime-text executable soft link
+  file: >
+    src="{{ ansible_env.HOME }}/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl"
+    dest={{ ansible_env.HOME }}/bin/subl
+    mode=0750
+    state=link

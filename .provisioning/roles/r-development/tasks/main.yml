@@ -1,0 +1,28 @@
+- name: install r using brew - install science-tap
+  command: >
+    /usr/local/bin/brew tap homebrew/science
+    creates=/usr/local/Library/Taps/homebrew-science
+
+- name: install r using brew - we need X11 - installing XQuartz
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+   - xquartz
+
+- name: install r using brew - install r
+  homebrew: name={{ item }}
+  with_items:
+   - r
+
+- name: link r into standard location on osx
+  sudo: true
+  file: >
+    src="/usr/local/opt/r/R.framework"
+    dest="/Library/Frameworks/R.framework"
+    mode=0755
+    state=link
+
+- name: install RStudio
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+   - rstudio
+

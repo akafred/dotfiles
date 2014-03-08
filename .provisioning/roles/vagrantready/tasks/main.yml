@@ -1,0 +1,15 @@
+
+ - name: install virtualbox
+   sudo: true
+   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+   with_items:
+     - virtualbox
+
+ - name: install vagrant
+   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+   with_items:
+     - vagrant
+
+# Need to fix the version number
+ - name: install vagrant plugin for caching
+   command: /usr/bin/vagrant plugin install vagrant-cachier creates=.vagrant.d/gems/gems/vagrant-cachier-0.6.0
