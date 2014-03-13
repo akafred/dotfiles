@@ -1,8 +1,9 @@
 
-- name: install half decent browser - chromium
+- name: install half decent browser - or two
   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
   with_items:
     - chromium
+    - firefox
 
 - name: install codecs for HTML5 video
   homebrew: name={{ item }}
