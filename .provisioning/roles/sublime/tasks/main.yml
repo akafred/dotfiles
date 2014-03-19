@@ -16,4 +16,5 @@
     src={{ item }} 
     dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Packages/User/"
   with_items:
+    - Preferences.sublime-settings
     - groovy.sublime-build
