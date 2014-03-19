@@ -17,9 +17,11 @@
     - .RData
     - .Rhistory
     - .Trash
+    - .Xauthority
     - .ansible
     - .ansible.cfg
     - .bash_history
+    - .cache
     - .dropbox
     - .freemind
     - .gem
@@ -27,8 +29,10 @@
     - .gitignore_global
     - .groovy
     - .lesshst
+    - .rnd
     - .rstudio-desktop
     - .rsync-exclude
+    - .serverauth.*
     - .ssh
     - .subversion
     - .vagrant.d
