@@ -10,3 +10,10 @@
     dest={{ ansible_env.HOME }}/bin/subl
     mode=0750
     state=link
+
+- name: copy my settings files to sublime-text
+  copy: >
+    src={{ item }} 
+    dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Packages/User/"
+  with_items:
+    - groovy.sublime-build

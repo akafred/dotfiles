@@ -25,6 +25,7 @@
     - .gem
     - .gitconfig
     - .gitignore_global
+    - .groovy
     - .lesshst
     - .rstudio-desktop
     - .rsync-exclude
