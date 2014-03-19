@@ -1,0 +1,14 @@
+- name: install octave - need science-tap
+  command: >
+    /usr/local/bin/brew tap homebrew/science
+    creates=/usr/local/Library/Taps/homebrew-science
+
+- name: install octave  - we need X11 - installing XQuartz
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+   - xquartz
+
+- name: install octave
+  homebrew: name={{ item }}
+  with_items:
+   - octave
