@@ -29,13 +29,13 @@
     - .gitignore_global
     - .groovy
     - .lesshst
-    - .ocateve_hist
     - .rnd
     - .rstudio-desktop
     - .rsync-exclude
     - .serverauth.*
     - .ssh
     - .subversion
+    - .octave_hist
     - .vagrant.d
     - .viminfo
 
