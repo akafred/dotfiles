@@ -1,0 +1,6 @@
+- name: make hidden files visible
+  command: defaults write com.apple.Finder AppleShowAllFiles YES
+
+# a bit brutal and wide?
+- name: restart Finder
+  command: killall Finder
