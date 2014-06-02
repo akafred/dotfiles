@@ -1,3 +1,13 @@
 
 - name: install groovy
   homebrew: name=groovy
+
+- name: do we have gvm?
+  command: file {{ ansible_env.HOME }}/.gvm
+  register: gvm_installed
+
+- name: install gvm (http://gvmtool.net/)
+  shell: curl -s get.gvmtool.net | bash
+  when: gvm_installed|failed
+
+# should install groovy using gvm!
