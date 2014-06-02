@@ -1,0 +1,9 @@
+
+- name: install scala and sbt using brew
+  homebrew: name={{ item }}
+  with_items:
+   - scala
+   - sbt
+
+- name: add entry to .sbtconfig
+  lineinfile: dest="{{ ansible_env.HOME }}/.sbtconfig" line='SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"'
