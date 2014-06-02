@@ -1,8 +1,8 @@
 
 - name: install tap homebrew cask
   command: >
-    /usr/local/bin/brew tap phinze/homebrew-cask
-    creates=/usr/local/Library/Taps/phinze-cask
+    /usr/local/bin/brew tap caskroom/cask
+    creates=/usr/local/Library/Taps/caskroom/homebrew-cask
 
 - name: install homebrew cask after updating Homebrew
   homebrew: name=brew-cask update_homebrew=yes
