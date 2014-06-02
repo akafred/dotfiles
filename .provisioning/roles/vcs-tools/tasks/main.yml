@@ -1,0 +1,10 @@
+- name: install sourcetree
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+    - sourcetree
+
+
+- name: install gource - https://code.google.com/p/gource/
+  homebrew: name={{ item }}
+  with_items:
+   - gource
