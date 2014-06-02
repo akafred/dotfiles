@@ -21,21 +21,39 @@
     - .ansible
     - .ansible.cfg
     - .bash_history
+    - .bash_profile
+    - .bashrc
     - .cache
+    - .cups
+    - .distlib
     - .dropbox
+    - .dropbox-master
     - .freemind
     - .gem
+    - .hgignore_global
     - .gitconfig
     - .gitignore_global
+    - .grails
+    - .grails_history
     - .groovy
+    - .gvm
+    - .ivy2
+    - .lein
     - .lesshst
+    - .m2
+    - .octave_hist
+    - .pgadmin_histoqueries
+    - .pgpass
     - .rnd
     - .rstudio-desktop
     - .rsync-exclude
+    - .sbt
+    - .sbtconfig
+    - .scala_history
     - .serverauth.*
     - .ssh
     - .subversion
-    - .octave_hist
+    - .tapas
     - .vagrant.d
     - .viminfo
 
