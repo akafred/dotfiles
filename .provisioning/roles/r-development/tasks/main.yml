@@ -1,12 +1,12 @@
-- name: install r using brew - install science-tap
-  command: >
-    /usr/local/bin/brew tap homebrew/science
-    creates=/usr/local/Library/Taps/homebrew-science
-
 - name: install r using brew - we need X11 - installing XQuartz
   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
   with_items:
    - xquartz
+
+- name: install r using brew - install science-tap
+  command: >
+    /usr/local/bin/brew tap homebrew/science
+    creates=/usr/local/Library/Taps/homebrew-science
 
 - name: install r using brew - install r
   homebrew: name={{ item }}
