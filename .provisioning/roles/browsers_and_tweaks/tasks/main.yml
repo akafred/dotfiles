@@ -5,6 +5,15 @@
     - chromium
     - firefox
 
+- name: add firefox to path
+  sudo: true
+  lineinfile: >
+    dest=/etc/paths.d/70-firefox
+    line=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS
+    regexp=.*firefox.*
+    mode=0644
+    create=yes
+
 - name: install codecs for HTML5 video
   homebrew: name={{ item }}
   with_items:
