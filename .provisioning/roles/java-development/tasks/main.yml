@@ -1,0 +1,22 @@
+- name: install intellij
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+    - intellij-idea
+
+- name: install maven
+  homebrew: name=maven
+
+# - name: intellij doesnt start with java 1.7
+# /opt/homebrew-cask/Caskroom/intellij-idea/13.1.1/IntelliJ IDEA 13.app/Contents/Info.plist
+#      <key>JVMVersion</key>
+#      <string>1.6*</string>
+# Need to change to 1.7*  - now done manually...
+
+
+# These two commands are nice!
+#alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d[,_]" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+#function java_use() {
+#    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+#    export PATH=$JAVA_HOME/bin:$PATH
+#    java -version
+#}

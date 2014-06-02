@@ -26,6 +26,8 @@
     - vcs-tools
     - r-development
     - machine-learning
+    - javaready
+    - java-development
     - groovy-development
     - vagrantready
     - spotify
