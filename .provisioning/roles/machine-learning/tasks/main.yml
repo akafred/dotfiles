@@ -8,7 +8,5 @@
   with_items:
    - xquartz
 
-- name: install octave
-  homebrew: name={{ item }}
-  with_items:
-   - octave
+- name: install octave (docs require tex)
+  homebrew: name=octave install_options=without-docs,without-gui
