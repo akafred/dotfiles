@@ -44,3 +44,7 @@
     - alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
     - alias.type 'cat-file -t'
     - alias.dump 'cat-file -p'
+
+- name: install git-extras
+  homebrew: name=git-extras
+  
