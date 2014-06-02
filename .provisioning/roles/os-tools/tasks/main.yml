@@ -3,3 +3,4 @@
   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
   with_items:
     - appcleaner
+    - forklift
