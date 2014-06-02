@@ -45,6 +45,10 @@
     - alias.type 'cat-file -t'
     - alias.dump 'cat-file -p'
 
+- name: install git up (globally so it will be picked up as an external command)
+  sudo: true
+  gem: name=git-up state=latest user_install=false
+
 - name: install git-extras
   homebrew: name=git-extras
-  
+
