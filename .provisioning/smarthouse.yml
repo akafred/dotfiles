@@ -1,0 +1,24 @@
+
+# Prereqs:
+#
+#
+# Z-Wave-support:
+#
+# 	Hardware:
+#   	AeoTec Z-Stick Series 2 - with Silicon Labs CP2102 USB to UART Bridge VCP (Virtual Com Port)
+#
+#	Drivers: 
+#		Manually install driver for Silicon Labs CP2102 USB to UART Bridge Virtual Com Port 
+#			http://www.silabs.com/Support%20Documents/Software/Mac_OSX_VCP_Driver.zip
+#	
+#	After installing the driver and plugging in the usb stick you should have a /dev/tty.SLAB_USBtoUART (and /dev/cu.SLAB_USBtoUART )
+# 
+
+- hosts: localhost
+  vars:
+    openhab_install_dir: "{{ ansible_env.HOME }}/opt/openhab"
+    openhab_version: 1.4.0
+    habmin_version: 0.1.0-alpha
+  roles:
+    - smarthouse
+

@@ -1,0 +1,34 @@
+
+
+- name: install openHAB runtime
+  include: install_openhab_component.yml component=runtime
+
+- name: install openHAB addons
+  include: install_openhab_component.yml component=addons
+
+- name: install openHAB designer-macosx64
+  include: install_openhab_component.yml component=designer-macosx64
+
+- name: link addon bindings into runtime
+  file: >
+    state=link
+    src={{ openhab_install_dir }}/addons/{{openhab_version}}/org.openhab.binding.{{ item }}-{{openhab_version}}.jar
+    dest={{ openhab_install_dir }}/runtime/{{openhab_version}}/addons/org.openhab.binding.{{ item }}-{{openhab_version}}.jar
+  with_items:
+    - netatmo
+    - rfxcom
+    - zwave
+
+- name: install HABmin
+  include: install_habmin.yml 
+
+- name: link openHAB designer into application directory
+  file: >
+    state=link
+    src="{{ openhab_install_dir }}/designer-macosx64/{{openhab_version}}/openHAB Designer"
+    dest="{{ ansible_env.HOME }}/Downloads/openHAB Designer"
+    
+- name: make sure we have an openHAB configuration-file
+  command: >
+    cp {{ openhab_install_dir }}/runtime/{{openhab_version}}/configurations/openhab_default.cfg {{ openhab_install_dir }}/runtime/{{openhab_version}}/configurations/openhab.cfg
+    creates={{ openhab_install_dir }}/runtime/{{openhab_version}}/configurations/openhab.cfg
