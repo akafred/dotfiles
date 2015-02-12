@@ -3,7 +3,7 @@
 # bootstrap.sh - one-time initialization of homebrew+ansible environment on OS X
 
 # Install xcode
-sudo xcode-select --install
+sudo xcode-select --install || true
 
 # Install Homebrew
 
