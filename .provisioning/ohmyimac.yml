@@ -13,7 +13,7 @@
 #    - cronable
     - os-adjustments
     - cloudy
-#    - personal-bin
+    - personal-bin
     - cli-tools
     - git-mods
     - os-tools
