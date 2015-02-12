@@ -16,7 +16,7 @@ brew install ansible
 
 # Create a local ansible-config
 sudo mkdir -p /etc/ansible
-curl https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg | tee .ansible.cfg > /dev/null
+curl https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg | sudo tee /etc/ansible/ansible.cfg > /dev/null
 
 # Add localhost with connection local to ansible's hosts file.
 echo 'localhost ansible_connection=local' | sudo tee /etc/ansible/hosts >> /dev/null
