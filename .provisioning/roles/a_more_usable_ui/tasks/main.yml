@@ -6,7 +6,3 @@
     - divvy
     - jumpcut
     - rightzoom
-
-- name: include caskroom in alfred
-  command: /usr/local/bin/brew cask alfred link
-
