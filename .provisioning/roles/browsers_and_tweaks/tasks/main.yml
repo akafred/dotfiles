@@ -4,6 +4,7 @@
   with_items:
     - chromium
     - firefox
+    - google-chrome
 
 - name: add firefox to path
   sudo: true
