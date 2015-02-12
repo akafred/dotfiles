@@ -1,0 +1,35 @@
+# Prereqs:
+#     Run .provisioning/bootstrap.sh
+#
+# Then you can run this setup with:
+#     ansible-playbook -Kv .provisioning/ohmyimac.yml
+#
+# Norsk stavekontroll: http://www.applehjelp.no/eplekart/lion-stavekontroll/
+
+- hosts: localhost
+  roles:
+    - perfectly_brewed
+    - caskready
+#    - cronable
+    - os-adjustments
+    - cloudy
+#    - personal-bin
+    - cli-tools
+    - git-mods
+    - os-tools
+    - a_more_usable_ui
+    - browsers_and_tweaks
+    - productivity
+    - collaborative
+    - sublime
+    - vcs-tools
+#    - r-development
+#    - machine-learning
+#    - javaready
+#    - java-development
+#    - groovy-development
+#    - scala-development
+#    - perl-development
+    - vagrantready
+    - spotify
+#    - experimental
