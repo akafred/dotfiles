@@ -52,6 +52,9 @@
   sudo: true
   gem: name=git-up state=latest user_install=false
 
-- name: install git-extras
-  homebrew: name=git-extras
+- name: install git extras
+  homebrew: name={{ item }}
+  with_items: 
+    - git-extras
+    - tig
 
