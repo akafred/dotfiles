@@ -1,0 +1,20 @@
+- name: install oh_my_zsh
+  shell: >
+    curl -L http://install.ohmyz.sh | sh
+    creates=~/.oh-my-zsh
+
+- name: make zsh default
+  sudo: true
+  command: chsh -s /bin/zsh {{ ansible_env.USER }}
+
+- name: Add modules to .zshrc
+  lineinfile: >
+    dest=~/.zshrc
+    line="plugins=(brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
+    regexp="^[#\s]*plugins="
+
+- name: Add command history sharing to .zshrc
+  lineinfile: >
+    dest=~/.zshrc
+    line="setopt SHARE_HISTORY"
+    regexp="^#[\s]*setopt SHARE_HISTORY"

@@ -17,6 +17,7 @@
     - rsync_dots_to_dropbox
     - personal-bin
     - cli-tools
+    - zshell
     - git-mods
     - os-tools
     - a_more_usable_ui
