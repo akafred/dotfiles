@@ -45,6 +45,8 @@
     - alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
     - alias.type 'cat-file -t'
     - alias.dump 'cat-file -p'
+    - alias.unstage 'reset HEAD'
+    - alias.discard 'checkout --'
 
 - name: install git up (globally so it will be picked up as an external command)
   sudo: true
