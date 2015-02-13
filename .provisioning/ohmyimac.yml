@@ -13,23 +13,30 @@
 #    - cronable
     - os-adjustments
     - cloudy
+#    - salty
     - personal-bin
     - cli-tools
+    - zshell
     - git-mods
     - os-tools
     - a_more_usable_ui
+#    - dockered
     - browsers_and_tweaks
     - productivity
     - collaborative
     - sublime
+#    - emacs
     - vcs-tools
+#    - remoting
 #    - r-development
 #    - machine-learning
 #    - javaready
 #    - java-development
 #    - groovy-development
 #    - scala-development
+#    - clojure-development
 #    - perl-development
+#    - golang-development
     - vagrantready
     - spotify
 #    - experimental
