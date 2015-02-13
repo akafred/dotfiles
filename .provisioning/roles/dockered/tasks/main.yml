@@ -1,0 +1,5 @@
+- name: docker on mac
+  homebrew: name={{ item }}
+  with_items:
+   - docker
+   - boot2docker
