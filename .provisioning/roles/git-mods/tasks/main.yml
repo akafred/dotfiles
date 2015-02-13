@@ -11,6 +11,7 @@
   lineinfile: dest={{ ansible_env.HOME }}/.gitignore_global line={{ item }}
   with_items:
     - .DS_Store
+    - .idea
 
 - name: config to use .gitignore_global
   command: git config --global {{ item }}
