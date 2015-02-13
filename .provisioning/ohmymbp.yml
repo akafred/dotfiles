@@ -35,6 +35,7 @@
     - java-development
     - groovy-development
     - scala-development
+    - clojure-development
     - perl-development
     - golang-development
     - vagrantready
