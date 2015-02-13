@@ -36,6 +36,7 @@
     - groovy-development
     - scala-development
     - perl-development
+    - golang-development
     - vagrantready
     - spotify
     - experimental
