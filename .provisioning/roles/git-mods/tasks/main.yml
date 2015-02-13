@@ -58,3 +58,16 @@
     - git-extras
     - tig
 
+- name: install DiffMerge
+  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  with_items:
+   - diffmerge
+
+- name: config diffmerge
+  command: git config --global {{ item }}
+  with_items:
+   - diff.tool diffmerge
+   - difftool.diffmerge.cmd '/usr/local/bin/diffmerge "$LOCAL" "$REMOTE"'
+   - merge.tool diffmerge
+   - mergetool.diffmerge.trustExitCode true
+   - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
