@@ -13,6 +13,7 @@
     - cronable
     - os-adjustments
     - cloudy
+    - salty
     - rsync_dots_to_dropbox
     - personal-bin
     - cli-tools

@@ -1,0 +1,9 @@
+- name: install saltstack stuff
+  homebrew: name={{ item }}
+  with_items:
+   - saltstack
+
+
+# http://docs.saltstack.com/en/latest/topics/installation/osx.html
+
+# http://docs.saltstack.com/en/latest/ref/configuration/index.html
