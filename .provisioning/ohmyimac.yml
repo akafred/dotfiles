@@ -27,7 +27,7 @@
     - sublime
     - emacs
     - vcs-tools
-#    - remoting
+    - remoting
 #    - r-development
 #    - machine-learning
 #    - javaready
