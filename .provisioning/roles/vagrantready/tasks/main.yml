@@ -1,12 +1,12 @@
 
  - name: install virtualbox
    sudo: true
-   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+   homebrew_cask: name={{ item }}
    with_items:
      - virtualbox
 
  - name: install vagrant
-   command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+   homebrew_cask: name={{ item }}
    with_items:
      - vagrant
 

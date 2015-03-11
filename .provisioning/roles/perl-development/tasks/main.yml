@@ -1,4 +1,4 @@
 - name: install padre
-  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  homebrew_cask: name={{ item }}
   with_items:
    - padre

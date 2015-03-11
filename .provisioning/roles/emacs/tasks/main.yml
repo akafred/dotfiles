@@ -1,5 +1,5 @@
 #  homebrew: name=emacs install_options=cocoa --- trouble: must be copied to applications to work
 - name: Install emacs for osx
-  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  homebrew_cask: name={{ item }}
   with_items:
     - emacs

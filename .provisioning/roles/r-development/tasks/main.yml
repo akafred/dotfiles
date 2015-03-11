@@ -1,5 +1,5 @@
 - name: install r using brew - we need X11 - installing XQuartz
-  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  homebrew_cask: name={{ item }}
   with_items:
    - xquartz
 
@@ -22,7 +22,7 @@
     state=link
 
 - name: install RStudio
-  command: /usr/local/bin/brew cask install {{ item }} creates=/opt/homebrew-cask/Caskroom/{{ item }}
+  homebrew_cask: name={{ item }}
   with_items:
    - rstudio
 
