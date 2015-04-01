@@ -18,3 +18,9 @@
   with_items:
     - Preferences.sublime-settings
     - groovy.sublime-build
+
+- name: download package control 
+  get_url: >
+    url="https://packagecontrol.io/Package Control.sublime-package"
+    dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Installed Packages/"
+    sha256sum="eb2297e1a458f27d836c04bb0cbaf282d0e7a3098092775ccb37ca9d6b2e4b7d"
