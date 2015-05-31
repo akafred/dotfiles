@@ -3,8 +3,8 @@
   with_items:
     - intellij-idea
 
-- name: install maven
-  homebrew: name=maven
+# - name: install maven
+#  homebrew: name=maven
 
 # - name: intellij doesnt start with java 1.7
 # /opt/homebrew-cask/Caskroom/intellij-idea/13.1.1/IntelliJ IDEA 13.app/Contents/Info.plist
