@@ -30,8 +30,8 @@
     - remoting
 #    - r-development
 #    - machine-learning
-#    - javaready
-#    - java-development
+    - javaready
+    - java-development
 #    - groovy-development
 #    - scala-development
 #    - clojure-development
