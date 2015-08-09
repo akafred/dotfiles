@@ -1,13 +1,28 @@
-
 - name: install groovy
-  homebrew: name=groovy
+  homebrew: name=groovy install_options=with-invokedynamic
 
-- name: do we have gvm?
-  command: file {{ ansible_env.HOME }}/.gvm
-  register: gvm_installed
+- name: add groovy to path
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="export GROOVY_HOME=/usr/local/opt/groovy/libexec"
+    regexp="export GROOVY_HOME"
 
-- name: install gvm (http://gvmtool.net/)
-  shell: curl -s get.gvmtool.net | bash
-  when: gvm_installed|failed
-
-# should install groovy using gvm!
+# should install groovy using gvm ?
+#- name: do we have gvm?
+#  command: file {{ ansible_env.HOME }}/.gvm
+#  register: gvm_installed
+#
+#- name: install gvm (http://gvmtool.net/)
+#  shell: curl -s get.gvmtool.net | bash
+#  when: gvm_installed|failed
+#
+#- name: gvm | Install gvm prerequisites for Grails
+#  shell:
+#      curl -s get.gvmtool.net | bash executable: /bin/bash
+#  when: gvm_installed|failed
+#
+#- name: gvm set source | Set source for gvm
+#  shell:
+#    source {{ ansible_env.HOME }}/.gvm/bin/gvm-init.sh && yes | gvm install groovy 2.4.4 executable: /bin/bash 
+#  sudo: no
+#  tags: grails
