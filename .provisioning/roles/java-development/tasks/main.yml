@@ -28,11 +28,14 @@
 #      <string>1.6*</string>
 # Need to change to 1.7*  - now done manually...
 
-
-# These two commands are nice!
-#alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d[,_]" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
-#function java_use() {
-#    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
-#    export PATH=$JAVA_HOME/bin:$PATH
-#    java -version
-#}
+- name: add java_ls and java_use commands
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for java commands"
+    content: |
+             alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d[,_]" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+             function java_use() {
+                 export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+                 export PATH=$JAVA_HOME/bin:$PATH
+                 java -version
+             }
