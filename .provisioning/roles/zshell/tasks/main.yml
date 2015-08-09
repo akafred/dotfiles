@@ -18,3 +18,9 @@
     dest=~/.zshrc
     line="setopt SHARE_HISTORY"
     regexp="^#*[\s]*setopt SHARE_HISTORY"
+
+- name: add paths_homes_etc to zshrc
+  lineinfile: >
+    dest="{{ ansible_env.HOME }}/.zshrc"
+    line="source ~/.paths_homes_etc"
+    regexp="paths_homes_etc"
