@@ -29,7 +29,7 @@
     - vcs-tools
     - remoting
     - r-development
-    - machine-learning
+#    - machine-learning
     - javaready
     - java-development
     - groovy-development
