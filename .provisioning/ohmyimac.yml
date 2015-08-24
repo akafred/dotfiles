@@ -39,6 +39,7 @@
 #    - perl-development
 #    - golang-development
     - vagrantready
-    - spotify
+    - sequel
+#    - spotify
     - steamy
 #    - experimental

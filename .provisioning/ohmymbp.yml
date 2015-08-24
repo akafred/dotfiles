@@ -38,6 +38,7 @@
     - clojure-development
     - perl-development
     - golang-development
+    - sequel
     - vagrantready
     - spotify
     - experimental
