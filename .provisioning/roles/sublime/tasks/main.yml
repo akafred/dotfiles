@@ -23,4 +23,4 @@
   get_url: >
     url="https://packagecontrol.io/Package Control.sublime-package"
     dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Installed Packages/"
-    sha256sum="eb2297e1a458f27d836c04bb0cbaf282d0e7a3098092775ccb37ca9d6b2e4b7d"
+    sha256sum="2915d1851351e5ee549c20394736b4428bc59f460fa1548d1514676163dafc88"
