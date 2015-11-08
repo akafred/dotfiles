@@ -18,6 +18,18 @@
   with_items:
     - core.excludesfile ~/.gitignore_global
 
+- name: copy .gitmsg
+  copy: >
+    src={{ item }}
+    dest="{{ ansible_env.HOME }}/{{ item }}"
+  with_items:
+    - .gitmsg
+
+- name: setup .gitmsg
+  command: git config --global {{ item }}
+  with_items:
+    - commit.template ~/.gitmsg
+
 - name: config push default
   command: git config --global {{ item }}
   with_items:
