@@ -1,0 +1,4 @@
+- name: install kotlin
+  homebrew: name={{ item }}
+  with_items:
+   - kotlin-compiler
