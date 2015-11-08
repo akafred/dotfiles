@@ -1,0 +1,4 @@
+- name: install adsciidoc
+  homebrew: name={{ item }}
+  with_items:
+   - adsciidoc

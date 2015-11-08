@@ -17,6 +17,7 @@
 #    - salty
     - personal-bin
     - cli-tools
+    - asciidoc
     - zshell
     - git-mods
     - os-tools
