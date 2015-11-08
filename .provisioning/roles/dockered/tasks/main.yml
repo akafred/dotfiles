@@ -2,4 +2,5 @@
   homebrew: name={{ item }}
   with_items:
    - docker
-   - boot2docker
+   - docker-machine
+   - docker-compose
