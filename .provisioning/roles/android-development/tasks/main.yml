@@ -1,0 +1,8 @@
+- name: install android sdk
+  homebrew: name=android-sdk
+
+- name: add ANDROID_HOME
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="export ANDROID_HOME=/usr/local/opt/android-sdk"
+    regexp="export ANDROID_HOME"
