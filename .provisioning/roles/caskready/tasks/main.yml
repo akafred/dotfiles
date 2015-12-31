@@ -1,6 +1,3 @@
 
 - name: install tap homebrew cask
   homebrew_tap: tap=caskroom/cask state=present
-
-- name: install homebrew cask after updating Homebrew
-  homebrew: name=brew-cask update_homebrew=yes
