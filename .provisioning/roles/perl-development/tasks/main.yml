@@ -1,4 +1,0 @@
-- name: install padre
-  homebrew_cask: name={{ item }}
-  with_items:
-   - padre
