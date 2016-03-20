@@ -14,7 +14,7 @@
    - r
 
 - name: link r into standard location on osx
-  sudo: true
+  become: true
   file: >
     src="/usr/local/opt/r/R.framework"
     dest="/Library/Frameworks/R.framework"

@@ -63,7 +63,7 @@
     - alias.discard 'checkout --'
 
 - name: install git up (globally so it will be picked up as an external command)
-  sudo: true
+  become: true
   gem: name=git-up state=latest user_install=false
 
 - name: install git extras

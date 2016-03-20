@@ -4,7 +4,7 @@
     creates=~/.oh-my-zsh
 
 - name: make zsh default
-  sudo: true
+  become: true
   command: chsh -s /bin/zsh {{ ansible_env.USER }}
 
 - name: Add modules to .zshrc

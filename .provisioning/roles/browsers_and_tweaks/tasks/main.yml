@@ -7,7 +7,7 @@
     - google-chrome
 
 - name: add firefox to path
-  sudo: true
+  become: true
   lineinfile: >
     dest=/etc/paths.d/70-firefox
     line=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS
@@ -21,7 +21,7 @@
    - ffmpeg    
 
 - name: install lastpass
-  sudo: true
+  become: true
   homebrew_cask: name={{ item }}
   with_items:
     - lastpass

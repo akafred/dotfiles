@@ -27,7 +27,7 @@
   homebrew: name=go install_options=cross-compile-common
 
 - name: add go to path
-  sudo: true
+  become: true
   lineinfile: >
     dest=/etc/paths.d/90-golang-bin
     line=/usr/local/opt/go/libexec/bin

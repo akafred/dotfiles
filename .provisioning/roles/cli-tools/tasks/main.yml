@@ -8,7 +8,7 @@
 # issue with version no
 
 - name: make sure mtr is runnable for non-root user
-  sudo: true
+  become: true
   file: path=/usr/local/Cellar/mtr/0.86/sbin/mtr owner=root group=wheel state=file mode=6755
 
 # also need to link mtr into /usr/local/bin

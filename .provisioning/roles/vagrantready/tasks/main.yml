@@ -1,6 +1,6 @@
 
  - name: install virtualbox
-   sudo: true
+   become: true
    homebrew_cask: name={{ item }}
    with_items:
      - virtualbox
