@@ -1,0 +1,4 @@
+# ~/.octaverc
+setenv ("GNUTERM", "X11")
+
+PS1('❯❯ ')

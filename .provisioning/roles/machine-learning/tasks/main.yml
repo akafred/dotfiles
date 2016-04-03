@@ -1,12 +1,23 @@
-- name: install octave - need science-tap
+
+- name: need science-tap
   command: >
     /usr/local/bin/brew tap homebrew/science
     creates=/usr/local/Library/Taps/homebrew-science
 
-- name: install octave  - we need X11 - installing XQuartz
+- name: prereqs for octave
   homebrew_cask: name={{ item }}
   with_items:
-   - xquartz
+    - mactex
+    - xquartz
 
-- name: install octave (docs require tex)
-  homebrew: name=octave install_options=without-docs,without-gui
+- name: need gcc with gfortran in it
+  homebrew: name=gcc state=latest
+
+- name: install gnuplot for graphs
+  homebrew: name=gnuplot install_options=with-x11
+
+- name: install octave
+  homebrew: name=octave install_options=with-x11
+
+- name: octave settings
+  copy: src=octaverc dest={{ ansible_env.HOME }}/.octaverc owner={{ ansible_env.USER }} mode="u=rw,g=r,o=r"
