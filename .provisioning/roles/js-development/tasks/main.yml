@@ -1,0 +1,16 @@
+- name: base tools
+  homebrew: name={{ item }}
+  with_items:
+   - node
+
+- name: install "nvm" package
+  npm: name=nvm global=yes
+
+- name: add node stuff to path
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="export PATH=./node_modules/.bin:$PATH"
+    regexp="export PATH=\.\/node_modules\/\.bin:\$PATH"
+
+- name: add WebStorm
+  homebrew_cask: name=webstorm

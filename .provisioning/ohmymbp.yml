@@ -40,6 +40,7 @@
     - scala-development
     - clojure-development
     - golang-development
+    - js-development
     - sequel
     - steamy
     - vagrantready
