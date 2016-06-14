@@ -10,7 +10,7 @@
 - name: Add modules to .zshrc
   lineinfile: >
     dest=~/.zshrc
-    line="plugins=(brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
+    line="plugins=(autojump brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
     regexp="^[#\s]*plugins="
 
 - name: Add command history sharing to .zshrc
