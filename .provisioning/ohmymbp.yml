@@ -14,7 +14,7 @@
     - cronable
     - os-adjustments
     - cloudy
-    - salty
+#    - salty
     - personal-bin
     - cli-tools
     - asciidoc
