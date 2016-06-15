@@ -1,0 +1,4 @@
+- name: install atom
+  homebrew_cask: name={{ item }}
+  with_items:
+    - atom
