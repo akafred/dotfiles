@@ -16,6 +16,9 @@
 - name: install gnuplot for graphs
   homebrew: name=gnuplot install_options=with-x11
 
+- name: link gnuplot
+  command: brew link gnuplot
+
 - name: install octave
   homebrew: name=octave install_options=with-x11
 
