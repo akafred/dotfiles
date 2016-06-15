@@ -1,0 +1,2 @@
+# these must be replaced by real values in vars/main.yml and encrypted with ansible-vault
+github_api_token: 6b3d819050a76c42235d853c9b8394d66544a36b

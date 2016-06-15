@@ -5,3 +5,8 @@
 - name: upgrade installed brews
   command: /usr/local/bin/brew upgrade
 
+- name: add HOMEBREW_GITHUB_API_TOKEN
+  lineinfile: >
+      dest={{ ansible_env.HOME }}/.paths_homes_etc
+      line="export HOMEBREW_GITHUB_API_TOKEN={{ github_api_token }}"
+      regexp="export HOMEBREW_GITHUB_API_TOKEN"
