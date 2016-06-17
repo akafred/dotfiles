@@ -12,5 +12,5 @@
     line="export PATH=./node_modules/.bin:$PATH"
     regexp="export PATH=\.\/node_modules\/\.bin:\$PATH"
 
-- name: add WebStorm
-  homebrew_cask: name=webstorm
+- name: add WebStorm (EAP ... to keep up with the world)
+  homebrew_cask: name=webstorm-eap
