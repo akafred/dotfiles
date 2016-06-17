@@ -37,3 +37,11 @@
   with_items:
     - "LC_CTYPE=en_US.UTF-8"
     - "LC_ALL=en_US.UTF-8"
+
+- name: tldr repo
+  command: >
+    /usr/local/bin/brew tap tldr-pages/tldr
+    creates=/usr/local/Library/Taps/tldr-pages/homebrew-tldr
+
+- name: install tldr
+  homebrew: name=tldr
