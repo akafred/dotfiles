@@ -19,6 +19,13 @@
     line="setopt SHARE_HISTORY"
     regexp="^#*[\s]*setopt SHARE_HISTORY"
 
+- name: Comment out stupid omz-install time PATH setting (which does not include $PATH)
+  lineinfile: >
+    dest=~/.zshrc
+    line="# \1"
+    regexp="^(export PATH=(?:(?!\$PATH).)*)$"
+    backrefs=yes
+
 - name: add paths_homes_etc to zshrc
   lineinfile: >
     dest="{{ ansible_env.HOME }}/.zshrc"
