@@ -37,12 +37,12 @@
     - java-development
 #    - app-engine-development
     - groovy-development
-    - android-development
-    - kotlin-development
-    - scala-development
-    - clojure-development
-    - golang-development
-    - js-development
+#    - android-development
+#    - kotlin-development
+#    - scala-development
+#    - clojure-development
+#    - golang-development
+#    - js-development
     - sequel
     - steamy
     - vagrantready
