@@ -31,8 +31,8 @@
 #    - emacs
     - vcs-tools
     - remoting
-    - r-development
-    - machine-learning
+#    - r-development
+#    - machine-learning
     - javaready
     - java-development
 #    - app-engine-development
