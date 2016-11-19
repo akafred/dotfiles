@@ -2,5 +2,7 @@
 - name: install applications
   homebrew_cask: name={{ item }}
   with_items:
-    - hipchat
+#    - hipchat
     - skype
+    - slack
+
