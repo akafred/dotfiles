@@ -4,7 +4,7 @@
     - gitkraken
 
 
-- name: install gource - https://code.google.com/p/gource/
-  homebrew: name={{ item }}
-  with_items:
-   - gource
+#- name: install gource - https://code.google.com/p/gource/
+#  homebrew: name={{ item }}
+#  with_items:
+#   - gource
