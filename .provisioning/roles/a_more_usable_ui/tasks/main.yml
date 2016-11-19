@@ -1,7 +1,7 @@
 - name: install applications
   homebrew_cask: name={{ item }}
   with_items:
-    - alfred
+#    - alfred
     - caffeine
     - divvy
     - jumpcut
