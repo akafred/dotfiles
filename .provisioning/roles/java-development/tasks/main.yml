@@ -13,9 +13,6 @@
   with_items:
     - java7
 
-# - name: install maven
-#  homebrew: name=maven
-
 - name: install maven
   homebrew: name=maven
 
