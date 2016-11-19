@@ -15,28 +15,6 @@
 # also need to link mtr into /usr/local/bin
 
 - name: need to link mtr into /usr/local/bin
-  file: src=/usr/local/Cellar/mtr/0.86/sbin/mtr dest=/usr/local/bin/mtr state=link mode=0755
-
-- name: create bash_profile
-  command: touch {{ ansible_env.HOME }}/.bash_profile  creates={{ ansible_env.HOME }}/.bash_profile
-
-- name: create .paths_homes_etc
-  command: touch {{ ansible_env.HOME }}/.paths_homes_etc  creates={{ ansible_env.HOME }}/.paths_homes_etc
-
-- name: add paths_homes_etc to bash_profile
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.bash_profile
-    line="source ~/.paths_homes_etc"
-    regexp="paths_homes_etc"
-
-- name: add locale exports
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="export {{ item }}"
-    regexp="{{ item }}"
-  with_items:
-    - "LC_CTYPE=en_US.UTF-8"
-    - "LC_ALL=en_US.UTF-8"
 
 - name: tldr repo
   command: >

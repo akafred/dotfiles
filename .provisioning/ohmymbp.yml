@@ -9,6 +9,7 @@
 - hosts: localhost
   roles:
     - yaegashi.blockinfile
+    - shell-config
     - perfectly_brewed
     - caskready
     - cronable
