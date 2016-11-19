@@ -11,3 +11,8 @@
     mode=0644 
     create=yes
 
+- name: double up
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line='PATH=~/bin:$PATH'
+    regexp='PATH=~\/bin:\$PATH'
