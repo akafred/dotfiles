@@ -4,3 +4,5 @@
     - dropbox
     - google-drive
 
+- name: install one drive
+  command: mas install 823766827
