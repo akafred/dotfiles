@@ -1,0 +1,4 @@
+- name: install AppEngine SDK for Java
+  homebrew: name={{ item }}
+  with_items:
+    - app-engine-java-sdk
