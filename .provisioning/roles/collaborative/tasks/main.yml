@@ -6,3 +6,7 @@
     - skype
     - slack
 
+- name: BlueJeans
+  homebrew_cask: name={{ item }}
+  with_items:
+    - blue-jeans-launcher
