@@ -21,7 +21,4 @@ curl https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cf
 # Add localhost with connection local to ansible's hosts file.
 echo 'localhost ansible_connection=local' | sudo tee /etc/ansible/hosts >> /dev/null
 
-# We're using a custom ansible role (which only contains a module).
-ansible-galaxy install -r ~/.provisioning/requirements.yml
-
 # You should now be ready to run ansible locally.
