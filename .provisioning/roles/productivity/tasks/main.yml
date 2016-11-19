@@ -9,3 +9,8 @@
     - vitamin-r
     - kindle
     - selfcontrol
+
+- name: install microsoft office
+  homebrew_cask: name={{ item }}
+  with_items:
+    - microsoft-office
