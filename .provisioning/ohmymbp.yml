@@ -44,7 +44,7 @@
 #    - golang-development
 #    - js-development
     - sequel
-    - steamy
     - vagrantready
+#    - steamy
     - spotify
     - experimental
