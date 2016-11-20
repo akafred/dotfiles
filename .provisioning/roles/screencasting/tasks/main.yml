@@ -2,3 +2,6 @@
   homebrew_cask: name={{ item }}
   with_items:
     - screenflow
+
+- name: install Backdrop
+  shell: mas list | grep 411461952 || mas install 411461952
