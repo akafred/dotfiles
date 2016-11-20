@@ -11,8 +11,3 @@
     - selfcontrol
     - anki
     - dash
-
-- name: install microsoft office
-  homebrew_cask: name={{ item }}
-  with_items:
-    - microsoft-office

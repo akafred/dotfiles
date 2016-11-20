@@ -1,0 +1,7 @@
+- name: install microsoft office
+  homebrew_cask: name={{ item }}
+  with_items:
+    - microsoft-office
+
+- name: install one drive
+  shell: mas list | grep 823766827 || mas install 823766827
