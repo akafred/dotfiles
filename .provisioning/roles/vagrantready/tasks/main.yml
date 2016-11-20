@@ -1,6 +1,5 @@
 
  - name: install virtualbox
-   become: true
    homebrew_cask: name={{ item }}
    with_items:
      - virtualbox
