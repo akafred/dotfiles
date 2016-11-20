@@ -4,9 +4,7 @@
    - xquartz
 
 - name: install r using brew - install science-tap
-  command: >
-    /usr/local/bin/brew tap homebrew/science
-    creates=/usr/local/Library/Taps/homebrew-science
+  homebrew_tap: name=homebrew/science
 
 - name: install r using brew - install r
   homebrew: name={{ item }}

@@ -4,9 +4,7 @@
     - intellij-idea
 
 - name: install old casks (for java 7)
-  command: >
-    /usr/local/bin/brew tap caskroom/homebrew-versions
-    creates=/usr/local/Library/Taps/caskroom/homebrew-versions
+  homebrew_tap: name=caskroom/homebrew-versions
 
 - name: install java7 for appengine development
   homebrew_cask: name={{ item }}

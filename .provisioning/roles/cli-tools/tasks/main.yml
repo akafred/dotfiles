@@ -18,9 +18,7 @@
   file: src=/usr/local/Cellar/mtr/0.87/sbin/mtr dest=/usr/local/bin/mtr state=link mode=0755
 
 - name: tldr repo
-  command: >
-    /usr/local/bin/brew tap tldr-pages/tldr
-    creates=/usr/local/Library/Taps/tldr-pages/homebrew-tldr
+  homebrew_tap: name=tldr-pages/tldr
 
 - name: install tldr
   homebrew: name=tldr
