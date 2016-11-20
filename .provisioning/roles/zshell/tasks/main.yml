@@ -3,9 +3,15 @@
     curl -L http://install.ohmyz.sh | sh
     creates=~/.oh-my-zsh
 
+- name: check if zsh is default
+  shell: finger -l {{ ansible_env.USER }} | grep "Shell" | awk \'{ print $4 }\' | grep -v "/bin/zsh"
+  register: zsh_check
+  ignore_errors: true
+
 - name: make zsh default
   become: true
   command: chsh -s /bin/zsh {{ ansible_env.USER }}
+  when: zsh_check|success
 
 - name: Add modules to .zshrc
   lineinfile: >
