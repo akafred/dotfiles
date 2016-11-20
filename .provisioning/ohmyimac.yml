@@ -44,10 +44,11 @@
 #    - scala-development
 #    - clojure-development
 #    - golang-development
-    - vagrantready
+#    - js-development
     - sequel
     - screencasting
-    - ipad-integration
-#    - spotify
+#    - ipad-integration
     - steamy
+    - vagrantready
+#    - spotify
 #    - experimental
