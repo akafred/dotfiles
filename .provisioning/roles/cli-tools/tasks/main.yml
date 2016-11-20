@@ -5,6 +5,7 @@
    - mtr
    - wget
    - autojump
+   - ag
 
 # issue with version no
 
