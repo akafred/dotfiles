@@ -7,14 +7,11 @@
    - autojump
    - ag
 
-# issue with version no
-
 - name: make sure mtr is runnable for non-root user
   become: true
   file: path=/usr/local/Cellar/mtr/0.87/sbin/mtr owner=root group=wheel state=file mode=6755
 
 # also need to link mtr into /usr/local/bin
-
 - name: need to link mtr into /usr/local/bin
   file: src=/usr/local/Cellar/mtr/0.87/sbin/mtr dest=/usr/local/bin/mtr state=link mode=0755
 
