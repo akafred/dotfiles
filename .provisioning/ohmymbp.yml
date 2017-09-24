@@ -41,9 +41,9 @@
 #    - app-engine-development
     - groovy-development
 #    - android-development
-#    - kotlin-development
+    - kotlin-development
 #    - scala-development
-#    - clojure-development
+    - clojure-development
 #    - golang-development
 #    - js-development
     - sequel
