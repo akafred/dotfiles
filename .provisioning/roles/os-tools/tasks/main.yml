@@ -4,4 +4,4 @@
   with_items:
     - appcleaner
     - disk-inventory-x
-    - forklift
+#    - forklift
