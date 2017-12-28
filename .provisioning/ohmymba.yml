@@ -1,0 +1,55 @@
+# Prereqs:
+#     Run .provisioning/bootstrap.sh
+#
+# Then you can run this setup with:
+#     ansible-playbook -Kv ~/.provisioning/ohmymbp.yml
+#
+# Norsk stavekontroll: http://www.applehjelp.no/eplekart/lion-stavekontroll/
+
+- hosts: localhost
+  roles:
+    - shell-config
+    - perfectly_brewed
+    - caskready
+#    - app-storable # unsupported on MBA
+    - cronable
+    - os-adjustments
+    - cloudy
+#    - salty
+    - personal-bin
+    - cli-tools
+#    - asciidoc
+    - zshell
+    - git-mods
+    - os-tools
+    - a_more_usable_ui
+#    - dockered
+#    - browsers_and_tweaks
+    - productivity
+#    - msoffice
+#    - collaborative
+#    - fonts
+#    - atomic
+#    - sublime
+#    - emacs
+#    - vcs-tools
+#    - remoting
+#    - r-development
+#    - machine-learning
+#    - javaready
+#    - java-development
+#    - app-engine-development
+#    - groovy-development
+#    - android-development
+#    - kotlin-development
+#    - scala-development
+#    - clojure-development
+#    - golang-development
+#    - js-development
+#    - sequel
+#    - screencasting
+#    - ipad-integration
+#    - steamy
+#    - vagrantready
+    - spotify
+#    - experimental
