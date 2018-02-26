@@ -11,4 +11,4 @@
 
 # Need to fix the version number
  - name: install vagrant plugin for caching
-   command: /usr/bin/vagrant plugin install vagrant-cachier creates=.vagrant.d/gems/gems/vagrant-cachier-0.6.0
+   command: /usr/local/bin/vagrant plugin install vagrant-cachier creates=.vagrant.d/gems/gems/vagrant-cachier-0.6.0
