@@ -46,6 +46,7 @@
     - clojure-development
 #    - golang-development
 #    - js-development
+    - python-development
     - sequel
     - screencasting
     - ipad-integration

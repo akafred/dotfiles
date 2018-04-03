@@ -1,0 +1,20 @@
+- name: install python 3
+  homebrew: name={{ item }}
+  with_items:
+    - "python3"
+
+- name: make sure pip is updated
+  shell: "{{ item }} install --upgrade pip"
+  with_items:
+    - "pip3"
+
+- name: make sure we have virtualenv
+  pip: name=virtualenv executable="{{ item }}"
+  with_items:
+    - "pip"
+    - "pip3"
+
+- name: install jupyter
+  homebrew: name={{ item }}
+  with_items:
+    - "jupyter"
