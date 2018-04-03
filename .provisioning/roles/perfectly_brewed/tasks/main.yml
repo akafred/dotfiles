@@ -10,3 +10,9 @@
       dest={{ ansible_env.HOME }}/.paths_homes_etc
       line="export HOMEBREW_GITHUB_API_TOKEN={{ github_api_token }}"
       regexp="export HOMEBREW_GITHUB_API_TOKEN"
+
+- name: add brew path to PATH
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="PATH=/usr/local/bin:$PATH"
+    regexp="PATH=\/usr\/local\/bin"
