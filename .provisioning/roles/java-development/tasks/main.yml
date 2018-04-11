@@ -4,14 +4,18 @@
   with_items:
     - intellij-idea
 
-- name: install old casks (for java 7)
+- name: install old casks (for old javas)
   homebrew_tap: name=caskroom/homebrew-versions
 
-- name: install java7 for appengine development
-  homebrew_cask: name={{ item }}
+- name: install Javas
+  homebrew_cask:
+    name: "{{ item }}"
   ignore_errors: yes
   with_items:
     - java7
+    - java8
+    - java9
+    - java
 
 - name: install maven
   homebrew: name=maven
