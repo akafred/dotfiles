@@ -3,5 +3,6 @@
 
 - name: Fira Code font
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
    - font-fira-code

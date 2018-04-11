@@ -1,5 +1,6 @@
 - name: install applications
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - screenflow
 

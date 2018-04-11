@@ -1,4 +1,5 @@
 - name: install atom
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - atom

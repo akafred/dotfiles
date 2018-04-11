@@ -1,6 +1,7 @@
 
 - name: install half decent browser - or two
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - chromium
     - firefox
@@ -22,5 +23,6 @@
 
 - name: install lastpass
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - lastpass

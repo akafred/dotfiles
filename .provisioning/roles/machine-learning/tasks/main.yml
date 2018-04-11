@@ -4,6 +4,7 @@
 
 - name: prereqs for octave
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - mactex
     - xquartz

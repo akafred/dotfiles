@@ -1,5 +1,6 @@
 #  homebrew: name=emacs install_options=cocoa --- trouble: must be copied to applications to work
 - name: Install emacs for osx
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - emacs

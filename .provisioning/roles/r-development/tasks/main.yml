@@ -1,5 +1,6 @@
 - name: install r using brew - we need X11 - installing XQuartz
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
    - xquartz
 
@@ -21,6 +22,7 @@
 
 - name: install RStudio
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
    - rstudio
 

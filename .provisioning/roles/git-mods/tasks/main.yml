@@ -74,6 +74,7 @@
 
 - name: install DiffMerge
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
    - diffmerge
 

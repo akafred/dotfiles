@@ -1,5 +1,6 @@
 - name: install intellij
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - intellij-idea
 
@@ -8,6 +9,7 @@
 
 - name: install java7 for appengine development
   homebrew_cask: name={{ item }}
+  ignore_errors: yes
   with_items:
     - java7
 
