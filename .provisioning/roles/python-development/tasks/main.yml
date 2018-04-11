@@ -18,3 +18,22 @@
   homebrew: name={{ item }}
   with_items:
     - "jupyter"
+
+- name: install virtualenvwrapper
+  pip: name=virtualenvwrapper executable=pip3
+
+- name: add virtualenvwrapper shell commands
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for virtualenvwrapper shell commands"
+    content: |
+             export VIRTUALENVWRAPPER_PYTHON=python3
+             export WORKON_HOME=$HOME/.virtualenvs
+             export PROJECT_HOME=$HOME/Projects
+             export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+             export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+             source /usr/local/bin/virtualenvwrapper.sh
+
+- name: install ipython
+  pip: name=IPython executable=pip3
+ 
