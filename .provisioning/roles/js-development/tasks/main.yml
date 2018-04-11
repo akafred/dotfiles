@@ -14,3 +14,8 @@
 
 - name: add WebStorm (EAP ... to keep up with the world)
   homebrew_cask: name=webstorm-eap
+
+- name: install js-related tools
+  homebrew: name={{ item }}
+  with_items:
+    - yarn
