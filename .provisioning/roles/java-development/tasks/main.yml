@@ -20,7 +20,8 @@
 - name: install maven
   homebrew: name=maven
 
-- file:
+- name: create mvn settings bin-folder
+  file:
     path: "{{ ansible_env.HOME }}/.m2/bin"
     state: directory
     mode: 0755
@@ -35,6 +36,7 @@
   with_items:
     - { name: ".m2/bin/mvn", mode: 'u=rwx,g=rx,o=r' }
     - { name: ".m2/schibsted-settings.xml", mode: 'u=rw,g=,o=' }
+    - { name: ".m2/posten-settings.xml", mode: 'u=rw,g=r,o=' }
     - { name: ".m2/default-settings.xml", mode: 'u=rw,g=r,o=' }
 
 - name: override mvn command

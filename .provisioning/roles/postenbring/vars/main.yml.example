@@ -1,0 +1,5 @@
+# these must be replaced by real values in vars/main.yml and encrypted with ansible-vault
+selvdrift_pwd: xxx
+selvdrift_shared_secret: yyy
+grunnmur_pwd: zzz
+grunnmur_shared_secret: mmm

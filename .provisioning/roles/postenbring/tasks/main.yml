@@ -1,0 +1,134 @@
+
+- name: create projects folder
+  file:
+    path: "{{ ansible_env.HOME }}/Projects/posten"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: bring environment stuff
+  copy:
+    src: bring_zshrc_include.sh
+    dest: "{{ ansible_env.HOME }}/.bring_zshrc_include.sh"
+
+- name: init bring environment
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring environment"
+    content: "source {{ ansible_env.HOME }}/.bring_zshrc_include.sh"
+
+- name: update hosts-file
+  become: true
+  blockinfile:
+    dest: /etc/hosts
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring enviroment"
+    content: |
+             127.0.0.1  local.mybring.com
+             127.0.0.1	api.local.bring.com api.dev.bring.com
+             127.0.0.1  local.bring.no local.bring.dk local.bring.se local.bring.fi
+             127.0.0.1  local.posten.no
+             127.0.0.1	id.local.bring.com id.dev.bring.com
+
+- name: create posten-profile-for-git
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0640
+  with_items:
+    - "Projects/posten/.gitconfig-posten"
+
+- name: add posten-profile-for-git
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring environment"
+    content: |
+             [includeIf "gitdir:~/Projects/posten/"]
+                     path = ~/Projects/posten/.gitconfig-posten
+
+- name: ensure .ssh/config exists
+  copy:
+    content: ""
+    force: no
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+
+- name: create .ssh/config.d
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config.d"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: create postenbring config file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+  with_items:
+    - ".ssh/config.d/postenbring"
+
+- name: make sure .ssh-config has postenbring stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring enviroment"
+    content: Include config.d/postenbring
+
+- name: install databases
+  homebrew: name={{ item }}
+  with_items:
+    - postgresql
+    - mysql
+
+- name: start databases
+  shell: brew services start {{ item }}
+  with_items:
+    - postgresql
+    - mysql
+
+- name: install phantomjs for landpostbud
+  homebrew: name={{ item }}
+  with_items:
+    - phantomjs
+
+- name: "ensure we have Grunnmur VPN set up - if not see: https://github.com/bring/onboarding/blob/master/VPN.md"
+  shell: scutil --nc list | grep "Grunnmur Posten"
+  ignore_errors: true
+  register: grunnmur
+
+# - name: "ensure we have Selvdrift VPN set up - if not see: https://github.com/bring/onboarding/blob/master/VPN.md"
+#  shell: scutil --nc list | grep "Selvdrift Posten"
+#  ignore_errors: true
+#  register: selvdrift
+
+#- name: create script for creating Grunnmur VPN
+#  template:
+#    src: create_vpn.scpt
+#    vars:
+#      vpn: grunnmur
+#    dest: "{{ ansible_env.HOME }}/bin/create_{{ vpn }}.scpt"
+#    owner: "{{ ansible_env.USER }}"
+#    group: staff
+#    mode: 0750
+
+
+- name: install useful scripts for VPN
+  template:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: "u=rwx,g=,o="
+  with_items:
+    - "bin/disconnect_vpn.scpt.command"
+    - "bin/grunnmur_vpn.scpt.command"
+#    - "bin/selvdrift_vpn.scpt.command"
