@@ -31,3 +31,10 @@
                  export PATH=$JAVA_HOME/bin:$PATH
                  java -version
              }
+
+- name: set default java
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    line: "java_use 1.8"
+    regexp: "^java_use"
