@@ -5,5 +5,11 @@
    - scala
    - sbt
 
+- name: create .sbtconfig
+  command: touch {{ ansible_env.HOME }}/.sbtconfig creates={{ ansible_env.HOME }}/.sbtconfig
+
 - name: add entry to .sbtconfig
-  lineinfile: dest="{{ ansible_env.HOME }}/.sbtconfig" line='SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"'
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.sbtconfig"
+    line: 'SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"'
+    regexp: "SBT_OPTS="

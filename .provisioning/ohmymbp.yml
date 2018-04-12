@@ -41,7 +41,7 @@
     - groovy-development
 #    - android-development
     - kotlin-development
-#    - scala-development
+    - scala-development
     - clojure-development
 #    - golang-development
 #    - js-development
