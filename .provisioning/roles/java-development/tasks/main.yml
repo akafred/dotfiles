@@ -1,8 +1,8 @@
-- name: install intellij
+- name: install jetbrains-toolbox
   homebrew_cask: name={{ item }}
   ignore_errors: yes
   with_items:
-    - intellij-idea
+    - jetbrains-toolbox
 
 - name: install old casks (for old javas)
   homebrew_tap: name=caskroom/homebrew-versions
