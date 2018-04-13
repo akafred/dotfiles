@@ -23,3 +23,6 @@
 
 - name: install tldr
   homebrew: name=tldr
+
+- name: install tmux
+  homebrew: name=tmux
