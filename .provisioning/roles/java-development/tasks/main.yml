@@ -20,6 +20,29 @@
 - name: install maven
   homebrew: name=maven
 
+- file:
+    path: "{{ ansible_env.HOME }}/.m2/bin"
+    state: directory
+    mode: 0755
+
+- name: use smart mvn
+  copy: >
+    src={{ item.name }}
+    dest="{{ ansible_env.HOME }}/{{ item.name }}"
+    mode="{{ item.mode }}"
+    owner="{{ ansible_env.USER }}"
+    group="staff"
+  with_items:
+    - { name: ".m2/bin/mvn", mode: 'u=rwx,g=rx,o=r' }
+    - { name: ".m2/schibsted-settings.xml", mode: 'u=rw,g=,o=' }
+    - { name: ".m2/default-settings.xml", mode: 'u=rw,g=r,o=' }
+
+- name: override mvn command
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line='PATH={{ ansible_env.HOME }}/.m2/bin:$PATH'
+    regexp='PATH={{ ansible_env.HOME }}\/\.m2/bin:\$PATH'
+
 - name: add java_ls and java_use commands
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"

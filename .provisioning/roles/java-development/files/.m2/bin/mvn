@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$PWD" in
+    */schibsted*)              SETTINGS='schibsted-settings.xml' ;;
+    *)                         SETTINGS='default-settings.xml' ;;
+    esac
+
+echo SETTINGS: $SETTINGS
+
+eval /usr/local/bin/mvn -s $HOME/.m2/$SETTINGS $*
