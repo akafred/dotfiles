@@ -1,13 +1,13 @@
 
  - name: install virtualbox
    homebrew_cask: name={{ item }}
-  ignore_errors: yes
+   ignore_errors: yes
    with_items:
      - virtualbox
 
  - name: install vagrant
    homebrew_cask: name={{ item }}
-  ignore_errors: yes
+   ignore_errors: yes
    with_items:
      - vagrant
 
