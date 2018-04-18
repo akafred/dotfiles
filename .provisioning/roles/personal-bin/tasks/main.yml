@@ -8,11 +8,5 @@
     dest=/etc/paths.d/50-personal-bin
     line=~/bin
     regexp=~/bin
-    mode=0644 
+    mode=0644
     create=yes
-
-- name: double up
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line='PATH=~/bin:$PATH'
-    regexp='PATH=~\/bin:\$PATH'
