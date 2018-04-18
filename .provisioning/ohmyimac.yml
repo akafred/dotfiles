@@ -23,7 +23,7 @@
     - git-mods
     - os-tools
     - a_more_usable_ui
-#    - dockered
+    - dockered
     - browsers_and_tweaks
     - productivity
 #    - msoffice
