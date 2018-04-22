@@ -3,3 +3,13 @@
   ignore_errors: yes
   with_items:
    - docker
+
+- name: install pip for system-python (used by ansible locally)
+  command: /usr/bin/python -m ensurepip --default-pip
+  become: true
+
+- name: install docker-py for system python (used by ansible locally)
+  pip:
+    name: docker-py
+    executable: /usr/bin/python -m pip
+  become: true

@@ -11,7 +11,6 @@
 - name: make sure we have virtualenv
   pip: name=virtualenv executable="{{ item }}"
   with_items:
-    - "pip"
     - "pip3"
 
 - name: install jupyter
@@ -36,4 +35,3 @@
 
 - name: install ipython
   pip: name=IPython executable=pip3
- 

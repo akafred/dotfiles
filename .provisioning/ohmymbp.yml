@@ -47,6 +47,7 @@
 #    - js-development
     - python-development
     - ruby-development
+    - dockered_sonarqube
     - postenbring
     - sequel
     - screencasting

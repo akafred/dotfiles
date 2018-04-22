@@ -1,0 +1,52 @@
+
+- name: "install database server (default user for the database is {{ ansible_env.USER }})"
+  homebrew: name={{ item }}
+  with_items:
+    - postgresql
+
+- name: start database server automatically
+  shell: brew services start {{ item }}
+  with_items:
+    - postgresql
+
+- name: install pip for system-python (used by ansible locally)
+  command: /usr/bin/python -m ensurepip --default-pip
+  become: true
+
+- name: install Python-PostgreSQL Database Adapter
+  pip:
+    name: psycopg2
+    executable: /usr/bin/python -m pip
+  become: true
+
+- name: create database for sonarqube
+  postgresql_db:
+    name: sonar
+    encoding: UTF-8
+    login_user: "{{ ansible_env.USER }}"
+    lc_collate: en_US.UTF-8
+    lc_ctype: en_US.UTF-8
+
+- name: create user for sonarqube database
+  postgresql_user:
+    db: sonar
+    login_user: "{{ ansible_env.USER }}"
+    encrypted: yes
+    name: sonar
+    password: sonar
+    expires: infinity
+    role_attr_flags: NOSUPERUSER
+
+- name: install and run sonarqube docker container
+  docker_container:
+    name: sonarqube
+    image: sonarqube
+    state: started
+    pull: yes
+    ports:
+    - "9000:9000"
+    - "9092:9092"
+    env:
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: sonar
+      SONARQUBE_JDBC_URL: "jdbc:postgresql://docker.for.mac.host.internal/sonar"
