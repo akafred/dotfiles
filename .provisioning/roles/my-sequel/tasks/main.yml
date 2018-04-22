@@ -1,0 +1,15 @@
+- name: install mysql
+  homebrew: name={{ item }}
+  with_items:
+    - mysql
+
+- name: start mysql on boot
+  shell: brew services start {{ item }}
+  with_items:
+    - mysql
+
+- name: install sequel pro (mac mysql client)
+  homebrew_cask: name={{ item }}
+  ignore_errors: yes
+  with_items:
+    - sequel-pro

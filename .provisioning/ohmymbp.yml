@@ -47,9 +47,10 @@
 #    - js-development
     - python-development
     - ruby-development
+    - my-sequel
+    - postgresql-y
     - dockered_sonarqube
     - postenbring
-    - sequel
     - screencasting
     - ipad-integration
 #    - steamy

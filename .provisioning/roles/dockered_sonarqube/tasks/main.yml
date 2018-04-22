@@ -1,24 +1,4 @@
 
-- name: "install database server (default user for the database is {{ ansible_env.USER }})"
-  homebrew: name={{ item }}
-  with_items:
-    - postgresql
-
-- name: start database server automatically
-  shell: brew services start {{ item }}
-  with_items:
-    - postgresql
-
-- name: install pip for system-python (used by ansible locally)
-  command: /usr/bin/python -m ensurepip --default-pip
-  become: true
-
-- name: install Python-PostgreSQL Database Adapter
-  pip:
-    name: psycopg2
-    executable: /usr/bin/python -m pip
-  become: true
-
 - name: create database for sonarqube
   postgresql_db:
     name: sonar

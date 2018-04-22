@@ -83,17 +83,11 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring enviroment"
     content: Include config.d/postenbring
 
-- name: install databases
-  homebrew: name={{ item }}
-  with_items:
-    - postgresql
-    - mysql
+# moved to separate roles
+# - name: install databases
 
-- name: start databases
-  shell: brew services start {{ item }}
-  with_items:
-    - postgresql
-    - mysql
+# moved to separate roles
+# - name: start databases
 
 - name: install phantomjs for landpostbud
   homebrew: name={{ item }}

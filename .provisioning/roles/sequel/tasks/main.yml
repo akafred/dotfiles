@@ -1,5 +1,0 @@
-- name: install sequel pro (mac mysql client)
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
-  with_items:
-    - sequel-pro
