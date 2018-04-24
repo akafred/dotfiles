@@ -24,5 +24,8 @@
 - name: install tldr
   homebrew: name=tldr
 
-- name: install tmux
-  homebrew: name=tmux
+- name: install multiplexers
+  homebrew: name={{ item }}
+  with_items:
+    - tmux
+    - csshX
