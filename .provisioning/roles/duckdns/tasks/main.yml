@@ -1,0 +1,36 @@
+
+# https://www.duckdns.org/install.jsp?tab=osx-homebrew&domain=akafred
+
+- name: duckdns config file
+  copy:
+    src: duckdns
+    dest: "{{ ansible_env.HOME }}/.duckdns"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+
+- name: tap duckdns library
+  homebrew_tap:
+    name: jzelinskie/duckdns
+
+- name: install duckdns
+  homebrew:
+    name: duckdns
+
+- name: find launch agent file(s)
+  find:
+    paths: /usr/local/opt/duckdns
+    patterns: '*.plist'
+    recurse: no
+  register: launch_files
+
+- name: create symlink
+  file:
+    src: "/usr/local/opt/duckdns/{{ item.path | basename}}"
+    dest: "~/Library/LaunchAgents/{{ item.path | basename}}"
+    state: link
+    force: yes
+  with_items: "{{ launch_files.files }}"
+
+- name: setup duckdns service
+  command: launchctl load ~/Library/LaunchAgents/homebrew.mxcl.duckdns.plist
