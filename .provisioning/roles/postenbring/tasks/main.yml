@@ -79,9 +79,9 @@
 - name: make sure .ssh-config has postenbring stuff
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.ssh/config"
-    insertafter: EOF
+    insertbefore: BOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring enviroment"
-    content: Include config.d/postenbring
+    content: Include ~/.ssh/config.d/*
 
 # moved to separate roles
 # - name: install databases

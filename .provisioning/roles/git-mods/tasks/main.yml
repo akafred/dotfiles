@@ -35,6 +35,21 @@
   with_items:
     - push.default simple
 
+- name: set up github in .ssh/config
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Github"
+    content: |
+             Host github*
+                HostName github.com
+                User git
+                AddKeysToAgent yes
+                IdentitiesOnly yes
+
+             Host github.com
+                IdentityFile ~/.ssh/id_rsa
+
 - name: config colors
   command: git config --global {{ item }}
   with_items:
