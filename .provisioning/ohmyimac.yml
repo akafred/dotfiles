@@ -43,7 +43,7 @@
     - kotlin-development
 #    - scala-development
 #    - clojure-development
-#    - golang-development
+    - golang-development
 #    - js-development
     - python-development
     - ruby-development
