@@ -120,3 +120,11 @@
   ignore_errors: yes
   with_items:
    - GitUp
+
+- name: tap git-time-metric-stuff
+  homebrew_tap:
+    name: git-time-metric/gtm
+
+- name: install git-time-metric
+  homebrew:
+    name: gtm
