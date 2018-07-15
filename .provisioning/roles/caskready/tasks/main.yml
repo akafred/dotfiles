@@ -1,3 +1,0 @@
-
-- name: install tap homebrew cask
-  homebrew_tap: tap=caskroom/cask state=present

@@ -10,7 +10,6 @@
   roles:
     - shell-config
     - perfectly_brewed
-    - caskready
 #    - app-storable # unsupported on MBA
     - cronable
     - os-adjustments
