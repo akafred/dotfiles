@@ -9,14 +9,14 @@
 
 - name: bring environment stuff
   copy:
-    src: bring_zshrc_include.sh
-    dest: "{{ ansible_env.HOME }}/.bring_zshrc_include.sh"
+    src: postenbring_shellrc.sh
+    dest: "{{ ansible_env.HOME }}/.postenbring_shellrc.sh"
 
 - name: init bring environment
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring environment"
-    content: "source {{ ansible_env.HOME }}/.bring_zshrc_include.sh"
+    content: "source {{ ansible_env.HOME }}/.postenbring_shellrc.sh"
 
 - name: update hosts-file
   become: true

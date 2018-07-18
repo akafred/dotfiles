@@ -50,7 +50,7 @@
     - my-sequel
     - postgresql-y
     - dockered_sonarqube
-    - postenbring
+#    - postenbring
     - screencasting
 #    - ipad-integration
     - steamy
