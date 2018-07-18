@@ -43,7 +43,8 @@
 #    - scala-development
 #    - clojure-development
     - golang-development
-#    - js-development
+    - js-development
+    - elm-development
     - python-development
     - ruby-development
     - my-sequel

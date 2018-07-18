@@ -1,0 +1,9 @@
+- name: elm
+  homebrew:
+    name: elm
+
+
+- name: install "elm-test" package
+  npm:
+    name: elm-test 
+    global: yes
