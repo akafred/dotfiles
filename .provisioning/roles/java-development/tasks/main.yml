@@ -4,17 +4,13 @@
   with_items:
     - jetbrains-toolbox
 
-- name: install old casks (for old javas)
-  homebrew_tap: name=caskroom/homebrew-versions
-
 - name: install Javas
   homebrew_cask:
     name: "{{ item }}"
   ignore_errors: yes
   with_items:
-    - java7
+    - java6
     - java8
-    - java9
     - java
 
 - name: install maven
