@@ -2,7 +2,7 @@
   command: git config --global user.name "akafred"
 
 - name: setup git - email
-  command: git config --global user.email "github@akafred.com" 
+  command: git config --global user.email "github@akafred.com"
 
 - name: create .gitignore_global
   command: touch {{ ansible_env.HOME }}/.gitignore_global creates={{ ansible_env.HOME }}/.gitignore_global
@@ -83,7 +83,7 @@
 
 - name: install git extras
   homebrew: name={{ item }}
-  with_items: 
+  with_items:
     - git-extras
     - tig
 
