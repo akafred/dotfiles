@@ -1,5 +1,5 @@
 - name: Tap fonts
-  homebrew_tap: name=caskroom/fonts
+  homebrew_tap: name=homebrew/cask-fonts
 
 - name: Fira Code font
   homebrew_cask: name={{ item }}
