@@ -11,7 +11,7 @@
 - name: make zsh default
   become: true
   command: chsh -s /bin/zsh {{ ansible_env.USER }}
-  when: zsh_check|success
+  when: zsh_check is success
 
 - name: Add modules to .zshrc
   lineinfile: >
