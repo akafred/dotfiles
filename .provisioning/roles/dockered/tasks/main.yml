@@ -8,8 +8,15 @@
   command: /usr/bin/python -m ensurepip --default-pip
   become: true
 
-- name: install docker-py for system python (used by ansible locally)
+- name: remove deprecated docker-py for system python
   pip:
     name: docker-py
+    executable: /usr/bin/python -m pip
+    state: absent
+  become: true
+
+- name: install docker for system python (used by ansible locally)
+  pip:
+    name: docker
     executable: /usr/bin/python -m pip
   become: true
