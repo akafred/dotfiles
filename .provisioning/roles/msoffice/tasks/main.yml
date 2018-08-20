@@ -1,8 +1,11 @@
-- name: install microsoft office
-  homebrew_cask: name={{ item }}
+- name: install microsoft office INSTALLER
+  homebrew_cask: 
+    name: "{{ item }}"
   ignore_errors: yes
   with_items:
     - microsoft-office
 
 - name: install one drive
-  shell: mas list | grep 823766827 || mas install 823766827
+  shell: mas list | grep 823766827 || mas install 823766827
+  args:
+    executable: /bin/bash
