@@ -1,18 +1,17 @@
 
-- name: update homebrew (and install tree)
-  homebrew: name=tree update_homebrew=yes
-
-- name: upgrade installed brews
-  command: /usr/local/bin/brew upgrade
-
 - name: add HOMEBREW_GITHUB_API_TOKEN
-  lineinfile: >
-      dest={{ ansible_env.HOME }}/.paths_homes_etc
-      line="export HOMEBREW_GITHUB_API_TOKEN={{ github_api_token }}"
-      regexp="export HOMEBREW_GITHUB_API_TOKEN"
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    line: "export HOMEBREW_GITHUB_API_TOKEN={{ github_api_token }}"
+    regexp: "export HOMEBREW_GITHUB_API_TOKEN"
 
-- name: add brew path to PATH
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="PATH=/usr/local/bin:$PATH"
-    regexp="PATH=\/usr\/local\/bin"
+# - name: add brew path to PATH (not sure why this is commented out, perhaps brew sets this up now?)
+#  lineinfile:
+#    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+#    line: "PATH=/usr/local/bin:$PATH"
+#    regexp: "PATH=\/usr\/local\/bin"
+
+- name: update homebrew and upgrade brews
+  homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
