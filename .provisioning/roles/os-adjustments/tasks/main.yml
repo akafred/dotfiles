@@ -1,6 +1,13 @@
-- name: make hidden files visible
-  command: defaults write com.apple.Finder AppleShowAllFiles YES
+- name: Make hidden files visible 
+  osx_defaults:
+    domain: com.apple.Finder
+    key: AppleShowAllFiles
+    type: bool
+    value: true
+    state: present
+  register: default_set
 
-# a bit brutal and wide?
 - name: restart Finder
   command: killall Finder
+  when: default_set.changed
+
