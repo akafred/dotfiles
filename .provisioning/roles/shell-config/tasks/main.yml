@@ -1,14 +1,16 @@
 - name: create bash_profile
-  command: touch {{ ansible_env.HOME }}/.bash_profile  creates={{ ansible_env.HOME }}/.bash_profile
+  file: 
+    path: "{{ ansible_env.HOME }}/.bash_profile"
 
 - name: create .paths_homes_etc
-  command: touch {{ ansible_env.HOME }}/.paths_homes_etc  creates={{ ansible_env.HOME }}/.paths_homes_etc
+  file: 
+    path: "{{ ansible_env.HOME }}/.paths_homes_etc"
 
 - name: add paths_homes_etc to bash_profile
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.bash_profile
-    line="source ~/.paths_homes_etc"
-    regexp="paths_homes_etc"
+  lineinfile: 
+    dest: "{{ ansible_env.HOME }}/.bash_profile"
+    line: "source ~/.paths_homes_etc"
+    regexp: "paths_homes_etc"
 
 - name: detect shell and put in PROFILE_SHELL-variable
   blockinfile:
@@ -33,10 +35,10 @@
              fi
 
 - name: add locale exports
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="export {{ item }}"
-    regexp="{{ item }}"
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    line: "export {{ item }}"
+    regexp: "{{ item }}"
   with_items:
     - "LC_CTYPE=en_US.UTF-8"
     - "LC_ALL=en_US.UTF-8"
