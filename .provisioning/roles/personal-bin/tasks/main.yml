@@ -1,12 +1,16 @@
 
 - name: create personal bin folder
-  file: mode=0750 path={{ ansible_env.HOME }}/bin state=directory
+  file: 
+    path: "{{ ansible_env.HOME }}/bin" 
+    mode: 0750
+    state: directory
 
 - name: add personal bin folder to path
   become: true
-  lineinfile: >
-    dest=/etc/paths.d/50-personal-bin
-    line=~/bin
-    regexp=~/bin
-    mode=0644
-    create=yes
+  lineinfile:
+    dest: /etc/paths.d/50-personal-bin
+    line: ~/bin
+    regexp: ~/bin
+    mode: 0644
+    create: yes
+
