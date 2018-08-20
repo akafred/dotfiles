@@ -2,7 +2,7 @@
   homebrew_tap: name=homebrew/cask-fonts
 
 - name: Fira Code font
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
+  homebrew_cask:
+    name: "{{ item }}"
   with_items:
    - font-fira-code

@@ -1,6 +1,7 @@
 
 - name: install Mac App Store CLI
-  homebrew: name={{ item }}
+  homebrew: 
+    name: "{{ item }}"
   with_items:
     - mas
 

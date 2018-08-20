@@ -1,5 +1,6 @@
 - name: install common tools using brew
-  homebrew: name={{ item }}
+  homebrew:
+    name: "{{ item }}"
   with_items:
    - tree
    - mtr
@@ -19,13 +20,16 @@
 #   file: src=/usr/local/Cellar/mtr/0.92/sbin/mtr-packet dest=/usr/local/bin/mtr-packet state=link mode=0755
 
 - name: tldr repo
-  homebrew_tap: name=tldr-pages/tldr
+  homebrew_tap:
+    name: tldr-pages/tldr
 
 - name: install tldr
-  homebrew: name=tldr
+  homebrew:
+    name: tldr
 
 - name: install multiplexers
-  homebrew: name={{ item }}
+  homebrew:
+    name: "{{ item }}"
   with_items:
     - tmux
     - csshX

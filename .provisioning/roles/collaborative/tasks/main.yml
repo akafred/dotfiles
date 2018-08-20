@@ -1,13 +1,13 @@
 
 - name: install applications
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
+  homebrew_cask: 
+    name: "{{ item }}"
   with_items:
 #    - hipchat
     - skype
     - slack
 
 #- name: BlueJeans
-#  homebrew_cask: n<me={{ item }} state=absent
+#  homebrew_cask: name={{ item }} state=absent
 #  with_items:
 #    - blue-jeans-launcher

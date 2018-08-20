@@ -1,6 +1,6 @@
 - name: install applications
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
+  homebrew_cask:
+    name: "{{ item }}"
   with_items:
 #    - alfred
     - caffeine
