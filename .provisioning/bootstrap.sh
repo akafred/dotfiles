@@ -7,18 +7,11 @@ sudo xcode-select --install || true
 
 # Install Homebrew
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 
 # Install Ansible
 
 brew install ansible
-
-# Create a local ansible-config
-sudo mkdir -p /etc/ansible
-curl https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg | sudo tee /etc/ansible/ansible.cfg > /dev/null
-
-# Add localhost with connection local to ansible's hosts file.
-echo 'localhost ansible_connection=local' | sudo tee /etc/ansible/hosts >> /dev/null
 
 # You should now be ready to run ansible locally.

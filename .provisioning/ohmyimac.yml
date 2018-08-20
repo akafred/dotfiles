@@ -2,9 +2,8 @@
 #     Run .provisioning/bootstrap.sh
 #
 # Then you can run this setup with:
-#     ansible-playbook -Kv -i /etc/ansible/hosts .provisioning/ohmyimac.yml
+#     pushd ~/.provisioning/ && ansible-playbook -Kv ohmyimac.yml ; popd
 #
-# Norsk stavekontroll: http://www.applehjelp.no/eplekart/lion-stavekontroll/
 
 - hosts: localhost
   roles:
