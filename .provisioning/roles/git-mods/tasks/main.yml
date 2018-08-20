@@ -5,10 +5,14 @@
   command: git config --global user.email "github@akafred.com"
 
 - name: create .gitignore_global
-  command: touch {{ ansible_env.HOME }}/.gitignore_global creates={{ ansible_env.HOME }}/.gitignore_global
+  file:
+    path: "{{ ansible_env.HOME }}/.gitignore_global"
+    state: touch
 
 - name: add entries to .gitignore_global
-  lineinfile: dest={{ ansible_env.HOME }}/.gitignore_global line={{ item }}
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gitignore_global"
+    line: "{{ item }}"
   with_items:
     - .DS_Store
     - .idea
@@ -19,9 +23,9 @@
     - core.excludesfile ~/.gitignore_global
 
 - name: copy .gitmsg
-  copy: >
-    src={{ item }}
-    dest="{{ ansible_env.HOME }}/{{ item }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
   with_items:
     - .gitmsg
 
@@ -34,6 +38,11 @@
   command: git config --global {{ item }}
   with_items:
     - push.default simple
+
+- name: create .ssh/config
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    state: touch
 
 - name: set up github in .ssh/config
   blockinfile:
@@ -116,8 +125,8 @@
    - alias.olddiff '!git --no-pager diff'
 
 - name: install GitUp
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
+  homebrew_cask:
+    name: "{{ item }}"
   with_items:
    - GitUp
 
