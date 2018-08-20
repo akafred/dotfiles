@@ -1,10 +1,10 @@
 - name: install oh_my_zsh
   shell: >
     curl -L http://install.ohmyz.sh | sh
-    creates=~/.oh-my-zsh
+    creates=~/.oh-my-zsh warn=False
 
 - name: check if zsh is default
-  shell: finger -l {{ ansible_env.USER }} | grep "Shell" | awk \'{ print $4 }\' | grep -v "/bin/zsh"
+  shell: "finger -l {{ ansible_env.USER }} | grep 'Shell' | awk '{ print $4 }' | grep -v '/bin/zsh'"
   register: zsh_check
   ignore_errors: true
 
@@ -14,26 +14,27 @@
   when: zsh_check is success
 
 - name: Add modules to .zshrc
-  lineinfile: >
-    dest=~/.zshrc
-    line="plugins=(autojump brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
-    regexp="^[#\s]*plugins="
+  lineinfile: 
+    dest: "~/.zshrc"
+    line: "plugins=(autojump brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
+    regexp: "^[#\\s]*plugins="
 
 - name: Add command history sharing to .zshrc
-  lineinfile: >
-    dest=~/.zshrc
-    line="setopt SHARE_HISTORY"
-    regexp="^#*[\s]*setopt SHARE_HISTORY"
+  lineinfile:
+    dest: "~/.zshrc"
+    line: "setopt SHARE_HISTORY"
+    regexp: "^#*[\\s]*setopt SHARE_HISTORY"
 
 - name: Comment out stupid omz-install time PATH setting (which does not include $PATH)
-  lineinfile: >
-    dest=~/.zshrc
-    line="# \1"
-    regexp="^(export PATH=(?:(?!\$PATH).)*)$"
-    backrefs=yes
+  lineinfile:
+    dest: ~/.zshrc
+    line: "# \\1"
+    regexp: "^(export PATH=(?:(?!\\$PATH).)*)$"
+    backrefs: yes
 
 - name: add paths_homes_etc to zshrc
-  lineinfile: >
-    dest="{{ ansible_env.HOME }}/.zshrc"
-    line="source ~/.paths_homes_etc"
-    regexp="paths_homes_etc"
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    line: "source ~/.paths_homes_etc"
+    regexp: "paths_homes_etc"
+
