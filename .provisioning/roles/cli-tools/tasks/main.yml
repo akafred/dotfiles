@@ -3,7 +3,7 @@
     name: "{{ item }}"
   with_items:
    - tree
-   - mtr
+#   - mtr
    - wget
    - autojump
    - ag
