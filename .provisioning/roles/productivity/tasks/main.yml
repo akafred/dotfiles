@@ -2,12 +2,17 @@
   homebrew_cask: name={{ item }}
   ignore_errors: yes
   with_items:
-    - evernote
-    - skitch
+#    - evernote
+#    - skitch
     - freemind
 #    - papers
-#    - todoist AppStore only
     - vitamin-r
     - kindle
     - selfcontrol
-    - anki
+#    - anki
+
+# mas search todoist -
+- name: install todoist
+  shell: mas list | grep 585829637 || mas install 585829637
+  args:
+    executable: /bin/bash
