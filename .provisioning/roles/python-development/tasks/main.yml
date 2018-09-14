@@ -1,7 +1,8 @@
-- name: install python 3
-  homebrew: name={{ item }}
+- name: install python3
+  homebrew:
+    name: "{{ item }}"
   with_items:
-    - "python3"
+    - "python"
 
 - name: make sure pip is updated
   shell: "{{ item }} install --upgrade pip"
@@ -9,17 +10,10 @@
     - "pip3"
 
 - name: make sure we have virtualenv
-  pip: name=virtualenv executable="{{ item }}"
+  pip: name="{{ item }}" executable=pip3
   with_items:
-    - "pip3"
-
-- name: install jupyter
-  homebrew: name={{ item }}
-  with_items:
-    - "jupyter"
-
-- name: install virtualenvwrapper
-  pip: name=virtualenvwrapper executable=pip3
+    - "virtualenv"
+    - "virtualenvwrapper"
 
 - name: add virtualenvwrapper shell commands
   blockinfile:
@@ -32,6 +26,11 @@
              export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
              export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
              source /usr/local/bin/virtualenvwrapper.sh
+
+- name: install jupyter
+  homebrew: name="{{ item }}"
+  with_items:
+    - "jupyter"
 
 - name: install ipython
   pip: name=IPython executable=pip3
