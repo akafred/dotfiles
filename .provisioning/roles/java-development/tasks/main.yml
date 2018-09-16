@@ -6,8 +6,23 @@
     - java8
     - java
 
-- name: install maven
-  homebrew: name=maven
+- name: Check if sdkman is installed
+  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""
+  register: is_sdkman_installed
+
+- name: Install SDKMAN!
+  when: is_sdkman_installed.stdout == "no"
+  shell: curl -s "https://get.sdkman.io" | bash executable=/bin/bash
+
+- name: Ensure presence of bashrc
+  file: state=touch path={{ ansible_env.HOME }}/.bashrc
+
+- name: Add sdkman in .bashrc
+  lineinfile: dest={{ ansible_env.HOME }}/.bashrc regexp="\/.sdkman/bin\/sdkman\-init\.sh" line='[[ -s "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh" && ! $(which sdkman-init.sh) ]] && source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"'
+
+- name: Installing maven (have issues with mvn under sdkman)
+  homebrew:
+    name: maven
 
 - name: create mvn settings bin-folder
   file:
