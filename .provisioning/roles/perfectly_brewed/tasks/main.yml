@@ -11,6 +11,11 @@
 #    line: "PATH=/usr/local/bin:$PATH"
 #    regexp: "PATH=\/usr\/local\/bin"
 
+
+- name: Make sure we can get to older versions
+  homebrew_tap:
+    name: homebrew/cask-versions
+
 - name: update homebrew and upgrade brews
   homebrew:
     update_homebrew: yes

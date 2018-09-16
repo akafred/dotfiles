@@ -1,7 +1,6 @@
 - name: install Javas
   homebrew_cask:
     name: "{{ item }}"
-  ignore_errors: yes
   with_items:
 #    - java6
     - java8
