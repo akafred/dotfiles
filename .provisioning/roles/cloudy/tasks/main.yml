@@ -4,4 +4,4 @@
 #  ignore_errors: yes
   with_items:
     - dropbox
-    - google-backup-and-sync
+#    - google-backup-and-sync
