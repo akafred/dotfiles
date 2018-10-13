@@ -1,0 +1,56 @@
+- name: create projects folder
+  file:
+    path: "{{ ansible_env.HOME }}/Projects/{{ altident }}"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: create altident-profile-for-git
+  copy:
+    src: "Projects/altident/.gitconfig-altident"
+    dest: "{{ ansible_env.HOME }}/Projects/{{ altident }}/.gitconfig-{{ altident }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0640
+
+- name: add altident-profile-for-git
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for altident environment"
+    content: |
+             [includeIf "gitdir:~/Projects/{{ altident }}/"]
+                     path = ~/Projects/{{ altident }}/.gitconfig-{{ altident }}
+
+- name: ensure .ssh/config exists
+  copy:
+    content: ""
+    force: no
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+
+- name: create .ssh/config.d
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config.d"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: create altident config file
+  template:
+    src: ".ssh/config.d/altident"
+    dest: "{{ ansible_env.HOME }}/.ssh/config.d/{{ altident }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+
+- name: make sure .ssh-config has altident stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for altident environment"
+    content: Include ~/.ssh/config.d/*

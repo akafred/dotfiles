@@ -35,7 +35,7 @@
       dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
       marker: "# {mark} ANSIBLE MANAGED BLOCK for unaliasing sdkman mvn command"
       content: |
-               unalias mvn
+               unalias mvn || true
 
 - name: use my smart mvn command
   copy: >

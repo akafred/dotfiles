@@ -49,6 +49,7 @@
     - my-sequel
     - postgresql-y
     - dockered_sonarqube
+    - altident
 #    - postenbring
     - screencasting
 #    - ipad-integration
