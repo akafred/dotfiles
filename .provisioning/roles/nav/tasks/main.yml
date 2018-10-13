@@ -1,0 +1,97 @@
+
+- name: create projects folder
+  file:
+    path: "{{ ansible_env.HOME }}/Projects/navikt"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: shell-script environment stuff
+  copy:
+    src: nav_shellrc.sh
+    dest: "{{ ansible_env.HOME }}/.nav_shellrc.sh"
+
+- name: init nav environment
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
+    content: "source {{ ansible_env.HOME }}/.nav_shellrc.sh"
+
+- name: update hosts-file
+  become: true
+  blockinfile:
+    dest: /etc/hosts
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
+    content: |
+             127.0.0.1  someservice.nav.no
+
+- name: create nav-profile-for-git
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0640
+  with_items:
+    - "Projects/navikt/.gitconfig-nav"
+
+- name: add nav-profile-for-git
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
+    content: |
+             [includeIf "gitdir:~/Projects/navikt/"]
+                     path = ~/Projects/navikt/.gitconfig-nav
+
+- name: ensure .ssh/config exists
+  copy:
+    content: ""
+    force: no
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+
+- name: create .ssh/config.d
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config.d"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: create nav config file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+  with_items:
+    - ".ssh/config.d/nav"
+
+- name: make sure .ssh-config has nav stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
+    content: Include ~/.ssh/config.d/*
+
+- name: create nav maven settings file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0600
+  with_items:
+    - ".m2/navikt-settings.xml"
+
+- name: setup mvn settings
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.m2/bin/mvn"
+    regexp: "    \\*\\/navikt\\*\\).*;;"
+    insertafter: '.*# options here:$'
+    line: '    */navikt*)              SETTINGS="navikt-settings.xml" ;;'
