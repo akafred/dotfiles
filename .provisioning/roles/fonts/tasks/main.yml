@@ -1,8 +1,14 @@
 - name: Tap fonts
-  homebrew_tap: name=homebrew/cask-fonts
+  homebrew_tap:
+    name: homebrew/cask-fonts
 
-- name: Fira Code font
+- name: Tap non-free fonts
+  homebrew_tap:
+    name: colindean/fonts-nonfree
+
+- name: Install Microsofts and Fira Code font
   homebrew_cask:
     name: "{{ item }}"
   with_items:
    - font-fira-code
+   - font-microsoft-office
