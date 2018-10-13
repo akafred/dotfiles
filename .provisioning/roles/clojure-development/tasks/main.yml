@@ -1,4 +1,6 @@
-- name: install leiningen
-  homebrew: name=leiningen
+- name: install clojure
+  homebrew:
+    name: clojure
 
-
+#- name: install leiningen
+#  homebrew: name=leiningen
