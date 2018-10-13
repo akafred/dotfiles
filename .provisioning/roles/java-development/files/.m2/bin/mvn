@@ -1,10 +1,16 @@
 #!/bin/sh
 
-case "$PWD" in
+case "$PWD" in # options here:
     */something*)              SETTINGS='something-settings.xml' ;;
     *)                         SETTINGS='default-settings.xml' ;;
     esac
 
 echo SETTINGS: $SETTINGS
 
-eval /usr/local/bin/mvn -s $HOME/.m2/$SETTINGS $*
+if [ -f ./mvnw ]
+then
+  echo "executing mvnw instead of mvn"
+  eval ./mvnw -s $HOME/.m2/$SETTINGS $*
+else
+  eval /usr/local/bin/mvn -s $HOME/.m2/$SETTINGS $*
+fi

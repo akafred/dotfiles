@@ -30,6 +30,13 @@
     state: directory
     mode: 0755
 
+- name: Unalias maven-wrapper
+  blockinfile:
+      dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK for unaliasing sdkman mvn command"
+      content: |
+               unalias mvn
+
 - name: use my smart mvn command
   copy: >
     src={{ item.name }}
