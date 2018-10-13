@@ -10,7 +10,7 @@
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for rbenv"
     content: |
-             export PATH="/Users/kjetiljd/.rbenv/shims:${PATH}"
+             export PATH="{{ ansible_env.HOME }}/.rbenv/shims:${PATH}"
              export RBENV_SHELL=zsh
              source '/usr/local/Cellar/rbenv/1.1.1/libexec/../completions/rbenv.zsh'
              command rbenv rehash 2>/dev/null
@@ -30,7 +30,7 @@
              }
 
 - name: install a recent ruby version
-  shell: source {{ ansible_env.HOME }}/.paths_homes_etc && rbenv install 2.4.1 --skip-existing  
+  shell: source {{ ansible_env.HOME }}/.paths_homes_etc && rbenv install 2.4.1 --skip-existing
 
 - name: choose ruby version as default, instead of system installed one
   shell: source {{ ansible_env.HOME }}/.paths_homes_etc && rbenv global 2.4.1
