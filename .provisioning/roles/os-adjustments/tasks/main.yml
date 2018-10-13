@@ -1,6 +1,6 @@
-- name: Make hidden files visible 
+- name: Make hidden files visible
   osx_defaults:
-    domain: com.apple.Finder
+    domain: com.apple.finder
     key: AppleShowAllFiles
     type: bool
     value: true
