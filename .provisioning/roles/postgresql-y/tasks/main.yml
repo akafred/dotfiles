@@ -14,9 +14,7 @@
   become: true
 
 - name: install Python-PostgreSQL Database Adapter
-  pip:
-    name: psycopg2
-    executable: /usr/bin/python -m pip
+  command: /usr/bin/python -m pip install psycopg2
   become: true
 
 - name: install psequel (mac postgresql client)
