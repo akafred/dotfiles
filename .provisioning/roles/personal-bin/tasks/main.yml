@@ -13,4 +13,14 @@
     regexp: ~/bin
     mode: 0644
     create: yes
+  when: ansible_system == "Darwin"
+
+- name: add personal bin folder to path (centos/rhel)
+  become: true
+  lineinfile:
+    dest: /etc/profile.d/personal_bin_path.sh
+    line: "export PATH=$PATH:~/bin"
+    mode: 0644
+    create: yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 
