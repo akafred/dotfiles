@@ -1,12 +1,35 @@
-- name: install common tools using brew
-  homebrew:
+- name: install common tools with {{ ansible_pkg_mgr }}
+  become: "{{ ansible_system != 'Darwin' }}"
+  package:
     name: "{{ item }}"
   with_items:
    - tree
-#   - mtr
    - wget
    - autojump
-   - ag
+   - "{{ 'ag' if (ansible_pkg_mgr == 'Homebrew') else 'the_silver_searcher' }}"
+
+- name: patch autojump with zsh-file on rhel
+  copy:
+    src: autojump.zsh
+    dest: /usr/share/autojump/autojump.zsh
+    mode: 0644
+  become: true
+  when: ansible_system != 'Darwin'
+
+- name: make sure we have autojump sourced
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for autojump"
+    content: |
+             source /usr/share/autojump/autojump.zsh
+  when: ansible_system != 'Darwin'
+
+- name: install mtr
+  become: "{{ ansible_system != 'Darwin' }}"
+  package:
+    name: mtr
+  when: ansible_system != 'Darwin'
 
 # - name: make sure mtr is runnable for non-root user
 #   become: true
@@ -22,10 +45,12 @@
 - name: tldr repo
   homebrew_tap:
     name: tldr-pages/tldr
+  when: ansible_system == "Darwin"
 
 - name: install tldr
   homebrew:
     name: tldr
+  when: ansible_system == "Darwin"
 
 - name: install multiplexers
   homebrew:
@@ -33,3 +58,4 @@
   with_items:
     - tmux
     - csshX
+  when: ansible_system == "Darwin"
