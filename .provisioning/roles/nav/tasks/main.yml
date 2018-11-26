@@ -1,10 +1,8 @@
-
 - name: create projects folder
   file:
     path: "{{ ansible_env.HOME }}/Projects/navikt"
     state: directory
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0750
 
 - name: shell-script environment stuff
@@ -31,7 +29,6 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0640
   with_items:
     - "Projects/navikt/.gitconfig-nav"
@@ -51,7 +48,6 @@
     force: no
     dest: "{{ ansible_env.HOME }}/.ssh/config"
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0600
 
 - name: create .ssh/config.d
@@ -59,7 +55,6 @@
     path: "{{ ansible_env.HOME }}/.ssh/config.d"
     state: directory
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0750
 
 - name: create nav config file
@@ -67,7 +62,6 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0600
   with_items:
     - ".ssh/config.d/nav"
@@ -84,7 +78,6 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
     owner: "{{ ansible_env.USER }}"
-    group: staff
     mode: 0600
   with_items:
     - ".m2/navikt-settings.xml"
