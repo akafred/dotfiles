@@ -12,5 +12,10 @@ then
   echo "executing mvnw instead of mvn"
   eval ./mvnw -s $HOME/.m2/$SETTINGS $*
 else
-  eval /usr/local/bin/mvn -s $HOME/.m2/$SETTINGS $*
+  if [ -f /usr/local/bin/mvn ]
+  then
+    eval /usr/local/bin/mvn -s $HOME/.m2/$SETTINGS $*
+  else
+    eval /usr/local/maven/current/bin/mvn -s $HOME/.m2/$SETTINGS $*
+  fi
 fi
