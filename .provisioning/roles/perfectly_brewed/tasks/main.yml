@@ -4,6 +4,7 @@
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     line: "export HOMEBREW_GITHUB_API_TOKEN={{ github_api_token }}"
     regexp: "export HOMEBREW_GITHUB_API_TOKEN"
+  when: ansible_system == 'Darwin'
 
 # - name: add brew path to PATH (not sure why this is commented out, perhaps brew sets this up now?)
 #  lineinfile:
@@ -11,12 +12,24 @@
 #    line: "PATH=/usr/local/bin:$PATH"
 #    regexp: "PATH=\/usr\/local\/bin"
 
+- name: add linuxbrew to paths
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for linuxbrew paths"
+    content: |
+             export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+             export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+             export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+  when: ansible_system != 'Darwin'
 
 - name: Make sure we can get to older versions
   homebrew_tap:
     name: homebrew/cask-versions
+  when: ansible_system == 'Darwin'
 
 - name: update homebrew and upgrade brews
   homebrew:
     update_homebrew: yes
     upgrade_all: yes
+ 
