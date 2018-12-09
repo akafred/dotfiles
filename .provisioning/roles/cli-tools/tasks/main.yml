@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-- name: install common tools using brew
-=======
 - name: install common tools with {{ ansible_pkg_mgr }}
   become: "{{ ansible_system != 'Darwin' }}"
->>>>>>> 0f52c6b980ade032e0f35d8840dca4f404476c8b
   package:
     name: "{{ item }}"
   with_items:
