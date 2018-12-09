@@ -94,18 +94,30 @@
 - name: install git up (globally so it will be picked up as an external command)
   become: true
   gem: name=git-up state=latest user_install=false
+  when: ansible_system == "Darwin"
+
+- name: install git up
+  pip:
+    name: git-up
+    extra_args: --trusted-host pypi.org --trusted-host files.pythonhosted.org
+  become: true
+  when: ansible_pkg_mgr == "yum"
 
 - name: install git extras
-  homebrew: name={{ item }}
+  package:
+    name: "{{ item }}"
   with_items:
     - git-extras
     - tig
+  become: ansible_pkg_mgr == "yum"
+  when: ansible_pkg_mgr != "yum" # We have issues
 
 - name: install DiffMerge
   homebrew_cask: name={{ item }}
   ignore_errors: yes
   with_items:
    - diffmerge
+  when: ansible_system == "Darwin"
 
 - name: config diffmerge
   command: git config --global {{ item }}
@@ -115,6 +127,7 @@
    - merge.tool diffmerge
    - mergetool.diffmerge.trustExitCode true
    - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
+  when: ansible_system == "Darwin"
 
 - name: diff-so-fancy install
   homebrew: name=diff-so-fancy
@@ -134,11 +147,14 @@
     name: "{{ item }}"
   with_items:
    - GitUp
+  when: ansible_system == "Darwin"
 
 - name: tap git-time-metric-stuff
   homebrew_tap:
     name: git-time-metric/gtm
+  when: ansible_system == "Darwin"
 
 - name: install git-time-metric
   homebrew:
     name: gtm
+  when: ansible_system == "Darwin"

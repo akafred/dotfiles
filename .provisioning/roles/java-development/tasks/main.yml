@@ -5,24 +5,33 @@
 #    - java6
     - java8
     - java
+  when: ansible_system == 'Darwin'
 
-- name: Check if sdkman is installed
-  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""
-  register: is_sdkman_installed
+#- name: Check if sdkman is installed
+#  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""
+#  register: is_sdkman_installed
 
-- name: Install SDKMAN!
-  when: is_sdkman_installed.stdout == "no"
-  shell: curl -s "https://get.sdkman.io" | bash executable=/bin/bash
+#- name: Install SDKMAN!
+#  when: is_sdkman_installed.stdout == "no"
+#  shell: curl -s "https://get.sdkman.io" | bash executable=/bin/bash
 
-- name: Ensure presence of bashrc
-  file: state=touch path={{ ansible_env.HOME }}/.bashrc
+#- name: Ensure presence of bashrc
+#  file: state=touch path={{ ansible_env.HOME }}/.bashrc
 
-- name: Add sdkman in .bashrc
-  lineinfile: dest={{ ansible_env.HOME }}/.bashrc regexp="\/.sdkman/bin\/sdkman\-init\.sh" line='[[ -s "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh" && ! $(which sdkman-init.sh) ]] && source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"'
+#- name: Add sdkman in .bashrc
+#  lineinfile: dest={{ ansible_env.HOME }}/.bashrc regexp="\/.sdkman/bin\/sdkman\-init\.sh" line='[[ -s "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh" && ! $(which sdkman-init.sh) ]] && source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"'
 
 - name: Installing maven (have issues with mvn under sdkman)
   homebrew:
     name: maven
+  when: ansible_system == 'Darwin'
+
+- name: create m2 folder
+  file:
+    path: "{{ ansible_env.HOME }}/.m2"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0755
 
 - name: create mvn settings bin-folder
   file:
@@ -30,12 +39,12 @@
     state: directory
     mode: 0755
 
-- name: Unalias maven-wrapper
-  blockinfile:
-      dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
-      marker: "# {mark} ANSIBLE MANAGED BLOCK for unaliasing sdkman mvn command"
-      content: |
-               unalias mvn || true
+#- name: Unalias maven-wrapper
+#  blockinfile:
+#      dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+#      marker: "# {mark} ANSIBLE MANAGED BLOCK for unaliasing sdkman mvn command"
+#      content: |
+#               unalias mvn || true
 
 - name: use my smart mvn command
   copy: >
@@ -43,7 +52,6 @@
     dest="{{ ansible_env.HOME }}/{{ item.name }}"
     mode="{{ item.mode }}"
     owner="{{ ansible_env.USER }}"
-    group="staff"
   with_items:
     - { name: ".m2/bin/mvn", mode: 'u=rwx,g=rx,o=r' }
     - { name: ".m2/default-settings.xml", mode: 'u=rw,g=r,o=' }
@@ -66,6 +74,7 @@
                  export PATH=$JAVA_HOME/bin:$PATH
                  java -version
              }
+  when: ansible_system == 'Darwin'
 
 - name: set default java
   lineinfile:
@@ -73,3 +82,4 @@
     insertafter: EOF
     line: "java_use 1.8"
     regexp: "^java_use"
+  when: ansible_system == 'Darwin'

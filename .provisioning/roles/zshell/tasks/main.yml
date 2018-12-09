@@ -1,7 +1,26 @@
+- name: install zsh if not present
+  package: 
+    name: zsh
+  become: true
+  when: ansible_system != 'Darwin'
+
 - name: install oh_my_zsh
   shell: >
     curl -L http://install.ohmyz.sh | sh
     creates=~/.oh-my-zsh warn=False
+  register: ohmyzsh_install
+  ignore_errors: true
+
+- name: install oh_my_zsh - take 2
+  git:
+    repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  when: ohmyzsh_install is not success
+
+- name: make sure we have a .zshrc
+  shell: >
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    creates=~/.zshrc
 
 - name: check if zsh is default
   shell: "finger -l {{ ansible_env.USER }} | grep 'Shell' | awk '{ print $4 }' | grep -v '/bin/zsh'"
@@ -11,13 +30,21 @@
 - name: make zsh default
   become: true
   command: chsh -s /bin/zsh {{ ansible_env.USER }}
-  when: zsh_check is success
+  when: zsh_check is success and ansible_system == 'Darwin'
 
 - name: Add modules to .zshrc
   lineinfile: 
     dest: "~/.zshrc"
-    line: "plugins=(autojump brew docker git github git-flow mvn osx perl vagrant sublime history-substring-search)"
+    line: "plugins=(autojump brew docker git github git-flow mvn vagrant sublime history-substring-search"
     regexp: "^[#\\s]*plugins="
+  when: ansible_system != 'Darwin'
+
+- name: Add modules to .zshrc
+  lineinfile:
+    dest: "~/.zshrc"
+    line: "plugins=(autojump brew docker git github git-flow mvn osx vagrant sublime history-substring-search)"
+    regexp: "^[#\\s]*plugins="
+  when: ansible_system == 'Darwin'
 
 - name: Add command history sharing to .zshrc
   lineinfile:

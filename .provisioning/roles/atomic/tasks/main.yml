@@ -3,3 +3,10 @@
     name: "{{ item }}"
   with_items:
     - atom
+  when: ansible_system == 'Darwin'
+
+- name: install atom on linux
+  yum:
+    name: https://github.com/atom/atom/releases/download/v1.32.2/atom.x86_64.rpm
+  become: true
+  when: ansible_pkg_mgr == 'yum'
