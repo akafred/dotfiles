@@ -1,9 +1,16 @@
+- name: remove obsolete applications
+  homebrew_cask:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - alfred
+    - jumpcut
+    - rightzoom
+
 - name: install applications
   homebrew_cask:
     name: "{{ item }}"
   with_items:
-#    - alfred
     - caffeine
     - divvy
-    - jumpcut
-#    - rightzoom
+    - flycut
