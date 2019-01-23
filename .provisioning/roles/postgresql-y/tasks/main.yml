@@ -1,8 +1,7 @@
 
 - name: "install database server (default user for the database is {{ ansible_env.USER }})"
-  homebrew: name={{ item }}
-  with_items:
-    - postgresql
+  homebrew:
+    name: postgresql
 
 - name: start database server automatically
   shell: brew services start {{ item }}
@@ -14,7 +13,7 @@
   become: true
 
 - name: install Python-PostgreSQL Database Adapter
-  command: /usr/bin/python -m pip install psycopg2
+  command: env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" /usr/bin/python -m pip --no-cache install psycopg2
   become: true
 
 - name: install psequel (mac postgresql client)

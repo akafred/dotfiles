@@ -1,23 +1,20 @@
 - name: docker for mac
-  homebrew_cask: name={{ item }}
+  homebrew_cask:
+    name: docker
   ignore_errors: yes
-  with_items:
-   - docker
 
-# hoping this is no longer needed
-#- name: install pip for system-python (used by ansible locally)
-#  command: /usr/bin/python -m ensurepip --default-pip
-#  become: true
-#
-#- name: remove deprecated docker-py for system python
-#  pip:
-#    name: docker-py
-#    executable: /usr/bin/python -m pip
-#    state: absent
-# become: true
-#
-#- name: install docker for system python (used by ansible locally)
-#  pip:
-#    name: docker
-#    executable: /usr/bin/python -m pip
-#  become: true
+- name: install pip for system-python (used by ansible locally)
+  command: /usr/bin/python -m ensurepip --default-pip
+  become: true
+
+- name: remove deprecated docker-py for system python
+  pip:
+    name: docker-py
+    executable: /usr/bin/python -m pip
+    state: absent
+  ignore_errors: yes
+  become: true
+
+- name: install docker for system python (used by ansible locally)
+  command: /usr/bin/python -m pip --no-cache install docker
+  become: true
