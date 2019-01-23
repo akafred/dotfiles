@@ -1,10 +1,17 @@
-- name: install groovy
-  homebrew: name=groovy install_options=with-invokedynamic
+- name: uninstall groovy
+  homebrew:
+    name: groovy
+    state: absent
+
+- name: install groovysdk
+  homebrew:
+    name: groovysdk
+    state: present
 
 - name: add groovy to path
   lineinfile: >
     dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="export GROOVY_HOME=/usr/local/opt/groovy/libexec"
+    line="export GROOVY_HOME=/usr/local/opt/groovysdk/libexec"
     regexp="export GROOVY_HOME"
 
 # should install groovy using gvm ?
