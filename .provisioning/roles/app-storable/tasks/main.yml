@@ -1,9 +1,7 @@
 
 - name: install Mac App Store CLI
-  homebrew: 
-    name: "{{ item }}"
-  with_items:
-    - mas
+  homebrew:
+    name: mas
 
 - name: make sure we are logged out of Mac App Store
   command: mas signout

@@ -54,8 +54,7 @@
 
 - name: install multiplexers
   homebrew:
-    name: "{{ item }}"
-  with_items:
-    - tmux
-    - csshX
+    name:
+      - tmux
+      - csshX
   when: ansible_system == "Darwin"

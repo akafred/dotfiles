@@ -26,10 +26,11 @@
   when: ansible_system != "Darwin"
 
 - name: make sure we have virtualenv
-  pip: name="{{ item }}" executable=pip3
-  with_items:
-    - "virtualenv"
-    - "virtualenvwrapper"
+  pip:
+    name:
+      - "virtualenv"
+      - "virtualenvwrapper"
+    executable: pip3
   when: ansible_system == "Darwin"
 
 - name: add virtualenvwrapper shell commands
@@ -46,9 +47,9 @@
   when: ansible_system == "Darwin"
 
 - name: install jupyter
-  homebrew: name="{{ item }}"
-  with_items:
-    - "jupyter"
+  homebrew:
+    name:
+      - "jupyter"
   when: ansible_system == "Darwin"
 
 - name: install ipython
