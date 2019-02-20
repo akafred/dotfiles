@@ -39,7 +39,7 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
     content: |
-             [includeIf "gitdir:~/Projects/navikt/"]
+             [includeIf "gitdir:Projects/navikt/"]
                      path = ~/Projects/navikt/.gitconfig-nav
 
 - name: ensure .ssh/config exists

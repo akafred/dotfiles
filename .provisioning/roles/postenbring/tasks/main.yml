@@ -54,7 +54,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Bring environment"
     state: absent
     content: |
-             [includeIf "gitdir:~/Projects/posten/"]
+             [includeIf "gitdir:Projects/posten/"]
                      path = ~/Projects/posten/.gitconfig-posten
 
 - name: ensure .ssh/config exists

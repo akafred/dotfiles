@@ -20,7 +20,7 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for altident environment"
     content: |
-             [includeIf "gitdir:~/Projects/{{ altident }}/"]
+             [includeIf "gitdir:Projects/{{ altident }}/"]
                      path = ~/Projects/{{ altident }}/.gitconfig-{{ altident }}
 
 - name: ensure .ssh/config exists
