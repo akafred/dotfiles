@@ -3,16 +3,16 @@
   with_items:
    - node
 
-- name: install "nvm" package
-  npm: name=nvm global=yes
+#- name: install "nvm" package
+#  npm: name=nvm global=yes
 
-- name: add node stuff to path
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="export PATH=./node_modules/.bin:$PATH"
-    regexp="export PATH=\.\/node_modules\/\.bin:\$PATH"
+#- name: add node stuff to path
+#  lineinfile: >
+#    dest={{ ansible_env.HOME }}/.paths_homes_etc
+#    line="export PATH=./node_modules/.bin:$PATH"
+#    regexp="export PATH=\.\/node_modules\/\.bin:\$PATH"
 
-- name: install js-related tools
-  homebrew: name={{ item }}
-  with_items:
-    - yarn
+#- name: install js-related tools
+#  homebrew: name={{ item }}
+#  with_items:
+#    - yarn
