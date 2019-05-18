@@ -163,3 +163,8 @@
   homebrew:
     name: gtm
   when: ansible_system == "Darwin"
+
+- name: install git-secrets
+  homebrew:
+    name: git-secrets
+  when: ansible_system == "Darwin"
