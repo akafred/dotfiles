@@ -6,6 +6,7 @@
     login_user: "{{ ansible_env.USER }}"
     lc_collate: en_US.UTF-8
     lc_ctype: en_US.UTF-8
+    template: template0
 
 - name: create user for sonarqube database
   postgresql_user:
