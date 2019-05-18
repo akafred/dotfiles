@@ -1,8 +1,15 @@
 
+- name: remove applications
+  homebrew_cask:
+    name: " {{ item }}"
+    state: absent
+  ignore_errors: yes
+  with_items:
+    - disk-inventory-x
+
 - name: install applications
   homebrew_cask: name={{ item }}
   ignore_errors: yes
   with_items:
     - appcleaner
-    - disk-inventory-x
-#    - forklift
+    - grandperspective
