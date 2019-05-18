@@ -142,6 +142,11 @@
    - color.diff-highlight.newHighlight 'green bold 22'
    - alias.olddiff '!git --no-pager diff'
 
+- name: rebase on pull
+  command: git config --global {{ item }}
+  with_items:
+   - branch.autosetuprebase 'always'
+
 - name: install GitUp
   homebrew_cask:
     name: "{{ item }}"
