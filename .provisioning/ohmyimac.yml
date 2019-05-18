@@ -9,31 +9,31 @@
   roles:
     - shell-config
     - perfectly_brewed
-    - app-storable
+#    - app-storable
 #    - cronable
     - os-adjustments
-    - cloudy
+#    - cloudy
 #    - salty
     - personal-bin
     - cli-tools
-    - asciidoc
+#    - asciidoc
     - zshell
     - git-mods
     - os-tools
     - a_more_usable_ui
-    - dockered
-    - browsers_and_tweaks
+#    - dockered
+#    - browsers_and_tweaks
     - productivity
 #    - msoffice
     - collaborative
     - fonts
     - atomic
 #    - sublime
-    - emacs
-    - remoting
+#    - emacs
+#    - remoting
 #    - r-development
 #    - machine-learning
-    - idea
+#    - idea
     - java-development
 #    - app-engine-development
     - groovy-development
@@ -41,20 +41,20 @@
     - kotlin-development
 #    - scala-development
 #    - clojure-development
-    - golang-development
-    - js-development
-    - elm-development
-    - python-development
-    - ruby-development
-    - my-sequel
-    - postgresql-y
-    - dockered_sonarqube
-    - altident
+#    - golang-development
+#    - js-development
+#    - elm-development
+#    - python-development
+#    - ruby-development
+#    - my-sequel
+#    - postgresql-y
+#    - dockered_sonarqube
+#    - altident
 #    - postenbring
-    - screencasting
+#    - screencasting
 #    - ipad-integration
-    - steamy
-    - vagrantready
-    - spotify
-    - duckdns
+#    - steamy
+#    - vagrantready
+#    - spotify
+#    - duckdns
 #    - experimental
