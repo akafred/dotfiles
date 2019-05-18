@@ -10,11 +10,11 @@
     - shell-config
     - perfectly_brewed
     - os-adjustments
-    - cloudy
+#    - cloudy
     - personal-bin
     - cli-tools
     - zshell
-    - app-storable
+#    - app-storable
     - productivity
 #    - msoffice
     - atomic
@@ -25,6 +25,7 @@
     - git-mods
     - idea
     - java-development
+    - altident
     - nav
 #    - os-tools
 #    - cronable
@@ -43,7 +44,7 @@
 #    - scala-development
     - clojure-development
 #    - golang-development
-#    - js-development
+    - js-development
 #    - python-development
 #    - ruby-development
 #    - my-sequel
