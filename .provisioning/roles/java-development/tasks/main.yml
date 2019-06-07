@@ -3,7 +3,7 @@
     name: "{{ item }}"
   with_items:
 #    - java6
-    - java8
+    - adoptopenjdk8
     - java11
     - java
   when: ansible_system == 'Darwin'
