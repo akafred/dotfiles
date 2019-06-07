@@ -88,3 +88,25 @@
     regexp: "    \\*\\/navikt\\*\\).*;;"
     insertafter: '.*# options here:$'
     line: '    */navikt*)              SETTINGS="navikt-settings.xml" ;;'
+
+- name: create .gradle folder
+  file:
+    path: "{{ ansible_env.HOME }}/.gradle"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0750
+
+- name: ensure .gradle/gradle.properties
+  copy:
+    content: ""
+    force: no
+    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
+    owner: "{{ ansible_env.USER }}"
+    mode: 0600
+
+- name: make sure .gradle/gradle.properties has nav stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
+    content: org.gradle.jvmargs=-DsocksNonProxyHosts=*.confluent.io|*.gradle.org|*.apache.org|*.bintray.com|repo.jfrog.org -DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122
