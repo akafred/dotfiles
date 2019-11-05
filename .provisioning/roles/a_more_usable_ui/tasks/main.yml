@@ -6,11 +6,17 @@
     - alfred
     - jumpcut
     - rightzoom
+    - caffeine
 
 - name: install applications
   homebrew_cask:
     name: "{{ item }}"
+    accept_external_apps: yes
   with_items:
-    - caffeine
     - divvy
     - flycut
+
+- name: install amphetamine - 937984704  Amphetamine (4.2)
+  shell: mas list | grep 937984704 || mas install 937984704
+  args:
+    executable: /bin/bash
