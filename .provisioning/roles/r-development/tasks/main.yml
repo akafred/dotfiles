@@ -1,28 +1,6 @@
-- name: install r using brew - we need X11 - installing XQuartz
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
-  with_items:
-   - xquartz
-
-- name: install r using brew - install science-tap
-  homebrew_tap: name=homebrew/science
-
 - name: install r using brew - install r
-  homebrew: name={{ item }}
-  with_items:
-   - r
+  homebrew_cask: name=r
 
-- name: link r into standard location on osx
-  become: true
-  file: >
-    src="/usr/local/opt/r/R.framework"
-    dest="/Library/Frameworks/R.framework"
-    mode=0755
-    state=link
-
-- name: install RStudio
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
-  with_items:
-   - rstudio
-
+# https://stackoverflow.com/questions/9689104/installing-r-on-mac-warning-messages-setting-lc-ctype-failed-using-c
+- name: fix locale-issue
+  command: defaults write org.R-project.R force.LANG en_US.UTF-8
