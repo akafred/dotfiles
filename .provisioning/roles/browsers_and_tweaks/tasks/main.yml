@@ -3,9 +3,9 @@
   homebrew_cask: name={{ item }}
   ignore_errors: yes
   with_items:
-    - chromium
-    - firefox
-    - google-chrome
+   - firefox
+#    - chromium
+#    - google-chrome
 
 - name: add firefox to path
   become: true
@@ -16,13 +16,13 @@
     mode=0644
     create=yes
 
-- name: install codecs for HTML5 video
-  homebrew: name={{ item }}
-  with_items:
-   - ffmpeg    
+# - name: install codecs for HTML5 video
+#  homebrew: name={{ item }}
+#  with_items:
+#   - ffmpeg
 
-- name: install lastpass
-  homebrew_cask: name={{ item }}
-  ignore_errors: yes
-  with_items:
-    - lastpass
+#- name: install lastpass
+#  homebrew_cask: name={{ item }}
+#  ignore_errors: yes
+#  with_items:
+#    - lastpass
