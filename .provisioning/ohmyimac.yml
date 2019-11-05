@@ -9,7 +9,7 @@
   roles:
     - shell-config
     - perfectly_brewed
-#    - app-storable
+    - app-storable
 #    - cronable
     - os-adjustments
 #    - cloudy
@@ -22,7 +22,7 @@
     - os-tools
     - a_more_usable_ui
 #    - dockered
-#    - browsers_and_tweaks
+    - browsers_and_tweaks
     - productivity
 #    - msoffice
     - collaborative
