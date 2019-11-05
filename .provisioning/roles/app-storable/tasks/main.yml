@@ -3,9 +3,6 @@
   homebrew:
     name: mas
 
-- name: make sure we are logged out of Mac App Store
-  command: mas signout
-
 - name: make sure we are logged into Mac App Store
   command: mas signin kjetiljd@gmail.com "{{ mas_password }}"
   ignore_errors: yes
