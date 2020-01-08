@@ -9,7 +9,7 @@
   roles:
     - shell-config
     - perfectly_brewed
-    - os-adjustments
+#    - os-adjustments
 #    - cloudy
     - personal-bin
     - cli-tools
