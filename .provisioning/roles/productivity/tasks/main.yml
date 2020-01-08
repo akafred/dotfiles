@@ -14,7 +14,7 @@
 #    - anki
 
 # mas search todoist -
-- name: install todoist
-  shell: mas list | grep 585829637 || mas install 585829637
-  args:
-    executable: /bin/bash
+#- name: install todoist
+#  shell: mas list | grep 585829637 || mas install 585829637
+#  args:
+#    executable: /bin/bash
