@@ -4,17 +4,17 @@
   ignore_errors: yes
 
 - name: install pip for system-python (used by ansible locally)
-  command: /usr/bin/python -m ensurepip --default-pip
+  command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"
   become: true
 
 - name: remove deprecated docker-py for system python
   pip:
     name: docker-py
-    executable: /usr/bin/python -m pip
+    executable: "{{ansible_python_interpreter}} -m pip"
     state: absent
   ignore_errors: yes
   become: true
 
 - name: install docker for system python (used by ansible locally)
-  command: /usr/bin/python -m pip --no-cache install docker
+  command: "{{ansible_python_interpreter}} -m pip --no-cache install docker"
   become: true

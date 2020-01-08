@@ -9,11 +9,11 @@
     - postgresql
 
 - name: install pip for system-python (used by ansible locally)
-  command: /usr/bin/python -m ensurepip --default-pip
+  command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"
   become: true
 
 - name: install Python-PostgreSQL Database Adapter
-  command: env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" /usr/bin/python -m pip --no-cache install psycopg2
+  command: env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" {{ansible_python_interpreter}} -m pip --no-cache install psycopg2
   become: true
 
 - name: install psequel (mac postgresql client)
