@@ -113,3 +113,19 @@
       # Putt disse i Network - Bypass proxy settings for these Hosts & Domains:
       # *.local, 169.254/16, raw.githubusercontent.com, cache-redirector.jetbrains.com, *.cloudfront.net, *.confluent.io, *.gradle.org, *.apache.org, *.bintray.com, repo.jfrog.org, nvd.nist.gov
       org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122
+
+- name: Install kubectl
+  homebrew:
+    name: kubectl
+    state: present
+
+- name: Get kubeconfig from github
+  git:
+    repo: 'git@github.com-kjetiljd:navikt/kubeconfigs.git'
+    dest: "{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs"
+
+- name: KUBECONFIG environment variable
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config""
+    regexp="export KUBECONFIG"
