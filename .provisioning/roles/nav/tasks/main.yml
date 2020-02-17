@@ -123,6 +123,7 @@
   git:
     repo: 'git@github.com-kjetiljd:navikt/kubeconfigs.git'
     dest: "{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs"
+    update: no
 
 - name: KUBECONFIG environment variable
   lineinfile: >
