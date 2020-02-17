@@ -130,3 +130,13 @@
     dest={{ ansible_env.HOME }}/.paths_homes_etc
     line="export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config""
     regexp="export KUBECONFIG"
+
+# https://github.com/boz/kail
+- name: Get homebrew repo for kail
+  homebrew_tap:
+    name: boz/repo
+
+- name: Get kail
+  homebrew:
+    name:  boz/repo/kail
+    state: present
