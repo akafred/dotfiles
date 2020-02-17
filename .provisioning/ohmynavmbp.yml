@@ -14,7 +14,7 @@
     - personal-bin
     - cli-tools
     - zshell
-#    - app-storable
+    - app-storable
     - productivity
 #    - msoffice
     - atomic
