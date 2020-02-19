@@ -1,5 +1,5 @@
 - name: install zsh if not present
-  package: 
+  package:
     name: zsh
   become: true
   when: ansible_system != 'Darwin'
@@ -33,7 +33,7 @@
   when: zsh_check is success and ansible_system == 'Darwin'
 
 - name: Add modules to .zshrc
-  lineinfile: 
+  lineinfile:
     dest: "~/.zshrc"
     line: "plugins=(autojump brew docker git github git-flow mvn vagrant sublime history-substring-search"
     regexp: "^[#\\s]*plugins="
@@ -42,9 +42,16 @@
 - name: Add modules to .zshrc
   lineinfile:
     dest: "~/.zshrc"
-    line: "plugins=(autojump brew docker git github git-flow mvn osx vagrant sublime history-substring-search)"
+    line: "plugins=(autojump brew docker git github git-flow kubectl kube-ps1 mvn osx vagrant sublime history-substring-search)"
     regexp: "^[#\\s]*plugins="
   when: ansible_system == 'Darwin'
+
+- name: Add kubernetes info to prompt
+  lineinfile:
+    dest: "~/.zshrc"
+    line: "PROMPT=$PROMPT'$(kube_ps1) '"
+    regexp: "^PROMPT=$PROMPT'$(kube_ps1) '"
+    insertafter: "^source $ZSH/oh-my-zsh.sh"
 
 - name: Add command history sharing to .zshrc
   lineinfile:
@@ -64,4 +71,3 @@
     dest: "{{ ansible_env.HOME }}/.zshrc"
     line: "source ~/.paths_homes_etc"
     regexp: "paths_homes_etc"
-

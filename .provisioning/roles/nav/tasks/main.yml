@@ -140,3 +140,8 @@
   homebrew:
     name:  boz/repo/kail
     state: present
+
+- name: Get kube-ps1
+  homebrew:
+    name: kube-ps1
+    state: present
