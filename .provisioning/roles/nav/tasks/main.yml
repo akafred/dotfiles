@@ -126,10 +126,17 @@
     update: no
 
 - name: KUBECONFIG environment variable
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line="export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config""
-    regexp="export KUBECONFIG"
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    line: export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config"
+    regexp: export KUBECONFIG
+
+- name: Create a symbolic link
+  file:
+    src: "{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config"
+    dest: "{{ ansible_env.HOME }}/.kube/config"
+    owner: "{{ ansible_env.USER }}"
+    state: link
 
 # https://github.com/boz/kail
 - name: Get homebrew repo for kail
@@ -139,6 +146,11 @@
 - name: Get kail
   homebrew:
     name:  boz/repo/kail
+    state: present
+
+- name: Get kubernetic
+  homebrew_cask:
+    name: kubernetic
     state: present
 
 - name: Get kube-ps1
