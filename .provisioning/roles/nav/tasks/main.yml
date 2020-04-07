@@ -82,14 +82,14 @@
   with_items:
     - ".m2/navikt-settings.xml"
 
-- name: create nav security file
-  copy:
-    src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/{{ item }}"
-    owner: "{{ ansible_env.USER }}"
-    mode: 0600
-  with_items:
-    - ".m2/settings-security.xml"
+#- name: create nav security file
+#  copy:
+#    src: "{{ item }}"
+#    dest: "{{ ansible_env.HOME }}/{{ item }}"
+#    owner: "{{ ansible_env.USER }}"
+#    mode: 0600
+#  with_items:
+#    - ".m2/settings-security.xml"
 
 - name: copy proxy cert
   copy:
@@ -127,7 +127,9 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Maven in Nav-environment"
     content: |
-             export MAVEN_OPTS='-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122 -DsocksNonProxyHosts=127.0.0.1|dl.bintray.com|repo.maven.apache.org|*.local|169.254/16|raw.githubusercontent.com|cache-redirector.jetbrains.com|*.cloudfront.net|*.confluent.io|*.gradle.org|*.apache.org|*.bintray.com|repo.jfrog.org|maven.pkg.github.com'
+             export MAVEN_OPTS='-Djava.net.useSystemProxies=true'
+
+  #  export MAVEN_OPTS='-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122 -DsocksNonProxyHosts=127.0.0.1|dl.bintray.com|repo.maven.apache.org|*.local|169.254/16|raw.githubusercontent.com|cache-redirector.jetbrains.com|*.cloudfront.net|*.confluent.io|*.gradle.org|*.apache.org|*.bintray.com|repo.jfrog.org|maven.pkg.github.com'
 
 - name: create .gradle folder
   file:
@@ -153,6 +155,13 @@
       # Putt disse i Network - Bypass proxy settings for these Hosts & Domains:
       # *.local, 169.254/16, raw.githubusercontent.com, cache-redirector.jetbrains.com, *.cloudfront.net, *.confluent.io, *.gradle.org, *.apache.org, *.bintray.com, repo.jfrog.org, nvd.nist.gov
       org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122
+
+- name: make sure .gradle/gradle.properties has Github Package Repo stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
+    insertbefore: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Github Package Repo"
+    block: "{{lookup('file', 'gpr-content')}}"
 
 - name: Install kubectl
   homebrew:
