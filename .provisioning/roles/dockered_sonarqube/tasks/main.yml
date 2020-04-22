@@ -18,6 +18,20 @@
     expires: infinity
     role_attr_flags: NOSUPERUSER
 
+#- name: Create directories for sonarqube volumes
+#  become: true
+#  file:
+#    path: "{{ item }}"
+#    state: directory
+#    mode: '0775'
+#    owner: "{{ ansible_env.USER }}"
+#    group: staff
+#  with_items:
+#    - /opt/sonarqube
+#    - /opt/sonarqube/data
+#    - /opt/sonarqube/logs
+#    - /opt/sonarqube/extensions
+
 - name: install and run sonarqube docker container
   docker_container:
     name: sonarqube
@@ -25,8 +39,12 @@
     state: started
     pull: yes
     ports:
-    - "9000:9000"
-    - "9092:9092"
+      - "9000:9000"
+      - "9092:9092"
+#    volumes:
+#      - /opt/sonarqube/data
+#      - /opt/sonarqube/extensions
+#      - /opt/sonarqube/logs
     env:
       SONARQUBE_JDBC_USERNAME: sonar
       SONARQUBE_JDBC_PASSWORD: sonar
