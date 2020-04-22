@@ -3,7 +3,7 @@
     name: elm
 
 
-- name: install "elm-test" package
+- name: install "elm-format" package
   npm:
-    name: elm-test 
+    name: elm-format
     global: yes
