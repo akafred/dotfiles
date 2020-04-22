@@ -154,7 +154,7 @@
     block: |
       # Putt disse i Network - Bypass proxy settings for these Hosts & Domains:
       # *.local, 169.254/16, raw.githubusercontent.com, cache-redirector.jetbrains.com, *.cloudfront.net, *.confluent.io, *.gradle.org, *.apache.org, *.bintray.com, repo.jfrog.org, nvd.nist.gov
-      org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122
+      org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122 "-Dhttp.nonProxyHost=*.local|169.254/16|raw.githubusercontent.com|cache-redirector.jetbrains.com|*.cloudfront.net|*.confluent.io|*.gradle.org|plugins.gradle.org|*.apache.org|*.bintray.com|repo.jfrog.org|nvd.nist.gov|nav-deckofcards.herokuapp.com|maven.pkg.github.com|pkg.githubusercontent.com|plugins.gradle.com"
 
 - name: make sure .gradle/gradle.properties has Github Package Repo stuff
   blockinfile:
