@@ -1,10 +1,14 @@
+- name: make adoptopenjdk available
+  homebrew_tap:
+    name: AdoptOpenJDK/openjdk
+
 - name: install Javas
   homebrew_cask:
     name: "{{ item }}"
   with_items:
 #    - java6
     - adoptopenjdk8
-    - java11
+    - adoptopenjdk11
     - java
   when: ansible_system == 'Darwin'
 
@@ -86,6 +90,6 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     insertafter: EOF
-    line: "java_use 1.8"
+    line: "java_use 11"
     regexp: "^java_use"
   when: ansible_system == 'Darwin'
