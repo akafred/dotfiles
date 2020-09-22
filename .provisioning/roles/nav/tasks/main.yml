@@ -129,8 +129,6 @@
     content: |
              export MAVEN_OPTS='-Djava.net.useSystemProxies=true'
 
-  #  export MAVEN_OPTS='-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122 -DsocksNonProxyHosts=127.0.0.1|dl.bintray.com|repo.maven.apache.org|*.local|169.254/16|raw.githubusercontent.com|cache-redirector.jetbrains.com|*.cloudfront.net|*.confluent.io|*.gradle.org|*.apache.org|*.bintray.com|repo.jfrog.org|maven.pkg.github.com'
-
 - name: create .gradle folder
   file:
     path: "{{ ansible_env.HOME }}/.gradle"
@@ -145,16 +143,6 @@
     dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
     owner: "{{ ansible_env.USER }}"
     mode: 0600
-
-- name: make sure .gradle/gradle.properties has nav stuff
-  blockinfile:
-    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
-    insertbefore: BOF
-    marker: "# {mark} ANSIBLE MANAGED BLOCK for Nav environment"
-    block: |
-      # Putt disse i Network - Bypass proxy settings for these Hosts & Domains:
-      # *.local,169.254/16,*.githubusercontent.com,*.jetbrains.com,*.cloudfront.net,*.confluent.io,*.gradle.org,*.apache.org,*.bintray.com,*.jfrog.org,nvd.nist.gov,*.herokuapp.com,*.github.com,*.gradle-dn.com
-      org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=14122 "-Dhttp.nonProxyHost=*.local|169.254/16|*.githubusercontent.com|*.jetbrains.com|*.cloudfront.net|*.confluent.io|*.gradle.org|*.apache.org|*.bintray.com|*.jfrog.org|nvd.nist.gov|*.herokuapp.com|*.github.com|*.gradle-dn.com"
 
 - name: make sure .gradle/gradle.properties has Github Package Repo stuff
   blockinfile:
