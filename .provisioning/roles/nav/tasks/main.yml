@@ -109,10 +109,7 @@
     keystore_path: "{{ item }}/lib/security/cacerts"
     keystore_pass: changeit
     state: present
-  with_items:
-    - "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre"
-    - "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
-    - "/Library/Java/JavaVirtualMachines/openjdk-13.0.1.jdk/Contents/Home"
+  with_lines: "ls -d1 /Library/Java/JavaVirtualMachines/*/Contents/Home | grep -v adoptopenjdk-8"
 
 - name: setup mvn settings
   lineinfile:
