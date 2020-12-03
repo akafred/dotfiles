@@ -1,0 +1,10 @@
+# # # # # # # # # # # # # # #
+# $ ansible-galaxy collection install -r requirements.yml
+
+
+# Due to bug in ansible, get the fixed component before ansible gets the update
+# https://github.com/ansible-collections/community.general/pull/1038#issuecomment-719538134
+collections:
+ - name: https://github.com/ansible-collections/community.general
+   type: git
+   version: 4c379bd3b2147710c3e7a1d900cddf47a6b7cd42
