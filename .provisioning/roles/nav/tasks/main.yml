@@ -157,6 +157,7 @@
   git:
     repo: 'git@github.com-kjetiljd:navikt/kubeconfigs.git'
     dest: "{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs"
+    version: "naisdevice"
     update: no
 
 - name: KUBECONFIG environment variable
@@ -185,9 +186,29 @@
 - name: Get kubernetic
   homebrew_cask:
     name: kubernetic
-    state: present
+    state: absent
 
 - name: Get kube-ps1
   homebrew:
     name: kube-ps1
     state: present
+
+- name: Snyk CLI install step 1
+  homebrew_tap:
+    name: snyk/tap
+
+- name: Snyk CLI install step 2
+  homebrew:
+    name: snyk
+
+- name: Install Google Cloud SDK
+  homebrew_cask:
+    name: google-cloud-sdk
+
+- name: Install git-crypt
+  homebrew:
+    name: git-crypt
+
+- name: Install gnupg
+  homebrew:
+    name: gnupg
