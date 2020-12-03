@@ -1,5 +1,6 @@
 - name: base tools
-  homebrew: name={{ item }}
+  homebrew:
+    name: "{{ item }}"
   with_items:
    - node
 
