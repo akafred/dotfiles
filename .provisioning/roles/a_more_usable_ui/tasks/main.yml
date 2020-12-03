@@ -16,7 +16,9 @@
     - divvy
     - flycut
 
-- name: install amphetamine - 937984704  Amphetamine (4.2)
-  shell: mas list | grep 937984704 || mas install 937984704
+- name: install apps from Mac App Store
+  shell: "mas list | grep {{ item }} || mas search {{ item }} | grep {{ item }} | awk '{print $1}' | xargs mas install"
   args:
-    executable: /bin/bash
+      executable: /bin/bash
+  with_items:
+    - Amphetamine
