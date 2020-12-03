@@ -45,6 +45,7 @@
 #      - /opt/sonarqube/data
 #      - /opt/sonarqube/extensions
 #      - /opt/sonarqube/logs
+    container_default_behavior: compatibility
     env:
       SONARQUBE_JDBC_USERNAME: sonar
       SONARQUBE_JDBC_PASSWORD: sonar
