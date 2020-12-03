@@ -1,7 +1,7 @@
 - name: install python
   package:
     name: "{{ item }}"
-  become: ansible_system != "Darwin"
+  become: "{{ ansible_system != 'Darwin' }}"
   with_items:
     - "python"
 

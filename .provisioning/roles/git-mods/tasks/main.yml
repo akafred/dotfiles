@@ -109,7 +109,7 @@
   with_items:
     - git-extras
     - tig
-  become: ansible_pkg_mgr == "yum"
+  become: "{{ ansible_pkg_mgr == 'yum' }}"
   when: ansible_pkg_mgr != "yum" # We have issues
 
 - name: install DiffMerge
