@@ -5,9 +5,17 @@
     type: bool
     value: true
     state: present
-  register: default_set
+  register: default_set_visible
+
+- name: Make all extensions visible
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+    state: present
+  register: default_set_extension
 
 - name: restart Finder
   command: killall Finder
-  when: default_set.changed
-
+  when: default_set_visible.changed or default_set_extension.changed
