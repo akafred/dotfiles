@@ -16,13 +16,13 @@
 - name: make sure pip is updated
   shell: "{{ item }} install --upgrade pip"
   with_items:
-    - "pip"
+    - "pip3"
   when: ansible_system == "Darwin"
 
 - name: make sure pip is updated
   shell: "{{ item }} install --upgrade pip"
   with_items:
-    - "pip"
+    - "pip3"
   when: ansible_system != "Darwin"
 
 - name: make sure we have virtualenv
@@ -30,7 +30,7 @@
     name:
       - "virtualenv"
       - "virtualenvwrapper"
-    executable: pip
+    executable: pip3
   when: ansible_system == "Darwin"
 
 - name: add virtualenvwrapper shell commands
@@ -53,5 +53,5 @@
   when: ansible_system == "Darwin"
 
 - name: install ipython
-  pip: name=IPython executable=pip
+  pip: name=IPython executable=pip3
   when: ansible_system == "Darwin"
