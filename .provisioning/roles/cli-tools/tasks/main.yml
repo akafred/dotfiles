@@ -59,3 +59,33 @@
       - tmux
       - csshX
   when: ansible_system == "Darwin"
+
+- name: install thefuck
+  package:
+    name: thefuck
+
+- name: fix thefuck
+  become: "{{ ansible_system != 'Darwin' }}"
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for thefuck"
+    content: |
+             eval $(thefuck --alias)
+
+- name: install thefuck
+  become: "{{ ansible_system != 'Darwin' }}"
+  package:
+    name: thefuck
+
+- name: install more tools
+  become: "{{ ansible_system != 'Darwin' }}"
+  package:
+    name: "{{ item }}"
+  with_items:
+    - fzf
+    - httpie
+    - yq
+    - bat
+    - shellcheck
+    - gh
