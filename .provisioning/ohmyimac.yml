@@ -14,10 +14,10 @@
     - os-adjustments
 #    - cloudy
 #    - salty
+    - zshell
     - personal-bin
     - cli-tools
 #    - asciidoc
-    - zshell
     - git-mods
     - os-tools
     - a_more_usable_ui

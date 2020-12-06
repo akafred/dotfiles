@@ -83,9 +83,24 @@
   package:
     name: "{{ item }}"
   with_items:
-    - fzf
     - httpie
     - yq
     - bat
     - shellcheck
     - gh
+
+- name: install fzf
+  package:
+    name: fzf
+
+- name: setup fzf key-bindings and completion
+  shell: "$(brew --prefix)/opt/fzf/install --no-fish --completion --key-bindings --no-update-rc"
+  # creates: "{{ ansible_env.HOME }}/.fzf.zsh"
+
+- name: setup fzf in rc-files
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for fzf"
+    content: |
+             [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
