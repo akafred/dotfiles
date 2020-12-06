@@ -9,8 +9,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/i
 
 # Install Ansible
 
-su - 
+su -
 yum install git ansible
 exit
+
+@# Install requirements froom Ansible Galaxy
+ansible-galaxy install -r requirements.yml
 
 # You should now be ready to run ansible locally.
