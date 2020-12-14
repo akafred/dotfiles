@@ -13,6 +13,14 @@
     - java
   when: ansible_system == 'Darwin'
 
+- name: make latest java visible
+  become: true
+  file:
+    src: /usr/local/opt/openjdk/libexec/openjdk.jdk
+    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
+    state: link
+
+
 #- name: Check if sdkman is installed
 #  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""
 #  register: is_sdkman_installed
