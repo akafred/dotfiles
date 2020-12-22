@@ -22,3 +22,4 @@
       executable: /bin/bash
   with_items:
     - Amphetamine
+    - Pocket
