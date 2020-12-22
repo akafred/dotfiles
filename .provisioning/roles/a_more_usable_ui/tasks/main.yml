@@ -17,7 +17,7 @@
     - flycut
 
 - name: install apps from Mac App Store
-  shell: "mas list | grep {{ item }} || mas search {{ item }} | grep {{ item }} | awk '{print $1}' | xargs mas install"
+  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
   args:
       executable: /bin/bash
   with_items:
