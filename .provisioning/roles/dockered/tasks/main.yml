@@ -1,5 +1,5 @@
 - name: docker for mac
-  homebrew_cask:
+  package:
     name: docker
   ignore_errors: yes
 

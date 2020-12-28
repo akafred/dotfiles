@@ -1,5 +1,5 @@
 - name: remove obsolete applications
-  homebrew_cask:
+  package:
     name: "{{ item }}"
     state: absent
   with_items:
@@ -9,9 +9,9 @@
     - caffeine
 
 - name: install applications
-  homebrew_cask:
+  package:
     name: "{{ item }}"
-    accept_external_apps: yes
+  ignore_errors: yes
   with_items:
     - divvy
     - flycut

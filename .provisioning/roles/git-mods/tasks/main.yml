@@ -113,7 +113,7 @@
   when: ansible_pkg_mgr != "yum" # We have issues
 
 - name: install DiffMerge
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
    - diffmerge
@@ -148,8 +148,9 @@
    - branch.autosetuprebase 'always'
 
 - name: install GitUp
-  homebrew_cask:
+  package:
     name: "{{ item }}"
+  ignore_errors: yes
   with_items:
    - GitUp
   when: ansible_system == "Darwin"

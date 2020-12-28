@@ -1,6 +1,6 @@
 
 - name: remove applications
-  homebrew_cask:
+  package:
     name: " {{ item }}"
     state: absent
   ignore_errors: yes
@@ -8,7 +8,7 @@
     - disk-inventory-x
 
 - name: install applications
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
     - appcleaner

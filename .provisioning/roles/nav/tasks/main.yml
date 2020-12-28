@@ -184,9 +184,10 @@
     state: present
 
 - name: Get kubernetic
-  homebrew_cask:
+  package:
     name: kubernetic
     state: absent
+  ignore_errors: yes
 
 - name: Get kube-ps1
   homebrew:
@@ -202,8 +203,9 @@
     name: snyk
 
 - name: Install Google Cloud SDK
-  homebrew_cask:
+  package:
     name: google-cloud-sdk
+  ignore_errors: yes
 
 - name: Install git-crypt
   homebrew:

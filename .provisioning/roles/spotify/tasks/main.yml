@@ -1,6 +1,6 @@
 
 - name: install applications
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
     - spotify

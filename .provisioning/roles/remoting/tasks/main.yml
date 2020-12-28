@@ -1,5 +1,6 @@
 - name: install teamviewer
-  homebrew_cask:
+  package:
     name: "{{ item }}"
+  ignore_errors: yes
   with_items:
     - teamviewer

@@ -3,7 +3,7 @@
   homebrew_tap: name=homebrew/science
 
 - name: prereqs for octave
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
     - mactex

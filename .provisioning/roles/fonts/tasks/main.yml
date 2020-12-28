@@ -9,7 +9,7 @@
   when: ansible_system == 'Darwin'
 
 - name: Install Microsofts and Fira Code font
-  homebrew_cask:
+  package:
     name: "{{ item }}"
   with_items:
    - font-fira-code

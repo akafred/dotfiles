@@ -1,5 +1,5 @@
 - name: install microsoft office INSTALLER
-  homebrew_cask: 
+  package:
     name: "{{ item }}"
   ignore_errors: yes
   with_items:

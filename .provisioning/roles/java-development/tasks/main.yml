@@ -3,8 +3,9 @@
     name: AdoptOpenJDK/openjdk
 
 - name: install Javas
-  homebrew_cask:
+  package:
     name: "{{ item }}"
+  ignore_errors: yes
   with_items:
 #    - java6
     - adoptopenjdk/openjdk/adoptopenjdk8

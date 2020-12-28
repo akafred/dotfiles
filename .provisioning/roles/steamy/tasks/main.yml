@@ -1,5 +1,5 @@
 - name: install steam
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
     - steam

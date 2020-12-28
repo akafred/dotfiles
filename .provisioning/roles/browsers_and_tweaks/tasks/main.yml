@@ -1,6 +1,6 @@
 
 - name: install half decent browser - or two
-  homebrew_cask: name={{ item }}
+  package: name={{ item }}
   ignore_errors: yes
   with_items:
    - firefox
@@ -22,7 +22,7 @@
 #   - ffmpeg
 
 #- name: install lastpass
-#  homebrew_cask: name={{ item }}
+#  package: name={{ item }}
 #  ignore_errors: yes
 #  with_items:
 #    - lastpass
