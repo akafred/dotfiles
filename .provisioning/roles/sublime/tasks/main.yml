@@ -14,13 +14,13 @@
 
 - name: copy my settings files to sublime-text
   copy: >
-    src={{ item }} 
+    src={{ item }}
     dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Packages/User/"
   with_items:
     - Preferences.sublime-settings
     - groovy.sublime-build
 
-- name: download package control 
+- name: download package control
   get_url: >
     url="https://packagecontrol.io/Package Control.sublime-package"
     dest="{{ ansible_env.HOME }}/Library/Application Support/Sublime Text 2/Installed Packages/"
