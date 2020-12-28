@@ -90,6 +90,8 @@
     - alias.dump 'cat-file -p'
     - alias.unstage 'reset HEAD'
     - alias.discard 'checkout --'
+    - alias.back 'checkout HEAD~'
+    - alias.fwd '!sh -c "git checkout $(git rev-list --topo-order HEAD..$1 | tail -1) --"'
 
 - name: install git up (globally so it will be picked up as an external command)
   become: true
