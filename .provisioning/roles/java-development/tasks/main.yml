@@ -87,7 +87,7 @@
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for java commands"
     content: |
-             alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d\d?(?:(?:.\d)?.\d[,_])?," | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+             alias java_ls='/usr/libexec/java_home -V 2>&1 |grep -E "^\s+\d\d?(?:(?:.\d+)?.\d+[,_]?(?:.\d+))?\s" | cut -d "(" -f 1 | sed -e "s/^[[:space:]]*//"'
              function java_use() {
                  # unset introduced to avoid Big Sur-bug https://developer.apple.com/forums/thread/666681
                  unset JAVA_HOME
