@@ -173,18 +173,27 @@
     owner: "{{ ansible_env.USER }}"
     state: link
 
-# https://github.com/boz/kail
-- name: Get homebrew repo for kail
-  homebrew_tap:
-    name: boz/repo
+- name: Get stern
+  homebrew:
+    name: stern
 
-- name: Get kail
+# https://github.com/boz/kail
+- name: Don't get kail (certificate-issue)
   homebrew:
     name:  boz/repo/kail
-    state: present
+    state: absent
 
-- name: Get kubernetic
-  package:
+- name: Remove homebrew repo for kail
+  homebrew_tap:
+    name: boz/repo
+    state: absent
+
+- name: Get k9s
+  homebrew:
+    name: k9s
+
+- name: Dont get kubernetic (costs money)
+  homebrew_cask:
     name: kubernetic
     state: absent
   ignore_errors: yes
