@@ -1,8 +1,11 @@
 - name: install applications
-  package: name={{ item }}
+  homebrew_cask:
+    name: "{{ item }}"
   ignore_errors: yes
   with_items:
-    - screenflow
+    - obs
+    - obs-virtualcam
+#    - loopback - costs money
 
 - name: install Backdrop
   shell: mas list | grep 411461952 || mas install 411461952
