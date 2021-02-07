@@ -8,3 +8,18 @@
 # Closes #123
 # Fixes example_user/example_repo#76
 # See also: ad76e7, example_user/example_repo@a5c3785, #432
+
+# Arlo's Notation:
+# F   | Feature (<= 8 lines)
+# B   | Bug (<= 8 lines)
+# R   | Test-supported Procedural Refactoring
+# t   | Test only    |
+# d   | Developer documentation changes (not end-user facing)
+# a   | Automated formatting/generation
+# r   | Provable Refactoring
+# c   | Comments (add/delete)
+# e   | Environment (non-code) changes that affect development setup, and other tooling changes that don't affect program behavior (e.g. linting)
+# F!! | Feature (> 8 lines)
+# B!! | Bug (> 8 lines)
+# R!! | Non-provable refactoring
+# *** | Does not compile intermediate step
