@@ -1,7 +1,7 @@
 
 - name: create personal bin folder
-  file: 
-    path: "{{ ansible_env.HOME }}/bin" 
+  file:
+    path: "{{ ansible_env.HOME }}/bin"
     mode: 0750
     state: directory
 
@@ -9,8 +9,8 @@
   become: true
   lineinfile:
     dest: /etc/paths.d/50-personal-bin
-    line: ~/bin
-    regexp: ~/bin
+    line: "$HOME/bin"
+    regexp: "$HOME/bin"
     mode: 0644
     create: yes
   when: ansible_system == "Darwin"
@@ -19,8 +19,7 @@
   become: true
   lineinfile:
     dest: /etc/profile.d/personal_bin_path.sh
-    line: "export PATH=$PATH:~/bin"
+    line: "export PATH=$PATH:$HOME/bin"
     mode: 0644
     create: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
-
