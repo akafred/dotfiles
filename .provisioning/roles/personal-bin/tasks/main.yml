@@ -9,8 +9,8 @@
   become: true
   lineinfile:
     dest: /etc/paths.d/50-personal-bin
-    line: "$HOME/bin"
-    regexp: "$HOME/bin"
+    line: "{{ ansible_env.HOME }}/bin"
+    regexp: "{{ ansible_env.HOME }}/bin"
     mode: 0644
     create: yes
   when: ansible_system == "Darwin"
@@ -19,7 +19,7 @@
   become: true
   lineinfile:
     dest: /etc/profile.d/personal_bin_path.sh
-    line: "export PATH=$PATH:$HOME/bin"
+    line: "export PATH=$PATH:{{ ansible_env.HOME }}/bin"
     mode: 0644
     create: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
