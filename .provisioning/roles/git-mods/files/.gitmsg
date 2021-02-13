@@ -13,12 +13,13 @@
 # F   | Feature (<= 8 lines)
 # B   | Bug (<= 8 lines)
 # R   | Test-supported Procedural Refactoring
-# t   | Test only    |
+# t   | Test only
 # d   | Developer documentation changes (not end-user facing)
 # a   | Automated formatting/generation
 # r   | Provable Refactoring
 # c   | Comments (add/delete)
-# e   | Environment (non-code) changes that affect development setup, and other tooling changes that don't affect program behavior (e.g. linting)
+# e   | Environment (non-code) changes that affect development setup, and other
+#     | ... tooling changes that don't affect program behavior (e.g. linting)
 # F!! | Feature (> 8 lines)
 # B!! | Bug (> 8 lines)
 # R!! | Non-provable refactoring
