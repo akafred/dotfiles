@@ -29,12 +29,20 @@
   pip:
     name:
       - "virtualenv"
+    executable: pip3
+  when: ansible_system == "Darwin"
+
+- name: make sure we have virtualenv
+  pip:
+    name:
       - "virtualenvwrapper"
     executable: pip3
+    state: absent
   when: ansible_system == "Darwin"
 
 - name: add virtualenvwrapper shell commands
   blockinfile:
+    state: absent
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for virtualenvwrapper shell commands"
     content: |
