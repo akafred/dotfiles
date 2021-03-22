@@ -6,3 +6,4 @@
       - slack
       - whatsapp
       - zoom
+    accept_external_apps: yes
