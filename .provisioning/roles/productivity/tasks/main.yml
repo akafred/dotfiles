@@ -1,19 +1,12 @@
 - name: install applications
-  package: name={{ item }}
-  ignore_errors: yes
-  with_items:
+  homebrew_cask:
+    name:
+      - freemind
 #    - tiddly
 #    - evernote
 #    - skitch
-    - freemind
 #    - papers
 #    - vitamin-r
-    - kindle
+#    - kindle
 #    - selfcontrol
 #    - anki
-
-# mas search todoist -
-#- name: install todoist
-#  shell: mas list | grep 585829637 || mas install 585829637
-#  args:
-#    executable: /bin/bash

@@ -1,11 +1,7 @@
 
 - name: install half decent browser - or two
-  package: name={{ item }}
-  ignore_errors: yes
-  with_items:
-   - firefox
-#    - chromium
-#    - google-chrome
+  homebrew_cask:
+    name: firefox
 
 - name: add firefox to path
   become: true
@@ -21,8 +17,6 @@
 #  with_items:
 #   - ffmpeg
 
-#- name: install lastpass
-#  package: name={{ item }}
-#  ignore_errors: yes
-#  with_items:
-#    - lastpass
+- name: install lastpass
+  homebrew_cask:
+    name: lastpass

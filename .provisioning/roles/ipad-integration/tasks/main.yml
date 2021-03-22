@@ -1,5 +1,4 @@
 - name: install applications
-  package: name={{ item }}
-  ignore_errors: yes
+  homebrew: name={{ item }}
   with_items:
     - duet

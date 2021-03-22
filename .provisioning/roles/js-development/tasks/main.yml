@@ -1,8 +1,6 @@
 - name: base tools
   homebrew:
-    name: "{{ item }}"
-  with_items:
-   - node
+    name: node
 
 #- name: install "nvm" package
 #  npm: name=nvm global=yes

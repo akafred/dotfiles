@@ -1,5 +1,4 @@
 - name: install steam
   package: name={{ item }}
-  ignore_errors: yes
   with_items:
     - steam

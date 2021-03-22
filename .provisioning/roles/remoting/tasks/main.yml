@@ -1,6 +1,14 @@
 - name: install teamviewer
-  package:
-    name: "{{ item }}"
-  ignore_errors: yes
+  homebrew_cask:
+    name: teamviewer
+
+- name: install Microsoft Remote Deskto‪p‬
+  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
+  args:
+      executable: /bin/bash
   with_items:
-    - teamviewer
+    - Microsoft Remote Desktop
+
+- name: install AnyDesk
+  homebrew_cask:
+    name: anydesk

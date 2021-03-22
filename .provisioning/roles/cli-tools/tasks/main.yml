@@ -1,12 +1,11 @@
 - name: install common tools with {{ ansible_pkg_mgr }}
   become: "{{ ansible_system != 'Darwin' }}"
-  package:
-    name: "{{ item }}"
-  with_items:
-   - tree
-   - wget
-   - autojump
-   - "{{ 'ag' if (ansible_pkg_mgr == 'Homebrew') else 'the_silver_searcher' }}"
+  homebrew:
+    name:
+      - tree
+      - wget
+      - autojump
+      - "{{ 'ag' if (ansible_pkg_mgr == 'Homebrew') else 'the_silver_searcher' }}"
 
 - name: patch autojump with zsh-file on rhel
   copy:
@@ -36,13 +35,6 @@
     name: mtr
   when: ansible_system == 'Darwin'
 
-# need to link mtr into /usr/local/bin
-- name: need to link mtr into /usr/local/bin
-  file: src=/usr/local/sbin/mtr dest=/usr/local/bin/mtr state=link mode=0755
-
-- name: need to link mtr-packet into /usr/local/bin
-  file: src=/usr/local/sbin/mtr-packet dest=/usr/local/bin/mtr-packet state=link mode=0755
-
 - name: tldr repo
   homebrew_tap:
     name: tldr-pages/tldr
@@ -60,10 +52,6 @@
       - csshX
   when: ansible_system == "Darwin"
 
-- name: install thefuck
-  package:
-    name: thefuck
-
 - name: fix thefuck
   become: "{{ ansible_system != 'Darwin' }}"
   blockinfile:
@@ -74,23 +62,24 @@
              eval $(thefuck --alias)
 
 - name: install thefuck
-  become: "{{ ansible_system != 'Darwin' }}"
-  package:
+  homebrew:
     name: thefuck
 
 - name: install more tools
-  become: "{{ ansible_system != 'Darwin' }}"
-  package:
-    name: "{{ item }}"
-  with_items:
-    - httpie
-    - yq
-    - bat
-    - shellcheck
-    - gh
+  homebrew:
+    name:
+      - httpie
+      - yq
+      - bat
+      - gh
+
+- name: install shellcheck (fails on Apple M1 due to GHC issue)
+  homebrew:
+    name: shellcheck
+  when: ansible_processor != 'Apple M1'
 
 - name: install fzf
-  package:
+  homebrew:
     name: fzf
 
 - name: setup fzf key-bindings and completion

@@ -1,7 +1,6 @@
 - name: install cloud storage applications
-  package:
+  homebrew_cask:
     name: "{{ item }}"
-  ignore_errors: yes
   with_items:
     - dropbox
 #    - google-backup-and-sync

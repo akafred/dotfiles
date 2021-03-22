@@ -10,6 +10,5 @@
 
 - name: install sequel pro (mac mysql client)
   package: name={{ item }}
-  ignore_errors: yes
   with_items:
     - sequel-pro

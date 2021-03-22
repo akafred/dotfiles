@@ -3,13 +3,11 @@
   package:
     name: " {{ item }}"
     state: absent
-  ignore_errors: yes
   with_items:
     - disk-inventory-x
 
 - name: install applications
   package: name={{ item }}
-  ignore_errors: yes
   with_items:
     - appcleaner
     - grandperspective

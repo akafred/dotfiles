@@ -1,14 +1,10 @@
-- name: install office
-  homebrew_cask:
-    name: microsoft-office
 
-- name: install teams
-  homebrew_cask:
-    name: microsoft-teams
-
-- name: install Office apps from Mac App Store
+- name: install other apps from Mac App Store
   shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
   args:
       executable: /bin/bash
   with_items:
-    - OneDrive
+    - Trello
+    - iA Writer
+    - Notability
+    - Backdrop

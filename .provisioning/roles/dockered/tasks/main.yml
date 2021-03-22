@@ -1,7 +1,9 @@
 - name: docker for mac
-  package:
+  homebrew_cask:
     name: docker
-  ignore_errors: yes
+  when: ansible_processor != 'Apple M1'
+  # Man kan manuelt installere Docker på Apple M1:
+  # https://docs.docker.com/docker-for-mac/apple-m1/
 
 - name: install pip for system-python (used by ansible locally)
   command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"

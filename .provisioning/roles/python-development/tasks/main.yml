@@ -1,9 +1,7 @@
 - name: install python
-  package:
-    name: "{{ item }}"
   become: "{{ ansible_system != 'Darwin' }}"
-  with_items:
-    - "python"
+  homebrew:
+    name: "python"
 
 - name: make sure pip is installed
   package:

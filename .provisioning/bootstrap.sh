@@ -15,6 +15,6 @@ brew doctor
 brew install ansible
 
 # Install requirements froom Ansible Galaxy
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r requirements.yml --force
 
 # You should now be ready to run ansible locally.
