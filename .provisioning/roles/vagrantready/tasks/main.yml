@@ -1,13 +1,11 @@
 
  - name: install virtualbox
    package: name={{ item }}
-   ignore_errors: yes
    with_items:
      - virtualbox
 
  - name: install vagrant
    package: name={{ item }}
-   ignore_errors: yes
    with_items:
      - vagrant
 

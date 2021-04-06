@@ -6,16 +6,8 @@
 
 - name: install oh_my_zsh
   shell: >
-    curl -L http://install.ohmyz.sh | sh
-    creates=~/.oh-my-zsh warn=False
-  register: ohmyzsh_install
-  ignore_errors: true
-
-- name: install oh_my_zsh - take 2
-  git:
-    repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
-  when: ohmyzsh_install is not success
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    creates=~/.oh-my-zsh
 
 - name: make sure we have a .zshrc
   shell: >

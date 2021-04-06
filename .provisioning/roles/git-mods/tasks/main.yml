@@ -98,32 +98,23 @@
     - alias.back 'checkout HEAD~'
     - alias.fwd '!sh -c "git checkout $(git rev-list --topo-order HEAD..$1 | tail -1) --"'
 
-- name: install git up (globally so it will be picked up as an external command)
-  become: true
-  gem: name=git-up state=latest user_install=false
-  when: ansible_system == "Darwin"
-
 - name: install git up
   pip:
     name: git-up
     extra_args: --trusted-host pypi.org --trusted-host files.pythonhosted.org
   become: true
-  when: ansible_pkg_mgr == "yum"
 
 - name: install git extras
-  package:
-    name: "{{ item }}"
-  with_items:
-    - git-extras
-    - tig
+  homebrew:
+    name:
+      - git-extras
+      - tig
   become: "{{ ansible_pkg_mgr == 'yum' }}"
   when: ansible_pkg_mgr != "yum" # We have issues
 
 - name: install DiffMerge
-  package: name={{ item }}
-  ignore_errors: yes
-  with_items:
-   - diffmerge
+  homebrew_cask:
+    name: diffmerge
   when: ansible_system == "Darwin"
 
 - name: config diffmerge
@@ -137,7 +128,8 @@
   when: ansible_system == "Darwin"
 
 - name: diff-so-fancy install
-  homebrew: name=diff-so-fancy
+  homebrew:
+    name: diff-so-fancy
 
 - name: diff-so-fancy config
   command: git config --global {{ item }}
@@ -154,12 +146,9 @@
   with_items:
    - branch.autosetuprebase 'always'
 
-- name: install GitUp
-  package:
-    name: "{{ item }}"
-  ignore_errors: yes
-  with_items:
-   - GitUp
+- name: install gitup
+  homebrew_cask:
+    name: gitup
   when: ansible_system == "Darwin"
 
 - name: tap git-time-metric-stuff

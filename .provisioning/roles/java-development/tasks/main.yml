@@ -3,14 +3,21 @@
     name: AdoptOpenJDK/openjdk
 
 - name: install Javas
-  package:
-    name: "{{ item }}"
+  homebrew:
+    name: adoptopenjdk8
   ignore_errors: yes
-  with_items:
-#    - java6
-    - adoptopenjdk/openjdk/adoptopenjdk8
-    - adoptopenjdk11
-    - java
+  when: ansible_system == 'Darwin'
+
+- name: install Javas
+  homebrew:
+    name: adoptopenjdk11
+  ignore_errors: yes
+  when: ansible_system == 'Darwin'
+
+- name: install Javas
+  homebrew:
+    name: java
+  ignore_errors: yes
   when: ansible_system == 'Darwin'
 
 - name: make latest java visible
@@ -19,7 +26,16 @@
     src: /usr/local/opt/openjdk/libexec/openjdk.jdk
     dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
     state: link
+  register: found_in_opt_local
+  ignore_errors: yes
 
+- name: make latest java visible
+  become: true
+  file:
+    src: /opt/homebrew/opt/openjdk/libexec/openjdk.jdk
+    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
+    state: link
+  when: found_in_opt_local is failure
 
 #- name: Check if sdkman is installed
 #  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""

@@ -1,9 +1,6 @@
 - name: install atom
-  package:
-    name: "{{ item }}"
-  ignore_errors: yes
-  with_items:
-    - atom
+  homebrew_cask:
+    name: atom
   when: ansible_system == 'Darwin'
 
 - name: install atom on linux

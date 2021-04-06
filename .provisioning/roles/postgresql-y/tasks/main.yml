@@ -17,7 +17,5 @@
   become: true
 
 - name: install psequel (mac postgresql client)
-  package: name={{ item }}
-  ignore_errors: yes
-  with_items:
-    - psequel
+  homebrew_cask:
+    name: psequel

@@ -1,5 +1,3 @@
 - name: install jetbrains-toolbox
-  package: name={{ item }}
-  ignore_errors: yes
-  with_items:
-    - jetbrains-toolbox
+  homebrew_cask:
+    name: jetbrains-toolbox

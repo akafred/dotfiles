@@ -1,14 +1,9 @@
 
 - name: install applications
-  package:
-    name: "{{ item }}"
-  ignore_errors: yes
-  with_items:
-#    - hipchat
-    - skype
-    - slack
-
-#- name: BlueJeans
-#  package: name={{ item }} state=absent
-#  with_items:
-#    - blue-jeans-launcher
+  homebrew_cask:
+    name:
+      - skype
+      - slack
+      - whatsapp
+      - zoom
+    accept_external_apps: yes

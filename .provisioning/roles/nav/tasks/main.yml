@@ -152,12 +152,12 @@
   homebrew:
     name: kubectl
     state: present
+  when: ansible_processor != 'Apple M1' # Not needed as it is provided by Docker for Mac
 
 - name: Get kubeconfig from github
   git:
     repo: 'git@github.com-kjetiljd:navikt/kubeconfigs.git'
     dest: "{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs"
-    version: "naisdevice"
     update: no
 
 - name: KUBECONFIG environment variable
@@ -165,6 +165,13 @@
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     line: export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config"
     regexp: export KUBECONFIG
+
+- name: create .kube folder
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0750
 
 - name: Create a symbolic link
   file:
@@ -196,12 +203,12 @@
   homebrew_cask:
     name: kubernetic
     state: absent
-  ignore_errors: yes
 
 - name: Get kube-ps1
   homebrew:
     name: kube-ps1
     state: present
+  when: ansible_processor != 'Apple M1' # annoyingly needs brew installed kubectl
 
 - name: Snyk CLI install step 1
   homebrew_tap:
@@ -212,7 +219,7 @@
     name: snyk
 
 - name: Install Google Cloud SDK
-  package:
+  homebrew:
     name: google-cloud-sdk
   ignore_errors: yes
 

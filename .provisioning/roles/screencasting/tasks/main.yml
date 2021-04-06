@@ -1,7 +1,6 @@
 - name: install applications
   package:
     name: "{{ item }}"
-  ignore_errors: yes
   with_items:
     - obs
     - obs-virtualcam

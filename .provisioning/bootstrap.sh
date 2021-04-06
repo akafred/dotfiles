@@ -21,7 +21,7 @@ brew install ansible
 # Make sure you are in .provisioning folder
 cd .provisioning
 
-# Install requirements from Ansible Galaxy
-ansible-galaxy install -r requirements.yml  
+# Install requirements froom Ansible Galaxy
+ansible-galaxy install -r requirements.yml --force
 
 # You should now be ready to run ansible locally.

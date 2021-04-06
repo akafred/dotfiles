@@ -1,20 +1,17 @@
 - name: remove obsolete applications
-  package:
-    name: "{{ item }}"
+  homebrew_cask:
+    name:
+      - alfred
+      - jumpcut
+      - rightzoom
+      - caffeine
     state: absent
-  with_items:
-    - alfred
-    - jumpcut
-    - rightzoom
-    - caffeine
 
 - name: install applications
-  package:
-    name: "{{ item }}"
-  ignore_errors: yes
-  with_items:
-    - divvy
-    - flycut
+  homebrew_cask:
+    name:
+      - divvy
+      - flycut
 
 - name: install apps from Mac App Store
   shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
@@ -23,3 +20,4 @@
   with_items:
     - Amphetamine
     - Pocket
+    - Todoist
