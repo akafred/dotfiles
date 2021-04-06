@@ -54,7 +54,7 @@
 #    - my-sequel
     - postgresql-y
     - dockered_sonarqube
-#    - screencasting
+    - screencasting
 #    - ipad-integration
 #    - steamy
 #    - vagrantready

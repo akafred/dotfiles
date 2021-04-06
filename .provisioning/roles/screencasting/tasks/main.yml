@@ -1,9 +1,8 @@
 - name: install applications
-  package:
-    name: "{{ item }}"
-  with_items:
-    - obs
-    - obs-virtualcam
+  homebrew_cask:
+    name:
+      - obs
+      - obs-virtualcam
 #    - loopback - costs money
 
 - name: install Backdrop
