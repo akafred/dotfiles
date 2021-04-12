@@ -195,9 +195,11 @@
     name: boz/repo
     state: absent
 
-- name: Get k9s
+- name: Get kube-tools
   homebrew:
-    name: k9s
+    name:
+      - k9s
+      - kubectx
 
 - name: Dont get kubernetic (costs money)
   homebrew_cask:
@@ -222,6 +224,15 @@
   homebrew:
     name: google-cloud-sdk
   ignore_errors: yes
+
+- name: fix gcloud
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for gcloud"
+    content: |
+             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 - name: Install git-crypt
   homebrew:
