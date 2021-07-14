@@ -81,6 +81,7 @@
     mode: 0600
   with_items:
     - ".m2/navikt-settings.xml"
+    - ".m2/fp-settings.xml"
 
 #- name: create nav security file
 #  copy:
@@ -117,6 +118,13 @@
     regexp: "    \\*\\/navikt\\*\\).*;;"
     insertafter: '.*# options here:$'
     line: '    */navikt*)              SETTINGS="navikt-settings.xml" ;;'
+
+- name: setup mvn settings
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.m2/bin/mvn"
+    regexp: "    \\*\\/navikt\\/fp\\*\\).*;;"
+    insertafter: '.*# options here:$'
+    line: '    */navikt/fp*)              SETTINGS="fp-settings.xml" ;;'
 
 - name: add tunneling for some repos to maven
   blockinfile:
@@ -241,3 +249,20 @@
 - name: Install gnupg
   homebrew:
     name: gnupg
+
+- name: Tap nais
+  homebrew_tap:
+    name: nais/tap
+
+- name: Install naisdevice
+  homebrew_cask:
+    name: naisdevice
+
+- name: update hosts-file
+  become: true
+  blockinfile:
+    dest: /etc/hosts
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for FP enviroment"
+    state: absent
+    content: |
+             127.0.0.1  fptilbake fpoppdrag fpformidling fprisk fpabonennt fpfrontend fpsak fpabakus vtp oracle postgres

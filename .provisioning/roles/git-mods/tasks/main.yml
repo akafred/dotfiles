@@ -27,6 +27,11 @@
   with_items:
     - init.defaultBranch main
 
+- name: config to prune tracking branches
+  command: git config --global {{ item }}
+  with_items:
+    - fetch.prune true
+
 - name: copy .gitmsg
   copy:
     src: "{{ item }}"
@@ -165,3 +170,32 @@
   homebrew:
     name: git-secrets
   when: ansible_system == "Darwin"
+
+- name: install "meta" package
+  npm:
+    name: meta
+    global: yes
+
+- name: add GnuPG (gpg) terminal setup for passphrase dialog
+  blockinfile:
+    state: absent
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for GnuPG commit signing dialog"
+    content: |
+             export GPG_TTY=$(tty)
+
+- name: Install GPG Suite (without mail)
+  homebrew_cask:
+    name: gpg-suite-no-mail
+  when: ansible_system == "Darwin"
+
+- name: Setup gpg pinentry program
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gnupg/gpg-agent.conf"
+    line: pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
+
+- name: Add no-tty to gpg.conf
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gnupg/gpg.conf"
+    line: no-tty
