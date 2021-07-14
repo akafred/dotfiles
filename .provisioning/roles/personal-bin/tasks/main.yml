@@ -23,3 +23,13 @@
     mode: 0644
     create: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: add sbin folder to path
+  become: true
+  lineinfile:
+    dest: /etc/paths.d/10-sbin
+    line: "/usr/local/sbin"
+    regexp: "/usr/local/sbin"
+    mode: 0644
+    create: yes
+  when: ansible_system == "Darwin"
