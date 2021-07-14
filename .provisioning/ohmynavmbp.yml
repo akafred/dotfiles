@@ -18,7 +18,7 @@
     - productivity
 #    - msoffice
     - atomic
-#    - collaborative
+    - collaborative
     - a_more_usable_ui
 #    - remoting
     - fonts
@@ -50,7 +50,7 @@
 #    - my-sequel
     - postgresql-y
     - dockered_sonarqube
-#    - screencasting
+    - screencasting
 #    - ipad-integration
 #    - steamy
 #    - vagrantready
