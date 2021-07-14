@@ -5,6 +5,7 @@
       - tree
       - wget
       - autojump
+      - grep
       - "{{ 'ag' if (ansible_pkg_mgr == 'Homebrew') else 'the_silver_searcher' }}"
 
 - name: patch autojump with zsh-file on rhel
