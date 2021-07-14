@@ -16,6 +16,12 @@
 
 - name: install Javas
   homebrew:
+    name: adoptopenjdk13
+  ignore_errors: yes
+  when: ansible_system == 'Darwin'
+
+- name: install Javas
+  homebrew:
     name: java
   ignore_errors: yes
   when: ansible_system == 'Darwin'
@@ -74,6 +80,13 @@
     state: directory
     mode: 0755
 
+- name: add entries to .gitignore_global
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gitignore_global"
+    line: "{{ item }}"
+  with_items:
+    - target/
+
 #- name: Unalias maven-wrapper
 #  blockinfile:
 #      dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
@@ -117,6 +130,6 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     insertafter: EOF
-    line: "java_use 11"
+    line: "java_use 16"
     regexp: "^java_use"
   when: ansible_system == 'Darwin'
