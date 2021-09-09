@@ -13,6 +13,7 @@
     name:
       - font-fira-code
       - font-microsoft-office
+    install_options: force
   when: ansible_system == 'Darwin'
 
 - name: install fira-code on RHEL

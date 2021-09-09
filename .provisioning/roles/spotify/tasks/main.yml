@@ -2,3 +2,4 @@
 - name: install applications
   homebrew_cask:
     name: spotify
+    install_options: force

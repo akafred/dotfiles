@@ -120,6 +120,7 @@
 - name: install DiffMerge
   homebrew_cask:
     name: diffmerge
+    install_options: force
   when: ansible_system == "Darwin"
 
 - name: config diffmerge
@@ -154,6 +155,7 @@
 - name: install gitup
   homebrew_cask:
     name: gitup
+    install_options: force
   when: ansible_system == "Darwin"
 
 - name: tap git-time-metric-stuff

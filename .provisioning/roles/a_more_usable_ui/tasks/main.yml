@@ -12,6 +12,7 @@
     name:
       - divvy
       - flycut
+    install_options: force
 
 - name: install apps from Mac App Store
   shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"

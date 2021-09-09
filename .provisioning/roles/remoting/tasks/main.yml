@@ -12,3 +12,4 @@
 - name: install AnyDesk
   homebrew_cask:
     name: anydesk
+    install_options: force

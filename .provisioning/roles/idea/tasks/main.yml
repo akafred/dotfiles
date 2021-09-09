@@ -1,3 +1,4 @@
 - name: install jetbrains-toolbox
   homebrew_cask:
     name: jetbrains-toolbox
+    install_options: force

@@ -1,6 +1,7 @@
 - name: install atom
   homebrew_cask:
     name: atom
+    install_options: force
   when: ansible_system == 'Darwin'
 
 - name: install atom on linux
