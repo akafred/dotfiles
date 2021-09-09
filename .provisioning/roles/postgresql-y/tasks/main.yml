@@ -4,7 +4,7 @@
     name: postgresql
 
 - name: start database server automatically
-  shell: brew services start {{ item }}
+  shell: brew services restart {{ item }}
   with_items:
     - postgresql
 
