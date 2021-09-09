@@ -173,11 +173,6 @@
     name: git-secrets
   when: ansible_system == "Darwin"
 
-- name: install "meta" package
-  npm:
-    name: meta
-    global: yes
-
 - name: add GnuPG (gpg) terminal setup for passphrase dialog
   blockinfile:
     state: absent

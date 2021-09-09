@@ -258,6 +258,12 @@
   homebrew_cask:
     name: naisdevice
 
+- name: install "meta" package
+  npm:
+    name: meta
+    global: yes
+
+
 - name: update hosts-file
   become: true
   blockinfile:
