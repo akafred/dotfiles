@@ -1,0 +1,5 @@
+
+# make sure dagpenger is cloned
+
+# make sure meta is installed
+npm i -g meta
