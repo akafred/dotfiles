@@ -1,4 +1,13 @@
-- name: install Anaconda
+- name: install anaconda
   homebrew_cask:
     name:
       - "anaconda"
+  when: ansible_system == "Darwin"
+
+- name: add anaconda (conda) to path
+  become: true
+  lineinfile: >
+    dest=/etc/paths.d/30-conda-bin
+    line=/usr/local/anaconda3/bin
+    regexp=/usr/local/anaconda3/bin
+    create=yes

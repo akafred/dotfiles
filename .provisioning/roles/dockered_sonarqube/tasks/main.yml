@@ -59,3 +59,8 @@
       SONARQUBE_JDBC_URL: "jdbc:postgresql://docker.for.mac.host.internal/sonar"
   when: ansible_processor != 'Apple M1'
   # Dette imaget funker ikke - kan forsøke å emulere med --platform linux/amd64
+
+- name: stop database server BECAUSE STUPID FP DOCKER PSQL ON STANDARD PORT
+  shell: brew services stop {{ item }}
+  with_items:
+    - postgresql
