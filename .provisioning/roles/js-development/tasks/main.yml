@@ -15,3 +15,8 @@
 #  homebrew: name={{ item }}
 #  with_items:
 #    - yarn
+
+
+- name: visual studio code
+  homebrew_cask:
+    name: visual-studio-code
