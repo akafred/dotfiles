@@ -2,8 +2,11 @@
   homebrew:
     name: elm
 
-
 - name: install "elm-format" package
   npm:
     name: elm-format
     global: yes
+
+- name: elm needs npm
+  homebrew:
+    name: node
