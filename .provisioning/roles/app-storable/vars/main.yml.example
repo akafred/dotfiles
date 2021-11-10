@@ -1,2 +1,0 @@
-# these must be replaced by real values in vars/main.yml and encrypted with ansible-vault
-mas_password: 0123456789abcdef12345678
