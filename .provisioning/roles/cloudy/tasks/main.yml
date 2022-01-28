@@ -4,3 +4,7 @@
       - Dropbox
     install_options: force
 #    - google-backup-and-sync
+
+- name: allow Dropbox
+  shell: "xattr -d com.apple.quarantine /Applications/Dropbox.app || true"
+

@@ -196,3 +196,11 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.gnupg/gpg.conf"
     line: no-tty
+
+- name: Install git-crypt
+  homebrew:
+    name: git-crypt
+
+- name: Install gnupg
+  homebrew:
+    name: gnupg

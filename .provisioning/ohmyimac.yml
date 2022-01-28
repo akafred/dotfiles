@@ -22,12 +22,14 @@
     - os-tools
     - a_more_usable_ui
 #    - dockered
+#    - kubernetes
     - browsers_and_tweaks
     - productivity
 #    - msoffice
     - collaborative
     - fonts
     - atomic
+#    - displaylink
 #    - sublime
 #    - emacs
 #    - remoting

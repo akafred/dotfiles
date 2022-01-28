@@ -28,8 +28,12 @@
     name: homebrew/cask-versions
   when: ansible_system == 'Darwin'
 
+- name: Make sure we can get to drivers
+  homebrew_tap:
+    name: homebrew/cask-drivers
+  when: ansible_system == 'Darwin'
+
 - name: update homebrew and upgrade brews
   homebrew:
     update_homebrew: yes
     upgrade_all: yes
- 

@@ -6,26 +6,27 @@
       - slack
       - whatsapp
       - zoom
+      - mural
     accept_external_apps: yes
 
-# Install Mural from dmg
+# Install Roam from dmg manually
 
-- local_action: stat path=/Applications/Mural.app
+- local_action: stat path="/Applications/Roam Research.app"
   register: app_exists
 
 - command: mkdir -p ./tmp/
   when: app_exists.stat.exists == False
 
-- get_url: url=https://download.mural.co/mac-app/MURAL-1.0.10.dmg dest=./tmp/Mural.dmg
+- get_url: url=https://roam-electron-deploy.s3.us-east-2.amazonaws.com/Roam+Research-0.0.13.dmg dest=./tmp/Roam+Research.dmg
   when: app_exists.stat.exists == False
 
-- command: hdiutil attach ./tmp/Mural.dmg -nobrowse -mountpoint ./tmp/Mural
+- command: hdiutil attach ./tmp/Roam+Research.dmg -nobrowse -mountpoint ./tmp/Roam+Research
   when: app_exists.stat.exists == False
 
-- shell: cp -aR ./tmp/Mural/*.app /Applications/Mural.app
+- shell: cp -aR ./tmp/Roam+Research/*.app "/Applications/Roam Research.app"
   when: app_exists.stat.exists == False
 
-- command: hdiutil detach ./tmp/Mural/
+- command: hdiutil detach ./tmp/Roam+Research/
   when: app_exists.stat.exists == False
 
 - command: rm -R ./tmp/

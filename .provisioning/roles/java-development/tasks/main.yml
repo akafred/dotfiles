@@ -1,47 +1,44 @@
 - name: make adoptopenjdk available
   homebrew_tap:
     name: AdoptOpenJDK/openjdk
+    state: absent
 
-- name: install Javas
-  homebrew:
-    name: adoptopenjdk8
-  ignore_errors: yes
+- name: install Java 8
+  homebrew_cask:
+    name: temurin8
   when: ansible_system == 'Darwin'
 
-- name: install Javas
-  homebrew:
-    name: adoptopenjdk11
-  ignore_errors: yes
+- name: install Java 11
+  homebrew_cask:
+    name: temurin11
   when: ansible_system == 'Darwin'
 
-- name: install Javas
-  homebrew:
-    name: adoptopenjdk13
-  ignore_errors: yes
+- name: install Java - latest
+  homebrew_cask:
+    name: temurin
   when: ansible_system == 'Darwin'
 
 - name: install Javas
   homebrew:
     name: java
-  ignore_errors: yes
   when: ansible_system == 'Darwin'
 
-- name: make latest java visible
-  become: true
-  file:
-    src: /usr/local/opt/openjdk/libexec/openjdk.jdk
-    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
-    state: link
-  register: found_in_opt_local
-  ignore_errors: yes
+#- name: make latest java visible
+#  become: true
+#  file:
+#    src: /usr/local/opt/openjdk/libexec/openjdk.jdk
+#    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
+#    state: link
+#  register: found_in_opt_local
+#  ignore_errors: yes
 
-- name: make latest java visible
-  become: true
-  file:
-    src: /opt/homebrew/opt/openjdk/libexec/openjdk.jdk
-    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
-    state: link
-  when: found_in_opt_local is failure
+#- name: make latest java visible
+#  become: true
+#  file:
+#    src: /opt/homebrew/opt/openjdk/libexec/openjdk.jdk
+#    dest: /Library/Java/JavaVirtualMachines/openjdk.jdk
+#    state: link
+#  when: found_in_opt_local is failure
 
 #- name: Check if sdkman is installed
 #  shell: "test -d \"{{ ansible_env.HOME }}/.sdkman\" && echo \"yes\" || echo \"no\""
@@ -130,6 +127,6 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     insertafter: EOF
-    line: "java_use 16"
+    line: "java_use 17"
     regexp: "^java_use"
   when: ansible_system == 'Darwin'

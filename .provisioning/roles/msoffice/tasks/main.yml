@@ -6,9 +6,10 @@
   homebrew_cask:
     name: microsoft-teams
 
-- name: install Office apps from Mac App Store
-  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
-  args:
-      executable: /bin/bash
-  with_items:
-    - OneDrive
+# Er nå del av microsoft-office
+#- name: install Office apps from Mac App Store
+#  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
+#  args:
+#      executable: /bin/bash
+#  with_items:
+#    - OneDrive

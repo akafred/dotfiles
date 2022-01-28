@@ -110,7 +110,7 @@
     keystore_path: "{{ item }}/lib/security/cacerts"
     keystore_pass: changeit
     state: present
-  with_lines: "ls -d1 /Library/Java/JavaVirtualMachines/*/Contents/Home | grep -v adoptopenjdk-8"
+  with_lines: "ls -d1 /Library/Java/JavaVirtualMachines/*/Contents/Home | grep -v temurin-8"
 
 - name: setup mvn settings
   lineinfile:
@@ -156,12 +156,6 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Github Package Repo"
     block: "{{lookup('file', 'gpr-content')}}"
 
-- name: Install kubectl
-  homebrew:
-    name: kubectl
-    state: present
-  when: ansible_processor != 'Apple M1' # Not needed as it is provided by Docker for Mac
-
 - name: Get kubeconfig from github
   git:
     repo: 'git@github.com-kjetiljd:navikt/kubeconfigs.git'
@@ -174,12 +168,6 @@
     line: export KUBECONFIG="{{ ansible_env.HOME }}/Projects/navikt/kubeconfigs/config"
     regexp: export KUBECONFIG
 
-- name: create .kube folder
-  file:
-    path: "{{ ansible_env.HOME }}/.kube"
-    state: directory
-    owner: "{{ ansible_env.USER }}"
-    mode: 0750
 
 - name: Create a symbolic link
   file:
@@ -187,38 +175,6 @@
     dest: "{{ ansible_env.HOME }}/.kube/config"
     owner: "{{ ansible_env.USER }}"
     state: link
-
-- name: Get stern
-  homebrew:
-    name: stern
-
-# https://github.com/boz/kail
-- name: Don't get kail (certificate-issue)
-  homebrew:
-    name:  boz/repo/kail
-    state: absent
-
-- name: Remove homebrew repo for kail
-  homebrew_tap:
-    name: boz/repo
-    state: absent
-
-- name: Get kube-tools
-  homebrew:
-    name:
-      - k9s
-      - kubectx
-
-- name: Dont get kubernetic (costs money)
-  homebrew_cask:
-    name: kubernetic
-    state: absent
-
-- name: Get kube-ps1
-  homebrew:
-    name: kube-ps1
-    state: present
-  when: ansible_processor != 'Apple M1' # annoyingly needs brew installed kubectl
 
 - name: Snyk CLI install step 1
   homebrew_tap:
@@ -239,16 +195,8 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for gcloud"
     content: |
-             source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-             source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
-- name: Install git-crypt
-  homebrew:
-    name: git-crypt
-
-- name: Install gnupg
-  homebrew:
-    name: gnupg
+             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 - name: Tap nais
   homebrew_tap:
@@ -258,11 +206,14 @@
   homebrew_cask:
     name: naisdevice
 
+- name: base tools
+  homebrew:
+    name: node
+
 - name: install "meta" package
   npm:
     name: meta
     global: yes
-
 
 - name: update hosts-file
   become: true

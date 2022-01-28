@@ -74,10 +74,9 @@
       - bat
       - gh
 
-- name: install shellcheck (fails on Apple M1 due to GHC issue)
+- name: install shellcheck 
   homebrew:
     name: shellcheck
-  when: ansible_processor != 'Apple M1'
 
 - name: install fzf
   homebrew:

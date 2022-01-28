@@ -19,3 +19,35 @@
 - name: restart Finder
   command: killall Finder
   when: default_set_visible.changed or default_set_extension.changed
+
+- name: get dock-removal-script in place
+  copy:
+    src: remove-dock-app.sh
+    dest: "{{ ansible_env.HOME }}/bin/remove-dock-app.sh"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: remove dock apps
+  shell: "{{ ansible_env.HOME }}/bin/remove-dock-app.sh {{ item }}"
+  with_items:
+    - Messages
+    - Mail
+    - Maps
+    - Photos
+    - FaceTime
+    - Calendar
+    - Contacts
+    - Reminders
+    - TV
+    - Music
+    - Podcasts
+    - Keynote
+    - Pages
+    - System Preferences
+    - Safari
+    - App Store
+
+# Not sure if this works - works on commandline...
+- name: autohide dock
+  shell: osascript -e "tell application \"System Events\" to set the autohide of the dock preferences to true"

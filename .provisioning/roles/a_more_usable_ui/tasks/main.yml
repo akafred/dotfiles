@@ -1,12 +1,3 @@
-- name: remove obsolete applications
-  homebrew_cask:
-    name:
-      - alfred
-      - jumpcut
-      - rightzoom
-      - caffeine
-    state: absent
-
 - name: install applications
   homebrew_cask:
     name:

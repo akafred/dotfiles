@@ -34,7 +34,7 @@
 - name: Add modules to .zshrc
   lineinfile:
     dest: "~/.zshrc"
-    line: "plugins=(autojump brew docker fzf git github git-flow kubectl kube-ps1 mvn osx vagrant sublime history-substring-search)"
+    line: "plugins=(autojump brew docker fzf git github git-flow kubectl kube-ps1 mvn macos vagrant sublime history-substring-search)"
     regexp: "^[#\\s]*plugins="
   when: ansible_system == 'Darwin'
 

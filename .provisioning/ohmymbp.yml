@@ -25,11 +25,13 @@
     - git-mods
     - idea
     - java-development
+    - displaylink
 #    - os-tools
 #    - cronable
 #    - salty
 #    - asciidoc
 #    - dockered
+#    - kubernetes
 #    - browsers_and_tweaks
 #    - sublime
 #    - emacs

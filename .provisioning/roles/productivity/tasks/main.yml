@@ -2,12 +2,12 @@
   homebrew_cask:
     name:
       - freemind
-#    - tiddly
-#    - evernote
-#    - skitch
-#    - papers
-#    - vitamin-r
-#    - kindle
-#    - selfcontrol
-#    - anki
+#      - tiddly
+#      - evernote
+#      - skitch
+#      - papers
+      - vitamin-r
+#      - kindle
+#      - selfcontrol
+#      - anki
     accept_external_apps: yes

@@ -1,0 +1,27 @@
+- name: Install kubectl
+  homebrew:
+    name: kubectl
+    state: present
+
+- name: create .kube folder
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0750
+
+- name: Get stern
+  homebrew:
+    name: stern
+
+- name: Get kube-tools
+  homebrew:
+    name:
+      - k9s
+      - kubectx
+
+- name: Get kube-ps1
+  homebrew:
+    name: kube-ps1
+    state: present
+  
