@@ -1,6 +1,8 @@
 # Prereqs:
 #     Run .provisioning/bootstrap.sh
 #
+# A symlink is nice:
+#     ln -s `pwd`/.provisioning ~/.provisioning
 # Then you can run this setup with:
 #     pushd ~/.provisioning/ && ansible-playbook -Kv ohmymbp.yml ; popd
 #
@@ -9,34 +11,42 @@
   roles:
     - shell-config
     - perfectly_brewed
+    - git-mods
+    - altident
     - os-adjustments
-    - cloudy
-    - zshell
     - personal-bin
     - cli-tools
-    - productivity
+    - zshell
     - app-storable
+    - cloudy
+    - productivity
     - msoffice
     - atomic
     - collaborative
+#    - browsers_and_tweaks
     - a_more_usable_ui
-    - remoting
     - fonts
-    - git-mods
     - idea
     - java-development
-    - displaylink
+#    - dockered
+#    - kubernetes
 #    - os-tools
+    - spotify
+    - postgresql-y
+#    - dockered_sonarqube
+#    - nav
+    - remoting
+    - python-development
+#    - screencasting
+    - displaylink
+#    - js-development
+#    - machine-learning
 #    - cronable
 #    - salty
 #    - asciidoc
-#    - dockered
-#    - kubernetes
-#    - browsers_and_tweaks
 #    - sublime
 #    - emacs
 #    - r-development
-#    - machine-learning
 #    - app-engine-development
 #    - groovy-development
 #    - android-development
@@ -44,16 +54,11 @@
 #    - scala-development
 #    - clojure-development
 #    - golang-development
-    - js-development
-    - python-development
 #    - ruby-development
+#    - elm-development
 #    - my-sequel
-    - postgresql-y
-#    - dockered_sonarqube
-    - altident
-#    - screencasting
 #    - ipad-integration
 #    - steamy
 #    - vagrantready
-    - spotify
+#    - duckdns
 #    - experimental

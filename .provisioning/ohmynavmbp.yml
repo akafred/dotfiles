@@ -55,8 +55,10 @@
 #    - clojure-development
 #    - golang-development
 #    - ruby-development
+#    - elm-development
 #    - my-sequel
 #    - ipad-integration
 #    - steamy
 #    - vagrantready
+#    - duckdns
 #    - experimental
