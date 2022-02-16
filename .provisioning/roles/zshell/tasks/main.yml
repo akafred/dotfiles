@@ -45,6 +45,13 @@
     regexp: "^PROMPT=$PROMPT'$(kube_ps1) '"
     insertafter: "^source $ZSH/oh-my-zsh.sh"
 
+- name: Add timestamp to prompt
+  lineinfile:
+    dest: "~/.zshrc"
+    line: 'PROMPT=%{$fg[yellow]%}[%T]%{$reset_color%}$PROMPT'
+    search_string: 'PROMPT=%{$fg[yellow]%}[%T]%{$reset_color%}$PROMPT'
+    insertafter: "^source $ZSH/oh-my-zsh.sh"
+
 - name: Add command history sharing to .zshrc
   lineinfile:
     dest: "~/.zshrc"
