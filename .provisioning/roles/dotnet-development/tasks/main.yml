@@ -1,0 +1,20 @@
+
+# https://github.com/isen-ng/homebrew-dotnet-sdk-versions
+- name: dotnet repo
+  homebrew_tap:
+    name: isen-ng/dotnet-sdk-versions
+
+- name: install dotnet core 6.0
+  homebrew_cask:
+    name:
+      - dotnet-sdk6-0-100
+
+- name: install dotnet core 3.1 on x64
+  homebrew_cask:
+    name:
+      - dotnet-sdk3-1-400
+  when: ansible_machine != 'arm64'
+
+- name: visual studio code
+  homebrew_cask:
+    name: visual-studio-code

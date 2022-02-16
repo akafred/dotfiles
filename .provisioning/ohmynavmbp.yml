@@ -8,6 +8,10 @@
 #
 
 - hosts: localhost
+  environment:
+    HOMEBREW_NO_INSECURE_REDIRECT: 1
+    HOMEBREW_CASK_OPTS: "--require-sha"
+    HOMEBREW_DISPLAY_INSTALL_TIMES: 1
   roles:
     - shell-config
     - perfectly_brewed
@@ -39,6 +43,7 @@
     - python-development
     - screencasting
     - displaylink
+    - dotnet-development
 #    - machine-learning
 #    - js-development
 #    - cronable
