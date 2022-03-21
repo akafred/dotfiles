@@ -130,3 +130,14 @@
     line: "java_use 17"
     regexp: "^java_use"
   when: ansible_system == 'Darwin'
+
+- name: "git clone tcr - test && commit || revert"
+  git:
+    repo: 'https://github.com/kjetiljd/tcr.git'
+    dest: "{{ ansible_env.HOME }}/bin/tcr"
+
+- name: add tcr to PATH
+  lineinfile: >
+    dest={{ ansible_env.HOME }}/.paths_homes_etc
+    line="export PATH={{ ansible_env.HOME }}/bin/tcr:$PATH"
+    regexp="export PATH={{ ansible_env.HOME }}\/bin\/tcr:\$PATH"
