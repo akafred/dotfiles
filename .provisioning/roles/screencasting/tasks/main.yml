@@ -2,7 +2,6 @@
   homebrew_cask:
     name:
       - obs
-      - obs-virtualcam
       - elgato-stream-deck
       - epoccam
       - logitech-camera-settings
