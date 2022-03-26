@@ -93,3 +93,15 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK for fzf"
     content: |
              [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+- name: install EurKEY - layout (https://eurkey.steffen.bruentjen.eu/) - icon
+  get_url:
+    url: https://raw.githubusercontent.com/lbschenkel/EurKEY-Mac/master/EurKEY.icns
+    dest: "{{ ansible_env.HOME }}/Library/Keyboard Layouts/EurKEY.icns"
+    checksum: md5:fb69b6aeb3c41a4d62b89d9a8382b4a6
+
+- name: install EurKEY - layout (https://eurkey.steffen.bruentjen.eu/) - keylayout
+  get_url:
+    url: https://raw.githubusercontent.com/lbschenkel/EurKEY-Mac/master/EurKEY.keylayout
+    dest: "{{ ansible_env.HOME }}/Library/Keyboard Layouts/EurKEY.keylayout"
+    checksum: md5:bfa5c7b70f64b7736d6545d737452bd0
