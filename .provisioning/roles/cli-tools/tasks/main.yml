@@ -74,7 +74,7 @@
       - bat
       - gh
 
-- name: install shellcheck 
+- name: install shellcheck
   homebrew:
     name: shellcheck
 
