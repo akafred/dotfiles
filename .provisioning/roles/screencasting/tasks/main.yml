@@ -6,6 +6,7 @@
       - epoccam
       - logitech-camera-settings
       - keycastr
+      - elgato-control-center
 #    - loopback - costs money
 
 #- name: install apps from Mac App Store
