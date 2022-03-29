@@ -9,3 +9,18 @@
     name: https://github.com/atom/atom/releases/download/v1.32.2/atom.x86_64.rpm
   become: true
   when: ansible_pkg_mgr == 'yum'
+
+
+- name: install atom packages
+  shell: |
+    set -euo pipefail
+    apm list --bare | grep -E '^{{ item }}@' &&
+    echo 'Already installed.' ||
+    apm install '{{ item }}'
+  args:
+    executable: /bin/bash
+  register: apm_result
+  changed_when: "'Already installed.' not in apm_result.stdout"
+  with_items:
+    - sort-lines
+    - wakatime
