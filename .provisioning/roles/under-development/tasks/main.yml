@@ -1,0 +1,3 @@
+# Use this role while developing a new role (as it is first it will fail early)
+- name: no-op
+  meta: noop
