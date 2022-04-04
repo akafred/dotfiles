@@ -1,3 +1,55 @@
 # Use this role while developing a new role (as it is first it will fail early)
 - name: no-op
   meta: noop
+
+# ANCESTRIS er problemet - vil ikke starte etter installasjon
+
+# Install Ancestris from pkg manually
+- local_action: stat path="/Applications/Ancestris.app"
+  register: app_exists
+
+- name: Create temporary directory
+  tempfile:
+    state: directory
+    suffix: ancestris_download
+  register: ancestris_download_dir
+  when: app_exists.stat.exists == False
+
+- name: make tmp dir
+  command: mkdir -p ./tmp/
+  when: app_exists.stat.exists == False
+
+- name: Download Ancestris
+  get_url:
+    url: https://www.ancestris.org/compteur_dl.php?/dl/pub/ancestris/releases/Ancestris.pkg
+    dest: "{{ ancestris_download_dir.path }}/Ancestris.pkg"
+    checksum: 'md5:b1038ed77c54dc72822c3290ef307d9d'
+  when: app_exists.stat.exists == False
+
+# kommandoen fullfører ikke under ansible - vet ikke hvorfor
+- name: Run install of Ancestris.pkg
+  command: "installer -package '{{ ancestris_download_dir.path }}/Ancestris.pkg' -target /"
+  become: True
+  when: app_exists.stat.exists == False
+
+- name: Unquarantine
+  command: sudo xattr -r -d com.apple.quarantine /Applications/Ancestris.app
+  become: True
+
+- name: Remove cruft
+  file:
+    path: /Applications/DEV_Ancestris.app
+    state: absent
+  become: True
+
+- name: Remove cruft II
+  file:
+    path: /Applications/Ancestris_unsigned.pkg
+    state: absent
+  become: True
+
+- name: Remove temp dir
+  ansible.builtin.file:
+    path: "{{ ancestris_download_dir.path }}"
+    state: absent
+  when: ancestris_download_dir.path is defined
