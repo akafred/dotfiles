@@ -24,3 +24,4 @@
   with_items:
     - sort-lines
     - wakatime
+    - ansible-vault
