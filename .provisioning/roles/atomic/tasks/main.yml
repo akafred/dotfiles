@@ -25,3 +25,6 @@
     - sort-lines
     - wakatime
     - ansible-vault
+    - git-history
+    - linter
+    - linter-shellcheck
