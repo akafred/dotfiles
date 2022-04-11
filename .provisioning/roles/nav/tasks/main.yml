@@ -223,3 +223,16 @@
     state: absent
     content: |
              127.0.0.1  fptilbake fpoppdrag fpformidling fprisk fpabonennt fpfrontend fpsak fpabakus vtp oracle postgres
+
+- name: hedo-function
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Privileges app command line workaraound"
+    content: |
+             hedo() {
+               user=$(id | grep -o "80(admin)")
+               if [[ "$user" == "" ]]; then
+                 /Applications/Privileges.app/Contents/Resources/PrivilegesCLI --add
+               fi
+             }
