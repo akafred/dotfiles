@@ -1,6 +1,43 @@
+
 - name: docker for mac
   homebrew_cask:
     name: docker
+    state: absent
+  become: true
+
+- name: colima and docker
+  homebrew:
+    name:
+      - colima
+      - docker
+      - docker-compose
+  register: colima_install
+
+- file:
+    path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: start colima
+  shell: colima start --cpu 4 --memory 8
+  when: colima_install.changed
+
+- name: create symlink for docker-compose
+  file:
+    src: "/opt/homebrew/bin/docker-compose"
+    dest: "/Users/kjetiljd/.docker/cli-plugins/docker-compose"
+    state: link
+    force: yes
+
+- name: create symlink for colima
+  file:
+    src: "~/.colima/docker.sock"
+    dest: "/var/run/docker.sock"
+    state: link
+    force: yes
+  become: true
 
 - name: install pip for system-python (used by ansible locally)
   command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"

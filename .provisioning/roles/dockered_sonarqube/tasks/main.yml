@@ -39,24 +39,56 @@
 #    pull:
 #      platform: linux/amd64
 
+# argh ... fails after starting with colima
+#- name: install and run sonarqube docker container
+#  docker_container:
+#    name: sonarqube
+#    image: mwizner/sonarqube:8.9.5-community
+#    state: started
+#    pull: no
+#    ports:
+#      - "9000:9000"
+#      - "9092:9092"
+##    volumes:
+##      - /opt/sonarqube/data
+##      - /opt/sonarqube/extensions
+##      - /opt/sonarqube/logs
+#    container_default_behavior: compatibility
+#    env:
+#      SONARQUBE_JDBC_USERNAME: sonar
+#      SONARQUBE_JDBC_PASSWORD: sonar
+#      SONARQUBE_JDBC_URL: "jdbc:postgresql://host.lima.internal/sonar"
+#    command:
+#      -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmap=false"
+##    healthcheck:
+##      test: ["CMD", "curl", "--fail", "http://localhost:9000/"]
+##      interval: 30s
+##      timeout: 10s
+##      retries: 3
+##      start_period: 10s
+
+# $(docker inspect --format="{{ .State.Running }}" sonarqube == "true")
+
+- name: set gradle props for local sonarqube
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for local sonarqube"
+    content: |
+             systemProp.sonar.host.url=http://localhost:9000
+             systemProp.sonar.login=admin
+             systemProp.sonar.password=qO4RpBwB7T87
+
+- name: put sonarqube_start.sh in bin
+  copy:
+    src: sonarqube_start.sh
+    dest: "{{ ansible_env.HOME }}/bin/sonarqube_start.sh"
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: u=rwx,g=rx,o=r
+
 - name: install and run sonarqube docker container
-  docker_container:
-    name: sonarqube
-    image: mwizner/sonarqube:8.9.5-community
-    state: started
-    pull: no
-    ports:
-      - "9000:9000"
-      - "9092:9092"
-#    volumes:
-#      - /opt/sonarqube/data
-#      - /opt/sonarqube/extensions
-#      - /opt/sonarqube/logs
-    container_default_behavior: compatibility
-    env:
-      SONARQUBE_JDBC_USERNAME: sonar
-      SONARQUBE_JDBC_PASSWORD: sonar
-      SONARQUBE_JDBC_URL: "jdbc:postgresql://docker.for.mac.host.internal/sonar"
+  shell: sonarqube_start.sh
 
 #- name: stop database server BECAUSE STUPID FP DOCKER PSQL ON STANDARD PORT
 #  shell: brew services stop {{ item }}
