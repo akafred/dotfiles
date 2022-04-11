@@ -13,6 +13,11 @@
     name: temurin11
   when: ansible_system == 'Darwin'
 
+- name: install Java 17
+  homebrew_cask:
+    name: temurin17
+  when: ansible_system == 'Darwin'
+
 - name: install Java - latest
   homebrew_cask:
     name: temurin
