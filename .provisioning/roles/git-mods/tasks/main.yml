@@ -176,7 +176,7 @@
 
 - name: add GnuPG (gpg) terminal setup for passphrase dialog
   blockinfile:
-    state: absent
+#    state: absent
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for GnuPG commit signing dialog"
@@ -191,7 +191,9 @@
 - name: Setup gpg pinentry program
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.gnupg/gpg-agent.conf"
-    line: pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    # line: pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    line: pinentry-program /opt/homebrew/bin/pinentry
+    search_string: "pinentry-program "
 
 - name: Add no-tty to gpg.conf
   lineinfile:
