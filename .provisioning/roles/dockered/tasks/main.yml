@@ -39,6 +39,15 @@
     force: yes
   become: true
 
+- name: more stuff to get colima to work (with e.g TestContainers)
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for colima / TestContainers"
+    content: |
+             export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
+             export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+
 - name: install pip for system-python (used by ansible locally)
   command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"
   become: true
