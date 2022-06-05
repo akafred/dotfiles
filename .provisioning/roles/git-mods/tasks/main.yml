@@ -97,6 +97,7 @@
     - alias.br branch
     - alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
     - alias.lg 'log --all --color --graph --pretty=format:"%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(blue)<%cn>%Creset%C(yellow)%d%Creset" --abbrev-commit --'
+    - alias.logg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     - alias.type 'cat-file -t'
     - alias.dump 'cat-file -p'
     - alias.unstage 'reset HEAD'
