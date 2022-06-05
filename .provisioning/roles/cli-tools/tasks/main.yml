@@ -7,6 +7,7 @@
       - autojump
       - grep
       - "{{ 'ag' if (ansible_pkg_mgr == 'Homebrew') else 'the_silver_searcher' }}"
+      - watch
 
 - name: patch autojump with zsh-file on rhel
   copy:
