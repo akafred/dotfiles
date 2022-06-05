@@ -1,7 +1,7 @@
 - name: install applications
   homebrew_cask:
     name:
-      - freemind
+      - freeplane
 #      - tiddly
 #      - evernote
 #      - skitch
@@ -11,3 +11,14 @@
 #      - selfcontrol
 #      - anki
     accept_external_apps: yes
+
+- name: unquarantine freeplane
+  cmd: sudo xattr -r -d com.apple.quarantine /Applications/Freeplane.app
+  become: true
+
+- name: bye-bye freemind (hello freeplane)
+  homebrew_cask:
+    name:
+      - freemind
+    state: absent
+
