@@ -13,7 +13,7 @@
     accept_external_apps: yes
 
 - name: unquarantine freeplane
-  cmd: sudo xattr -r -d com.apple.quarantine /Applications/Freeplane.app
+  command: sudo xattr -r -d com.apple.quarantine /Applications/Freeplane.app
   become: true
 
 - name: bye-bye freemind (hello freeplane)
