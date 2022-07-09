@@ -236,3 +236,13 @@
                  /Applications/Privileges.app/Contents/Resources/PrivilegesCLI --add
                fi
              }
+
+- name: add co-authors to .gitmsg
+  become: true
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gitmsg"
+    insertbefore: "# Uncomment.*"
+    marker: "# Co-authors: {mark}"
+    content: |
+             #Co-authored-by: Mariam Pervez <mariam.pervez@nav.no>
+             #Co-authored-by: Daniel Skarpås <daniel.skarpas@nav.no>
