@@ -17,6 +17,7 @@
     - .DS_Store
     - .idea
     - .vscode
+    - codemr/
 
 - name: config to use .gitignore_global
   command: git config --global {{ item }}
