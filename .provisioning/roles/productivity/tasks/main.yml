@@ -1,5 +1,6 @@
 - name: install applications
   homebrew_cask:
+    accept_external_apps: yes
     name:
       - freeplane
 #      - tiddly
@@ -10,10 +11,9 @@
 #      - kindle
 #      - selfcontrol
 #      - anki
-    accept_external_apps: yes
 
 - name: unquarantine freeplane
-  command: sudo xattr -r -d com.apple.quarantine /Applications/Freeplane.app
+  command: xattr -r -d com.apple.quarantine /Applications/Freeplane.app
   become: true
 
 - name: bye-bye freemind (hello freeplane)
