@@ -1,30 +1,29 @@
-- name: install atom
+# has been buggy ...
+- name: install nova
   homebrew_cask:
-    name: atom
-    install_options: force
+    name: nova
   when: ansible_system == 'Darwin'
 
-- name: install atom on linux
-  yum:
-    name: https://github.com/atom/atom/releases/download/v1.32.2/atom.x86_64.rpm
-  become: true
-  when: ansible_pkg_mgr == 'yum'
+- name: uninstall atom
+  homebrew_cask:
+    name: atom
+    state: absent
 
-
-- name: install atom packages
-  shell: |
-    set -euo pipefail
-    apm list --bare | grep -E '^{{ item }}@' &&
-    echo 'Already installed.' ||
-    apm install '{{ item }}'
-  args:
-    executable: /bin/bash
-  register: apm_result
-  changed_when: "'Already installed.' not in apm_result.stdout"
-  with_items:
-    - sort-lines
-    - wakatime
-    - ansible-vault
-    - git-history
-    - linter
-    - linter-shellcheck
+# 
+# - name: install atom packages
+#   shell: |
+#     set -euo pipefail
+#     apm list --bare | grep -E '^{{ item }}@' &&
+#     echo 'Already installed.' ||
+#     apm install '{{ item }}'
+#   args:
+#     executable: /bin/bash
+#   register: apm_result
+#   changed_when: "'Already installed.' not in apm_result.stdout"
+#   with_items:
+#     - sort-lines
+#     - wakatime
+#     - ansible-vault
+#     - git-history
+#     - linter
+#     - linter-shellcheck
