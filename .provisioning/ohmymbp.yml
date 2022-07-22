@@ -35,7 +35,7 @@
     - java-development
 #    - dockered
 #    - kubernetes
-#    - os-tools
+    - os-tools
     - spotify
     - postgresql-y
 #    - dockered_sonarqube
