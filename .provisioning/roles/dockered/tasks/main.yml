@@ -1,9 +1,9 @@
 
-- name: docker for mac
-  homebrew_cask:
-    name: docker
-    state: absent
-  become: true
+# - name: docker for mac
+#  homebrew_cask:
+#   name: docker
+#    state: absent
+#  become: true
 
 - name: colima and docker
   homebrew:
