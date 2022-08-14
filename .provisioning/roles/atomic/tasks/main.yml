@@ -1,12 +1,14 @@
 # has been buggy ...
 - name: install nova
   homebrew_cask:
-    name: nova
+    name: sublime-text
   when: ansible_system == 'Darwin'
 
-- name: uninstall atom
+- name: uninstall passé editors
   homebrew_cask:
-    name: atom
+    name:
+      - atom
+      - nova
     state: absent
 
 # 
