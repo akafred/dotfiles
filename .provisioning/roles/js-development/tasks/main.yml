@@ -1,6 +1,8 @@
 - name: base tools
   homebrew:
-    name: node
+    name: 
+      - node
+      - nvm
 
 #- name: install "nvm" package
 #  npm: name=nvm global=yes
@@ -16,6 +18,20 @@
 #  with_items:
 #    - yarn
 
+- name: make sure ~/.nvm exists
+  file: 
+    path: "{{ ansible_env.HOME }}/.nvm"
+    state: directory
+
+- name: add nvm stuff 
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for nvm-stuff"
+    content: |
+             export NVM_DIR="$HOME/.nvm"
+             [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
+             [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 - name: visual studio code
   homebrew_cask:
