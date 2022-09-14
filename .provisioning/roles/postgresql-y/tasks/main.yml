@@ -1,12 +1,12 @@
 
 - name: "install database server (default user for the database is {{ ansible_env.USER }})"
   homebrew:
-    name: postgresql
+    name: postgresql@14
 
 - name: start database server automatically
   shell: brew services restart {{ item }}
   with_items:
-    - postgresql
+    - postgresql@14
 
 - name: install pip for system-python (used by ansible locally)
   command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"

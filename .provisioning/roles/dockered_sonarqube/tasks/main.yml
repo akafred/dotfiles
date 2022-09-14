@@ -1,22 +1,22 @@
 
-- name: create database for sonarqube
-  postgresql_db:
-    name: sonar
-    encoding: UTF-8
-    login_user: "{{ ansible_env.USER }}"
-    lc_collate: en_US.UTF-8
-    lc_ctype: en_US.UTF-8
-    template: template0
-
-- name: create user for sonarqube database
-  postgresql_user:
-    db: sonar
-    login_user: "{{ ansible_env.USER }}"
-    encrypted: yes
-    name: sonar
-    password: sonar
-    expires: infinity
-    role_attr_flags: NOSUPERUSER
+#- name: create database for sonarqube
+#  postgresql_db:
+#    name: sonar
+#    encoding: UTF-8
+#    login_user: "{{ ansible_env.USER }}"
+#    lc_collate: en_US.UTF-8
+#    lc_ctype: en_US.UTF-8
+#    template: template0
+#
+#- name: create user for sonarqube database
+#  postgresql_user:
+#    db: sonar
+#    login_user: "{{ ansible_env.USER }}"
+#    encrypted: yes
+#    name: sonar
+#    password: sonar
+#    expires: infinity
+#    role_attr_flags: NOSUPERUSER
 
 #- name: Create directories for sonarqube volumes
 #  become: true
