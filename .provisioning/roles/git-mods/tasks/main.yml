@@ -18,6 +18,7 @@
     - .idea
     - .vscode
     - codemr/
+    - gitstats-report/
 
 - name: config to use .gitignore_global
   command: git config --global {{ item }}
