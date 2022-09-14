@@ -238,7 +238,6 @@
              }
 
 - name: add co-authors to .gitmsg
-  become: true
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.gitmsg"
     insertbefore: "# Uncomment.*"
