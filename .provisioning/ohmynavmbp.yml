@@ -46,7 +46,7 @@
     - displaylink
     - dotnet-development
 #    - machine-learning
-#    - js-development
+    - js-development
 #    - cronable
 #    - salty
 #    - asciidoc
@@ -56,7 +56,7 @@
 #    - app-engine-development
 #    - groovy-development
 #    - android-development
-#    - kotlin-development
+    - kotlin-development
 #    - scala-development
 #    - clojure-development
 #    - golang-development
