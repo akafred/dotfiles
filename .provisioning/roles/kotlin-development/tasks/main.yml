@@ -1,3 +1,4 @@
-- name: install kotlin
+- name: install ktlint
   homebrew:
-    name: kotlin
+    name: 
+      - ktlint
