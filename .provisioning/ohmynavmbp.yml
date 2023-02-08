@@ -26,7 +26,7 @@
     - cloudy
     - productivity
     - msoffice
-    - atomic
+#    - atomic
     - collaborative
     - browsers_and_tweaks
     - a_more_usable_ui
@@ -36,7 +36,7 @@
     - dockered
     - kubernetes
     - os-tools
-    - spotify
+#    - spotify
     - postgresql-y
     - dockered_sonarqube
     - nav
