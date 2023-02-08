@@ -1,7 +1,9 @@
 
 - name: install half decent browser - or two
   homebrew_cask:
-    name: firefox
+    name:
+     - firefox
+#     - google-chrome does not have sha
 
 - name: add firefox to path
   become: true
@@ -17,13 +19,13 @@
 #  with_items:
 #   - ffmpeg
 
-- name: install lastpass
-  homebrew_cask:
-    name: lastpass
+# - name: install lastpass
+#  homebrew_cask:
+#    name: lastpass does not have sha
 
-- name: install tweaks from Mac App Store
-  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
-  args:
-      executable: /bin/bash
-  with_items:
-    - Super Agent for Safari
+#- name: install tweaks from Mac App Store
+#  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
+#  args:
+#      executable: /bin/bash
+#  with_items:
+#    - Super Agent for Safari
