@@ -69,6 +69,19 @@
 
 # $(docker inspect --format="{{ .State.Running }}" sonarqube == "true")
 
+
+- name: Create dir and file
+  file:
+    dest: "{{ ansible_env.HOME }}/.gradle"
+    owner: "{{ ansible_env.USER }}"
+    state: directory
+
+- name: Create dir and file
+  file:
+    dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
+    state: touch
+
+
 - name: set gradle props for local sonarqube
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.gradle/gradle.properties"
@@ -88,7 +101,7 @@
     mode: u=rwx,g=rx,o=r
 
 - name: install and run sonarqube docker container
-  shell: sonarqube_start.sh
+  shell: "{{ ansible_env.HOME }}/bin/sonarqube_start.sh"
 
 #- name: stop database server BECAUSE STUPID FP DOCKER PSQL ON STANDARD PORT
 #  shell: brew services stop {{ item }}
