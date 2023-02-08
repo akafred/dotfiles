@@ -20,6 +20,7 @@
     - codemr/
     - gitstats-report/
     - .fleet/
+    - .dccache
 
 - name: config to use .gitignore_global
   command: git config --global {{ item }}
@@ -199,6 +200,19 @@
       - gnupg 
       - pinentry-mac
 
+- name: create gnupg folder
+  file:
+    path: "{{ ansible_env.HOME }}/.gnupg"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: gnupg-file
+  file:
+    path: "{{ ansible_env.HOME }}/.gnupg/gpg-agent.conf"
+    state: touch
+
 - name: Setup gpg pinentry program
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.gnupg/gpg-agent.conf"
@@ -206,6 +220,11 @@
     # line: pinentry-program /opt/homebrew/bin/pinentry
     line: pinentry-program /opt/homebrew/bin/pinentry-mac
     search_string: "pinentry-program "
+
+- name: gnupg-file 2
+  file:
+    path: "{{ ansible_env.HOME }}/.gnupg/gpg.conf"
+    state: touch
 
 - name: Add no-tty to gpg.conf
   lineinfile:
