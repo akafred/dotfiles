@@ -1,3 +1,5 @@
 - name: Install display-link
   homebrew_cask:
     name: displaylink
+    accept_external_apps: yes
+  ignore_errors: yes
