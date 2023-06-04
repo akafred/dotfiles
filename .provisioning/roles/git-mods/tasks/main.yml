@@ -75,9 +75,28 @@
                 User git
                 AddKeysToAgent yes
                 IdentitiesOnly yes
+                UseKeychain yes
 
              Host github.com
                 IdentityFile ~/.ssh/id_rsa
+
+- name: create symlink
+  file:
+    src: "~/.ssh/id_ed25519"
+    dest: "~/~/.ssh/id_rsa"
+    state: link
+    force: no
+  ignore_errors: yes
+
+- name: create symlink
+  file:
+    src: "~/.ssh/id_ed25519"
+    dest: "~/~/.ssh/id_rsa"
+    state: link
+    force: no
+  ignore_errors: yes
+
+
 
 - name: config colors
   command: git config --global {{ item }}
