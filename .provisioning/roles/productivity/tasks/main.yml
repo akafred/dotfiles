@@ -2,31 +2,5 @@
   homebrew_cask:
     accept_external_apps: yes
     name:
-      - freeplane
-#      - tiddly
-#      - evernote
-#      - skitch
-#      - papers
       - vitamin-r
-#      - kindle
 #      - selfcontrol
-#      - anki
-
-- name: unquarantine freeplane
-  command: xattr -r -d com.apple.quarantine /Applications/Freeplane.app
-  become: true
-
-- name: bye-bye freemind (hello freeplane)
-  homebrew_cask:
-    name:
-      - freemind
-    state: absent
-
-- name: install tools from Mac App Store
-  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
-  args:
-      executable: /bin/bash
-  with_items:
-    - Notability
-    - Drafts
-    - Day One

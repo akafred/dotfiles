@@ -18,8 +18,8 @@
     - perfectly_brewed
     - git-mods
     - altident
-    - os-adjustments
     - personal-bin
+    - os-adjustments
     - cli-tools
     - zshell
     - app-storable
@@ -29,6 +29,7 @@
     - atomic
     - collaborative
 #    - browsers_and_tweaks
+    - knowledge
     - a_more_usable_ui
     - fonts
     - idea
