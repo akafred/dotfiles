@@ -44,9 +44,12 @@
     - Podcasts
     - Keynote
     - Pages
+    - Numbers
+    - Notes
     - System Preferences
     - Safari
     - App Store
+    - Freeform
 
 # Not sure if this works - works on commandline...
 - name: autohide dock
