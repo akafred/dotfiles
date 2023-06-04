@@ -1,3 +1,8 @@
+- name: install poetry
+  homebrew:
+    name:
+      - "poetry"
+
 - name: install anaconda
   homebrew_cask:
     name:
