@@ -3,6 +3,8 @@
   homebrew_cask:
     name:
      - firefox
+     - microsoft-edge
+#     - chromium  does not have sha
 #     - google-chrome does not have sha
 
 - name: add firefox to path
