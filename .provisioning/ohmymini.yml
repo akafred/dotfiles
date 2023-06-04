@@ -1,0 +1,71 @@
+# Prereqs:
+#     Run .provisioning/bootstrap.sh
+#
+# A symlink is nice:
+#     ln -s `pwd`/.provisioning ~/.provisioning
+# Then you can run this setup with:
+#     pushd ~/.provisioning/ && ansible-playbook -Kv ohmymini.yml ; popd
+#
+
+- hosts: localhost
+  environment:
+    HOMEBREW_NO_INSECURE_REDIRECT: 1
+    HOMEBREW_CASK_OPTS: "--require-sha"
+    HOMEBREW_DISPLAY_INSTALL_TIMES: 1
+  roles:
+    - under-development
+    - shell-config
+    - perfectly_brewed
+    - git-mods
+#    - altident
+    - personal-bin
+    - os-adjustments
+    - cli-tools
+    - zshell
+    - app-storable
+    - cloudy
+    - productivity
+#    - msoffice
+#    - atomic
+#    - collaborative
+    - browsers_and_tweaks
+    - knowledge
+    - a_more_usable_ui
+    - fonts
+    - idea
+#    - java-development
+    - dockered
+#    - kubernetes
+    - os-tools
+    - spotify
+#    - postgresql-y
+#    - dockered_sonarqube
+#    - nav
+#    - remoting
+    - python-development
+#    - screencasting
+    - displaylink
+#    - dotnet-development
+#    - machine-learning
+#    - js-development
+#    - cronable
+#    - salty
+#    - asciidoc
+#    - sublime
+#    - emacs
+#    - r-development
+#    - app-engine-development
+#    - groovy-development
+#    - android-development
+#    - kotlin-development
+#    - scala-development
+#    - clojure-development
+#    - golang-development
+#    - ruby-development
+#    - elm-development
+#    - my-sequel
+#    - ipad-integration
+#    - steamy
+#    - vagrantready
+#    - duckdns
+#    - experimental
