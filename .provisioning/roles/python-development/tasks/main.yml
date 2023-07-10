@@ -1,7 +1,9 @@
 - name: install poetry
   homebrew:
     name:
+      - "python" # A newer one than the system python
       - "poetry"
+
 
 - name: install anaconda
   homebrew_cask:
