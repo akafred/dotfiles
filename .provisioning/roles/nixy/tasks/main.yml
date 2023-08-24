@@ -1,0 +1,27 @@
+- name: install direnv (for managing environment variables and enabling flake integration
+  homebrew:
+    name: direnv
+
+- name: check if nix is installed
+  stat: path=/nix
+  register: nix_installed
+
+- name: install nix
+  become: yes
+  shell: curl -L https://nixos.org/nix/install | sh
+  when: nix_installed.stat.exists == False
+
+- name: make sure we have a ~/.config/nix folder
+  file:
+    path: ~/.config/nix
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: staff
+    mode: 0750
+
+- name: turn on experimental nix features
+  lineinfile:
+    dest: ~/.config/nix/nix.conf
+    line: experimental-features = nix-command flakes
+    create: yes
+  when: nix_installed.stat.exists == True
