@@ -206,6 +206,10 @@
   homebrew_cask:
     name: naisdevice
 
+- name: Install nais-cli
+  homebrew:
+    name: nais
+
 - name: base tools
   homebrew:
     name: node
