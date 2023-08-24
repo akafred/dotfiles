@@ -6,6 +6,13 @@
     regexp: "export HOMEBREW_GITHUB_API_TOKEN"
   when: ansible_system == 'Darwin'
 
+- name: add HOMEBREW_NO_ANALYTICS=1
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    line: "export HOMEBREW_NO_ANALYTICS=1"
+    regexp: "export HOMEBREW_NO_ANALYTICS"
+  when: ansible_system == 'Darwin'
+
 # - name: add brew path to PATH (not sure why this is commented out, perhaps brew sets this up now?)
 #  lineinfile:
 #    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
