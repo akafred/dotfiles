@@ -45,3 +45,6 @@
   homebrew:
     update_homebrew: yes
     upgrade_all: yes
+
+- name: "update casks - if it fails run manually: brew outdated --casks | xargs brew upgrade --force"
+  shell: "brew outdated --casks | xargs brew upgrade"
