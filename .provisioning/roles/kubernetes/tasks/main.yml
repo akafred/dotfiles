@@ -19,6 +19,7 @@
     name:
       - k9s
       - kubectx
+      - krew
 
 - name: Get kube-ps1
   homebrew:
