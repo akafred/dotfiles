@@ -20,9 +20,14 @@
     group: staff
     mode: 0750
 
+- name: check if colima is running
+  shell: colima status
+  register: colima_running
+  ignore_errors: true
+
 - name: start colima
   shell: colima start --cpu 4 --memory 8
-  when: colima_install.changed
+  when: colima_install.changed == True or colima_running.rc != 0
 
 - name: create symlink for docker-compose
   file:
