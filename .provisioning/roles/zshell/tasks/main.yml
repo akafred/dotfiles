@@ -15,14 +15,14 @@
     creates=~/.zshrc
 
 - name: check if zsh is default
-  shell: "finger -l {{ ansible_env.USER }} | grep 'Shell' | awk '{ print $4 }' | grep -v '/bin/zsh'"
+  shell: "finger -l {{ ansible_env.USER }} | grep 'Shell' | awk '{ print $4 }' | grep '/bin/zsh'"
   register: zsh_check
   ignore_errors: true
 
 - name: make zsh default
   become: true
   command: chsh -s /bin/zsh {{ ansible_env.USER }}
-  when: zsh_check is success and ansible_system == 'Darwin'
+  when: zsh_check is failed and ansible_system == 'Darwin'
 
 - name: Add modules to .zshrc
   lineinfile:
