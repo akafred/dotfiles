@@ -13,3 +13,13 @@
 #      executable: /bin/bash
 #  with_items:
 #    - OneDrive
+
+- name: Move OneDrive-plist file to LaunchAgents
+  template:
+    src: "com.microsoft.OneDrive.plist"
+    dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/com.microsoft.OneDrive.plist"
+    owner: "{{ ansible_env.USER }}"
+    mode: 0600
+
+- name: Load OneDrive LaunchAgent
+  shell: launchctl load "{{ ansible_env.HOME }}/Library/LaunchAgents/com.microsoft.OneDrive.plist"
