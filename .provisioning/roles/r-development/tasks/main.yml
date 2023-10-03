@@ -1,5 +1,9 @@
 - name: install r using brew - install r
-  package: name=r
+  brew_cask: r
+
+
+- name: install r using brew - install rstudio
+  brew_cask: rstudio
 
 # https://stackoverflow.com/questions/9689104/installing-r-on-mac-warning-messages-setting-lc-ctype-failed-using-c
 - name: fix locale-issue
