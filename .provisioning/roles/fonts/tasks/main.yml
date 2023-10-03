@@ -13,6 +13,8 @@
     name:
       - font-fira-code
       - font-microsoft-office
+      - font-hack-nerd-font
+      - font-fira-code-nerd-font
     install_options: force
   when: ansible_system == 'Darwin'
 
