@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.microsoft.Rewind</string>
+	<string>com.microsoft.OneDrive</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/Applications/OneDrive.app/Contents/MacOS/OneDrive</string>
