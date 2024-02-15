@@ -142,7 +142,7 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     insertafter: EOF
-    line: "java_use 17"
+    line: "java_use 21"
     regexp: "^java_use"
   when: ansible_system == 'Darwin'
 
