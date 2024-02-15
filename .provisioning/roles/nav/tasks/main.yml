@@ -246,6 +246,5 @@
     dest: "{{ ansible_env.HOME }}/.gitmsg"
     insertbefore: "# Uncomment.*"
     marker: "# Co-authors: {mark}"
-    content: |
-             #Co-authored-by: Mariam Pervez <mariam.pervez@nav.no>
-             #Co-authored-by: Daniel Skarpås <daniel.skarpas@nav.no>
+    block: "{{ lookup('file', 'co-authors') }}"
+
