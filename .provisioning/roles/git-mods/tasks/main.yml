@@ -128,6 +128,11 @@
     - alias.back 'checkout HEAD~'
     - alias.fwd '!sh -c "git checkout $(git rev-list --topo-order HEAD..$1 | tail -1) --"'
 
+- name: install prereq for git up in system python
+  pip:
+    name: packaging
+  become: true
+
 - name: install git up
   pip:
     name: git-up
