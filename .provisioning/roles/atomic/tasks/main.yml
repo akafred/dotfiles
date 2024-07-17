@@ -1,17 +1,17 @@
-# has been buggy ...
-- name: install nova
+- name: install zed
   homebrew_cask:
-    name: sublime-text
-  when: ansible_system == 'Darwin'
+    name:
+      - zed
+      - github
 
 - name: uninstall passé editors
   homebrew_cask:
     name:
       - atom
       - nova
+      - sublime-text
     state: absent
-
-# 
+#
 # - name: install atom packages
 #   shell: |
 #     set -euo pipefail
