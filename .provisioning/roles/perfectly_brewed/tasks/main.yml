@@ -30,17 +30,6 @@
              export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
   when: ansible_system != 'Darwin'
 
-- name: Make sure we can get to older versions
-  homebrew_tap:
-    name: homebrew/cask-versions
-  when: ansible_system == 'Darwin'
-
-# Seems to be deprecated
-#- name: Make sure we can get to drivers
-#  homebrew_tap:
-#    name: homebrew/cask-drivers
-#  when: ansible_system == 'Darwin'
-
 - name: update homebrew and upgrade brews
   homebrew:
     update_homebrew: yes
