@@ -1,8 +1,3 @@
-- name: Tap fonts
-  homebrew_tap:
-    name: homebrew/cask-fonts
-  when: ansible_system == 'Darwin'
-
 - name: Tap non-free fonts
   homebrew_tap:
     name: colindean/fonts-nonfree
@@ -20,8 +15,8 @@
 
 - name: install fira-code on RHEL
   shell: >
-         mkdir -p ~/.local/share/fonts ; \
-         for type in Bold Light Medium Regular Retina; do wget -O ~/.local/share/fonts/FiraCode-$type.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-$type.ttf?raw=true"; done ; \
-         fc-cache -f
-         creates=~/.local/share/fonts/FiraCode-Regular.ttf warn=False
+    mkdir -p ~/.local/share/fonts ; \
+    for type in Bold Light Medium Regular Retina; do wget -O ~/.local/share/fonts/FiraCode-$type.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-$type.ttf?raw=true"; done ; \
+    fc-cache -f
+    creates=~/.local/share/fonts/FiraCode-Regular.ttf warn=False
   when: ansible_pkg_mgr == 'yum'
