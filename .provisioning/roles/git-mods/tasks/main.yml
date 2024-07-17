@@ -83,7 +83,7 @@
 - name: create symlink
   file:
     src: "~/.ssh/id_ed25519"
-    dest: "~/~/.ssh/id_rsa"
+    dest: "~/.ssh/id_rsa"
     state: link
     force: no
   ignore_errors: yes
@@ -92,6 +92,8 @@
   file:
     src: "~/.ssh/id_ed25519"
     dest: "~/~/.ssh/id_rsa"
+    src: "~/.ssh/id_ed25519.pub"
+    dest: "~/.ssh/id_rsa.pub"
     state: link
     force: no
   ignore_errors: yes
