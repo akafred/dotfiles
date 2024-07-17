@@ -2,6 +2,6 @@
   homebrew_cask:
     accept_external_apps: yes
     name:
-      - vitamin-r
+#      - vitamin-r
       - kindle
 #      - selfcontrol
