@@ -2,12 +2,12 @@
 - name: install applications
   homebrew_cask:
     name:
-      - skype
+#      - skype
       - slack
-      - whatsapp
+#      - whatsapp
       - zoom
-      - mural
-      - roam-research
+#      - mural
+#      - roam-research
     accept_external_apps: yes
 
 ## Install Roam from dmg manually
