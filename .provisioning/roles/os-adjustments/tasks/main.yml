@@ -32,20 +32,28 @@
   shell: "{{ ansible_env.HOME }}/bin/remove-dock-app.sh {{ item }}"
   with_items:
     - Messages
+    - Meldinger
     - Mail
     - Maps
+    - Kart
     - Photos
+    - Bilder
     - FaceTime
     - Calendar
+    - Kalender
     - Contacts
+    - Kontakter
     - Reminders
+    - "Påminnelser"
     - TV
     - Music
+    - Musikk
     - Podcasts
     - Keynote
     - Pages
     - Numbers
     - Notes
+    - Notater
     - System Preferences
     - Safari
     - App Store
