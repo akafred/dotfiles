@@ -2,19 +2,20 @@
 - name: install half decent browser - or two
   homebrew_cask:
     name:
-     - firefox
-     - microsoft-edge
+     - arc
+#     - firefox
+#     - microsoft-edge
 #     - chromium  does not have sha
 #     - google-chrome does not have sha
 
-- name: add firefox to path
-  become: true
-  lineinfile: >
-    dest=/etc/paths.d/70-firefox
-    line=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS
-    regexp=.*firefox.*
-    mode=0644
-    create=yes
+#- name: add firefox to path
+#  become: true
+#  lineinfile: >
+#    dest=/etc/paths.d/70-firefox
+#    line=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS
+#    regexp=.*firefox.*
+#    mode=0644
+#    create=yes
 
 # - name: install codecs for HTML5 video
 #  homebrew: name={{ item }}
