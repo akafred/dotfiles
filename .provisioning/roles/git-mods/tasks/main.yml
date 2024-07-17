@@ -87,7 +87,7 @@
     dest: "~/.ssh/id_rsa"
     state: link
     force: no
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: create symlink
   file:
@@ -95,7 +95,7 @@
     dest: "~/.ssh/id_rsa.pub"
     state: link
     force: no
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: config colors
   command: git config --global {{ item }}
