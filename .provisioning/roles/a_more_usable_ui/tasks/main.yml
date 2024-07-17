@@ -1,7 +1,7 @@
 - name: install applications
   homebrew_cask:
     name:
-      - divvy
+#      - divvy - needs rosetta
       - flycut
       - raycast
     install_options: force
