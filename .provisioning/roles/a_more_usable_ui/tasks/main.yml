@@ -12,7 +12,7 @@
       executable: /bin/bash
   with_items:
     - Amphetamine
-    - Todoist
+#    - Todoist
 
 #- name: uninstall apps from Mac App Store # sudo mas uninstall does not work!
 #  become: true
