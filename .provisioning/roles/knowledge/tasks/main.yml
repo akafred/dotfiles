@@ -1,12 +1,13 @@
 - name: install applications
   homebrew_cask:
-      accept_external_apps: yes
-      name:
-        - freeplane
-        - arc
-        - roam-research
-        - obsidian
-        - logseq
+    accept_external_apps: yes
+    name:
+      - freeplane
+      - chatgpt
+      - reader
+#      - roam-research
+#      - obsidian
+#      - logseq
 #      - tiddly
 #      - evernote
 #      - skitch
@@ -20,11 +21,11 @@
   command: xattr -r -d com.apple.quarantine /Applications/Freeplane.app
   become: true
 
-- name: install tools from Mac App Store
-  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
-  args:
-      executable: /bin/bash
-  with_items:
-    - Notability
-    - Drafts
-    - Day One
+#- name: install tools from Mac App Store
+#  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
+#  args:
+#      executable: /bin/bash
+#  with_items:
+#    - Notability
+#    - Drafts
+#    - Day One
