@@ -70,15 +70,15 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Github"
     content: |
-             Host github*
-                HostName github.com
-                User git
-                AddKeysToAgent yes
-                IdentitiesOnly yes
-                UseKeychain yes
+      Host github*
+         HostName github.com
+         User git
+         AddKeysToAgent yes
+         IdentitiesOnly yes
+         UseKeychain yes
 
-             Host github.com
-                IdentityFile ~/.ssh/id_rsa
+      Host github.com
+         IdentityFile ~/.ssh/id_rsa
 
 - name: create symlink
   file:
@@ -90,15 +90,11 @@
 
 - name: create symlink
   file:
-    src: "~/.ssh/id_ed25519"
-    dest: "~/~/.ssh/id_rsa"
     src: "~/.ssh/id_ed25519.pub"
     dest: "~/.ssh/id_rsa.pub"
     state: link
     force: no
   ignore_errors: yes
-
-
 
 - name: config colors
   command: git config --global {{ item }}
@@ -130,16 +126,9 @@
     - alias.back 'checkout HEAD~'
     - alias.fwd '!sh -c "git checkout $(git rev-list --topo-order HEAD..$1 | tail -1) --"'
 
-- name: install prereq for git up in system python
-  pip:
-    name: packaging
-  become: true
-
 - name: install git up
-  pip:
-    name: git-up
-    extra_args: --trusted-host pypi.org --trusted-host files.pythonhosted.org
-  become: true
+  homebrew:
+    name: pygitup
 
 - name: install git extras
   homebrew:
@@ -158,11 +147,11 @@
 - name: config diffmerge
   command: git config --global {{ item }}
   with_items:
-   - diff.tool diffmerge
-   - difftool.diffmerge.cmd '/usr/local/bin/diffmerge "$LOCAL" "$REMOTE"'
-   - merge.tool diffmerge
-   - mergetool.diffmerge.trustExitCode true
-   - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
+    - diff.tool diffmerge
+    - difftool.diffmerge.cmd '/usr/local/bin/diffmerge "$LOCAL" "$REMOTE"'
+    - merge.tool diffmerge
+    - mergetool.diffmerge.trustExitCode true
+    - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
   when: ansible_system == "Darwin"
 
 - name: diff-so-fancy install
@@ -172,17 +161,17 @@
 - name: diff-so-fancy config
   command: git config --global {{ item }}
   with_items:
-   - core.pager 'diff-so-fancy | less --tabs=4 -RFX'
-   - color.diff-highlight.oldNormal 'red bold'
-   - color.diff-highlight.oldHighlight 'red bold 52'
-   - color.diff-highlight.newNormal 'green bold'
-   - color.diff-highlight.newHighlight 'green bold 22'
-   - alias.olddiff '!git --no-pager diff'
+    - core.pager 'diff-so-fancy | less --tabs=4 -RFX'
+    - color.diff-highlight.oldNormal 'red bold'
+    - color.diff-highlight.oldHighlight 'red bold 52'
+    - color.diff-highlight.newNormal 'green bold'
+    - color.diff-highlight.newHighlight 'green bold 22'
+    - alias.olddiff '!git --no-pager diff'
 
 - name: rebase on pull
   command: git config --global {{ item }}
   with_items:
-   - branch.autosetuprebase 'always'
+    - branch.autosetuprebase 'always'
 
 - name: install gitup
   homebrew_cask:
@@ -212,7 +201,7 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for GnuPG commit signing dialog"
     content: |
-             export GPG_TTY=$(tty)
+      export GPG_TTY=$(tty)
 
 - name: Install GPG Suite (without mail)
   homebrew_cask:
@@ -223,7 +212,7 @@
 - name: Install gnupg and pinentry-mac
   homebrew:
     name:
-      - gnupg 
+      - gnupg
       - pinentry-mac
 
 - name: create gnupg folder
