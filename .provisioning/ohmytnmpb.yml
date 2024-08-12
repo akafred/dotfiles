@@ -4,7 +4,7 @@
 # A symlink is nice:
 #     ln -s `pwd`/.provisioning ~/.provisioning
 # Then you can run this setup with:
-#     pushd ~/.provisioning/ && ansible-playbook -Kv ohmytnmbp.yml ; popd
+#     pushd ~/.provisioning/ && ansible-playbook -Kv ohmytnmpb.yml ; popd
 #
 
 - hosts: localhost
