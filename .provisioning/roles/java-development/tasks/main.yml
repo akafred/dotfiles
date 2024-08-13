@@ -59,10 +59,10 @@
 #- name: Add sdkman in .bashrc
 #  lineinfile: dest={{ ansible_env.HOME }}/.bashrc regexp="\/.sdkman/bin\/sdkman\-init\.sh" line='[[ -s "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh" && ! $(which sdkman-init.sh) ]] && source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"'
 
-- name: Installing maven (have issues with mvn under sdkman)
-  homebrew:
-    name: maven
-  when: ansible_system == 'Darwin'
+#- name: Installing maven (have issues with mvn under sdkman)
+#  homebrew:
+#    name: maven
+#  when: ansible_system == 'Darwin'
 
 - name: Installing gradle
   homebrew:
@@ -74,18 +74,18 @@
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     line: "gw() { ./gradlew $@ }"
 
-- name: create m2 folder
-  file:
-    path: "{{ ansible_env.HOME }}/.m2"
-    state: directory
-    owner: "{{ ansible_env.USER }}"
-    mode: 0755
+#- name: create m2 folder
+#  file:
+#    path: "{{ ansible_env.HOME }}/.m2"
+#    state: directory
+#    owner: "{{ ansible_env.USER }}"
+#    mode: 0755
 
-- name: create mvn settings bin-folder
-  file:
-    path: "{{ ansible_env.HOME }}/.m2/bin"
-    state: directory
-    mode: 0755
+#- name: create mvn settings bin-folder
+#  file:
+#    path: "{{ ansible_env.HOME }}/.m2/bin"
+#    state: directory
+#    mode: 0755
 
 - name: add entries to .gitignore_global
   lineinfile:
