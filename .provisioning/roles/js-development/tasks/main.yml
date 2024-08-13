@@ -36,3 +36,4 @@
 - name: visual studio code
   homebrew_cask:
     name: visual-studio-code
+    accept_external_apps: yes
