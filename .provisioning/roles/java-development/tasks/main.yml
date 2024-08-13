@@ -1,26 +1,21 @@
-- name: make adoptopenjdk available
-  homebrew_tap:
-    name: AdoptOpenJDK/openjdk
-    state: absent
-
 - name: install Java 8
   homebrew_cask:
-    name: temurin8
+    name: temurin@8
   when: ansible_system == 'Darwin'
 
 - name: install Java 11
   homebrew_cask:
-    name: temurin11
+    name: temurin@11
   when: ansible_system == 'Darwin'
 
 - name: install Java 17
   homebrew_cask:
-    name: temurin17
+    name: temurin@17
   when: ansible_system == 'Darwin'
 
 - name: install Java 21
   homebrew_cask:
-    name: temurin21
+    name: temurin@21
   when: ansible_system == 'Darwin'
 
 - name: install Java - latest
