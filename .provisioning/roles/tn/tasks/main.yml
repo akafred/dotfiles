@@ -1,0 +1,83 @@
+- name: create projects folder
+  file:
+    path: "{{ ansible_env.HOME }}/Projects/TelenorNorgeInternal"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0750
+
+- name: shell-script environment stuff
+  copy:
+    src: tn_shellrc.sh
+    dest: "{{ ansible_env.HOME }}/.tn_shellrc.sh"
+
+- name: init nav environment
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Tn environment"
+    content: "source {{ ansible_env.HOME }}/.tn_shellrc.sh"
+
+- name: update hosts-file
+  become: true
+  blockinfile:
+    dest: /etc/hosts
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for TN environment"
+    content: |
+      127.0.0.1  someservice.telenor.net
+
+- name: create tn-profile-for-git
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    mode: 0640
+  with_items:
+    - "Projects/TelenorNorgeInternal/.gitconfig-tn"
+
+- name: add tn-profile-for-git
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Tn environment"
+    content: |
+      [includeIf "gitdir:Projects/TelenorNorgeInternal/"]
+              path = ~/Projects/TelenorNorgeInternal/.gitconfig-tn
+
+- name: ensure .ssh/config exists
+  copy:
+    content: ""
+    force: no
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    owner: "{{ ansible_env.USER }}"
+    mode: 0600
+
+- name: create .ssh/config.d
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config.d"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    mode: 0750
+
+- name: create nav config file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    mode: 0600
+  with_items:
+    - ".ssh/config.d/tn"
+
+- name: make sure .ssh-config has tn stuff
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for tn environment"
+    content: Include ~/.ssh/config.d/*
+
+- name: base tools
+  homebrew:
+    name: node
+
+- name: install "meta" package
+  npm:
+    name: meta
+    global: yes

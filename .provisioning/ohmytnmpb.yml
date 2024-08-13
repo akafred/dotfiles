@@ -17,7 +17,7 @@
     - shell-config
     - perfectly_brewed
     - git-mods
-    #    - altident
+    - altident
     - personal-bin
     - os-adjustments
     - cli-tools
@@ -27,28 +27,29 @@
     - productivity
     #    - msoffice
     - atomic
-  #  - collaborative
-  #  - browsers_and_tweaks
-  #  - knowledge
-  #  - a_more_usable_ui
+    - collaborative
+    - browsers_and_tweaks
+    - knowledge
+    - a_more_usable_ui
     - fonts
-    #    - idea
-    #    - java-development
+    - idea
+    - java-development
     #    - dockered
     #    - kubernetes
-#    - os-tools
-#    - app-store-apps
-#    - spotify
-#    - postgresql-y
-#    - dockered_sonarqube
-#    - nav
-#    - remoting
-#    - python-development
-#    - screencasting
-#    - displaylink
-#    - dotnet-development
-#    - machine-learning
-#    - js-development
+    - os-tools
+    - app-store-apps
+    - spotify
+    #    - postgresql-y
+    #    - dockered_sonarqube
+    - tn
+    #    - nav
+    #    - remoting
+    #    - python-development
+    #    - screencasting
+    - displaylink
+    #    - dotnet-development
+    #    - machine-learning
+    - js-development
 #    - cronable
 #    - salty
 #    - asciidoc
