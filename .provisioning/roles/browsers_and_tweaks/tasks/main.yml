@@ -8,6 +8,7 @@
 #     - chromium  does not have sha
 #     - google-chrome does not have sha
 
+    accept_external_apps: yes
 #- name: add firefox to path
 #  become: true
 #  lineinfile: >

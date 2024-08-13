@@ -5,3 +5,4 @@
       - appcleaner
       - grandperspective
       - fluor
+    accept_external_apps: yes
