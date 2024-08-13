@@ -17,6 +17,7 @@
 
 # Have to install tana, readwise reader,  manually
 
+# Dersom denne gir "xattr: [Errno 1] Operation not permitted: " så gi Full Disk Access til Terminal
 - name: unquarantine freeplane
   command: xattr -r -d com.apple.quarantine /Applications/Freeplane.app
   become: true
