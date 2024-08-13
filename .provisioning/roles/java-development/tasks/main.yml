@@ -93,6 +93,7 @@
     line: "{{ item }}"
   with_items:
     - target/
+    - ".gradle/file-system.probe"
 
 #- name: Unalias maven-wrapper
 #  blockinfile:
