@@ -39,8 +39,15 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Tn environment"
     content: |
-      [includeIf "gitdir:Projects/TelenorNorgeInternal/"]
+      [includeIf "gitdir:~/Projects/TelenorNorgeInternal/"]
               path = ~/Projects/TelenorNorgeInternal/.gitconfig-tn
+
+- name: ensure we have Google Package Repo info
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertbefore: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Github Package Repo"
+    block: "{{lookup('file', 'gpr-env')}}"
 
 - name: ensure .ssh/config exists
   copy:
