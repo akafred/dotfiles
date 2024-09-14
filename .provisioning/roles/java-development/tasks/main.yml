@@ -1,13 +1,3 @@
-- name: install Java 8
-  homebrew_cask:
-    name: temurin@8
-  when: ansible_system == 'Darwin'
-
-- name: install Java 11
-  homebrew_cask:
-    name: temurin@11
-  when: ansible_system == 'Darwin'
-
 - name: install Java 17
   homebrew_cask:
     name: temurin@17
@@ -102,36 +92,36 @@
 #      content: |
 #               unalias mvn || true
 
-- name: use my smart mvn command
-  copy: >
-    src={{ item.name }}
-    dest="{{ ansible_env.HOME }}/{{ item.name }}"
-    mode="{{ item.mode }}"
-    owner="{{ ansible_env.USER }}"
-  with_items:
-    - { name: ".m2/bin/mvn", mode: 'u=rwx,g=rx,o=r' }
-    - { name: ".m2/default-settings.xml", mode: 'u=rw,g=r,o=' }
-    # - { name: ".m2/something-settings.xml", mode: 'u=rw,g=r,o=' }
+#- name: use my smart mvn command
+#  copy: >
+#    src={{ item.name }}
+#    dest="{{ ansible_env.HOME }}/{{ item.name }}"
+#    mode="{{ item.mode }}"
+#    owner="{{ ansible_env.USER }}"
+#  with_items:
+#    - { name: ".m2/bin/mvn", mode: "u=rwx,g=rx,o=r" }
+#    - { name: ".m2/default-settings.xml", mode: "u=rw,g=r,o=" }
+#    # - { name: ".m2/something-settings.xml", mode: 'u=rw,g=r,o=' }
 
-- name: override mvn command
-  lineinfile: >
-    dest={{ ansible_env.HOME }}/.paths_homes_etc
-    line='PATH={{ ansible_env.HOME }}/.m2/bin:$PATH'
-    regexp='PATH={{ ansible_env.HOME }}\/\.m2/bin:\$PATH'
+#- name: override mvn command
+#  lineinfile: >
+#    dest={{ ansible_env.HOME }}/.paths_homes_etc
+#    line='PATH={{ ansible_env.HOME }}/.m2/bin:$PATH'
+#    regexp='PATH={{ ansible_env.HOME }}\/\.m2/bin:\$PATH'
 
 - name: add java_ls and java_use commands
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for java commands"
     content: |
-             alias java_ls='/usr/libexec/java_home -V 2>&1 |grep -E "^\s+\d\d?(?:(?:.\d+)?.\d+[,_]?(?:.\d+))?\s" | cut -d "(" -f 1 | sed -e "s/^[[:space:]]*//"'
-             function java_use() {
-                 # unset introduced to avoid Big Sur-bug https://developer.apple.com/forums/thread/666681
-                 unset JAVA_HOME
-                 export JAVA_HOME=$(/usr/libexec/java_home -v "$1")
-                 export PATH=$JAVA_HOME/bin:$PATH
-                 java -version
-             }
+      alias java_ls='/usr/libexec/java_home -V 2>&1 |grep -E "^\s+\d\d?(?:(?:.\d+)?.\d+[,_]?(?:.\d+))?\s" | cut -d "(" -f 1 | sed -e "s/^[[:space:]]*//"'
+      function java_use() {
+          # unset introduced to avoid Big Sur-bug https://developer.apple.com/forums/thread/666681
+          unset JAVA_HOME
+          export JAVA_HOME=$(/usr/libexec/java_home -v "$1")
+          export PATH=$JAVA_HOME/bin:$PATH
+          java -version
+      }
   when: ansible_system == 'Darwin'
 
 - name: set default java
@@ -144,7 +134,7 @@
 
 - name: "git clone tcr - test && commit || revert"
   git:
-    repo: 'https://github.com/kjetiljd/tcr.git'
+    repo: "https://github.com/kjetiljd/tcr.git"
     dest: "{{ ansible_env.HOME }}/bin/tcr"
 
 - name: add tcr to PATH
