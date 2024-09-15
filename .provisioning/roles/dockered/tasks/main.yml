@@ -20,9 +20,6 @@
     group: staff
     mode: 0750
 
-- name: start colima
-  shell: colima status || colima start --cpu 4 --memory 8
-  
 - name: create symlink for docker-compose
   file:
     src: "/opt/homebrew/bin/docker-compose"
@@ -37,6 +34,9 @@
     state: link
     force: yes
   become: true
+
+- name: start colima
+  shell: colima status || colima start --cpu 4 --memory 8
 
 - name: more stuff to get colima to work (with e.g TestContainers)
   blockinfile:
