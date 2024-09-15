@@ -13,6 +13,9 @@
       - docker-compose
   register: colima_install
 
+- name: install pip requests in ansible python for ansible docker stuff to work
+  command: "{{ansible_python_interpreter}} -m pip install requests --break-system-packages"
+
 - file:
     path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
     state: directory

@@ -1,20 +1,46 @@
+# - name: install Python-PostgreSQL Database Adapter
+#  command: env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" {{ansible_python_interpreter}} -m pip --break-system-packages --no-cache install psycopg2
+#  become: true
 
-- name: "install database server (default user for the database is {{ ansible_env.USER }})"
-  homebrew:
-    name: postgresql@14
+# We're swithching to postgresql in docker (or really in colima), which is already installed
+- name: start docker postgresql container
+  docker_container:
+    name: postgres
+    image: postgres:16
+    state: started
+    ports:
+      - "5432:5432"
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+    restart_policy: always
 
-- name: start database server automatically
-  shell: brew services restart {{ item }}
-  with_items:
-    - postgresql@14
+- name: start docker pgvector container
+  docker_container:
+    name: pgvector
+    image: pgvector/pgvector:pg16
+    state: started
+    ports:
+      - "5433:5432"
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - /var/lib/pgvector/data:/var/lib/postgresql/data
+    restart_policy: always
 
-- name: install pip for system-python (used by ansible locally)
-  command: "{{ansible_python_interpreter}} -m ensurepip --default-pip"
-  become: true
+#- name: "install server (default user for the database is {{ ansible_env.USER }})"
+#  homebrew:
+#   name: postgresql
 
-- name: install Python-PostgreSQL Database Adapter
-  command: env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" {{ansible_python_interpreter}} -m pip --no-cache install psycopg2
-  become: true
+#- name: start database server automatically
+# shell: brew services restart {{ item }}
+#  with_items:
+#   - postgresql
 
 - name: install DBeaver (universal sql client)
   homebrew_cask:
