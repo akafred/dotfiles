@@ -10,7 +10,7 @@
     src: tn_shellrc.sh
     dest: "{{ ansible_env.HOME }}/.tn_shellrc.sh"
 
-- name: init nav environment
+- name: init tn environment
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK for Tn environment"
@@ -64,7 +64,7 @@
     owner: "{{ ansible_env.USER }}"
     mode: 0750
 
-- name: create nav config file
+- name: create tn config file
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
@@ -88,3 +88,9 @@
   npm:
     name: meta
     global: yes
+
+- name: "stuff for frontend-development (see: https://tnweb.docs.telenor.no/get-started )"
+  homebrew:
+    name:
+      - mkcert
+      - nss # if you use Firefox
