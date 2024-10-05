@@ -38,7 +38,7 @@
     #    - kubernetes
     - os-tools
     - app-store-apps
-#    - spotify
+    - spotify
 #    - postgresql-y
 #    - dockered_sonarqube
 #    - nav
