@@ -12,7 +12,6 @@
 #      - evernote
 #      - skitch
 #      - papers
-#      - kindle
 #      - anki
 
 # Have to install tana, readwise reader,  manually
@@ -30,3 +29,15 @@
 #    - Notability
 #    - Drafts
 #    - Day One
+
+- name: remove brew installed kindle
+  homebrew_cask:
+    accept_external_apps: yes
+    name:
+      - kindle
+    state: absent
+
+- name: install kindle from Mac App Store
+  shell: 'mas list | grep "Kindle" || mas search "Kindle" | grep "Kindle" | head -n 1 | awk ''{print $1}'' | xargs mas install'
+  args:
+    executable: /bin/bash
