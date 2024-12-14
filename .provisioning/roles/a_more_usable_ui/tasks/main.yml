@@ -1,16 +1,16 @@
 - name: install applications
   homebrew_cask:
     name:
-#      - divvy - needs rosetta
+      #      - divvy - needs rosetta
       - flycut
       - raycast
       - jordanbaird-ice
     install_options: force
 
 - name: install apps from Mac App Store
-  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
+  shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
   args:
-      executable: /bin/bash
+    executable: /bin/bash
   with_items:
     - Amphetamine
 #    - Todoist
