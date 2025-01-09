@@ -34,7 +34,7 @@
     - fonts
     - idea
     - java-development
-    #    - dockered
+    - dockered
     #    - kubernetes
     - os-tools
     - app-store-apps
