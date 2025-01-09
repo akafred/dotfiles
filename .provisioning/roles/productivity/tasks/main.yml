@@ -1,6 +1,6 @@
-- name: install applications
-  homebrew_cask:
-    accept_external_apps: yes
-    name:
+#- name: install applications
+#  homebrew_cask:
+#    accept_external_apps: yes
+#    name:
 #      - vitamin-r
 #      - selfcontrol
