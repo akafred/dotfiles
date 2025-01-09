@@ -14,21 +14,10 @@
 #      - papers
 #      - anki
 
-# Have to install tana, readwise reader,  manually
-
 # Dersom denne gir "xattr: [Errno 1] Operation not permitted: " så gi Full Disk Access til Terminal
 - name: unquarantine freeplane
   command: xattr -r -d com.apple.quarantine /Applications/Freeplane.app
   become: true
-
-#- name: install tools from Mac App Store
-#  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
-#  args:
-#      executable: /bin/bash
-#  with_items:
-#    - Notability
-#    - Drafts
-#    - Day One
 
 - name: remove brew installed kindle
   homebrew_cask:
@@ -37,7 +26,17 @@
       - kindle
     state: absent
 
-- name: install kindle from Mac App Store
-  shell: 'mas list | grep "Kindle" || mas search "Kindle" | grep "Kindle" | head -n 1 | awk ''{print $1}'' | xargs mas install'
+# Have to install tana manually
+
+- name: install tools from Mac App Store
+  shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
   args:
     executable: /bin/bash
+  with_items:
+    - Kindle
+    - Jojo Transcribe
+    - reMarkable desktop
+    - iA Writer
+#    - Notability
+#    - Drafts
+#    - Day One
