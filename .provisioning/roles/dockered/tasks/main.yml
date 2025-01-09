@@ -26,7 +26,7 @@
 - name: create symlink for docker-compose
   file:
     src: "/opt/homebrew/bin/docker-compose"
-    dest: "/Users/kjetiljd/.docker/cli-plugins/docker-compose"
+    dest: "/Users/{{ ansible_env.USER }}/.docker/cli-plugins/docker-compose"
     state: link
     force: yes
 
