@@ -1,8 +1,8 @@
-- name: install other apps from Mac App Store
-  shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
-  args:
-    executable: /bin/bash
-  with_items:
+# - name: install other apps from Mac App Store
+#  shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
+#  args:
+#    executable: /bin/bash
+#  with_items:
 #    - Trello
 #    - Backdrop
 # Seems LastPass needs Rosetta 2 to be installed
