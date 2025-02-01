@@ -1,5 +1,7 @@
-
 - name: install applications
   homebrew_cask:
     name: spotify
     install_options: force
+
+- name: un-quarantine Spotify
+  command: xattr -d com.apple.quarantine /Applications/Spotify.app
