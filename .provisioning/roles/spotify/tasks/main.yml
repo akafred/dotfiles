@@ -4,4 +4,8 @@
     install_options: force
 
 - name: un-quarantine Spotify
-  command: xattr -d com.apple.quarantine /Applications/Spotify.app || true
+  shell: xattr -d com.apple.quarantine /Applications/Spotify.app || true
+
+# https://github.com/Homebrew/homebrew-cask/issues/161665
+- name: Lets skip the startuphelper
+  shell: "launchctl remove com.spotify.client.startuphelper"
