@@ -1,0 +1,11 @@
+- name: Install AI tools
+  homebrew_cask:
+    name:
+      - chatgpt
+      - claude
+
+# Install Claude Code using npm globally as command
+- name: Install Claude Code
+  npm:
+    name: "@anthropic-ai/claude-code"
+    global: true
