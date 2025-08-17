@@ -9,3 +9,12 @@
   npm:
     name: "@anthropic-ai/claude-code"
     global: true
+
+- name: add entries to .gitignore_global
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gitignore_global"
+    line: "{{ item }}"
+  with_items:
+    - .claude/
+    - .serena/
+    - CLAUDE.md
