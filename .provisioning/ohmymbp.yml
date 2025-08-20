@@ -17,7 +17,7 @@
     - shell-config
     - perfectly_brewed
     - git-mods
-    #    - altident
+    - altident
     - personal-bin
     - os-adjustments
     - cli-tools
@@ -40,16 +40,17 @@
     - app-store-apps
     - spotify
     - artificial_intelligence
-#    - postgresql-y
-#    - dockered_sonarqube
-#    - nav
-#    - remoting
-#    - python-development
-#    - screencasting
-#    - displaylink
-#    - dotnet-development
-#    - machine-learning
-#    - js-development
+    #    - postgresql-y
+    #    - dockered_sonarqube
+    #    - nav
+    #    - remoting
+    #    - python-development
+    #    - screencasting
+    #    - displaylink
+    #    - dotnet-development
+    #    - machine-learning
+    #    - js-development
+    - js-development
 #    - cronable
 #    - salty
 #    - asciidoc
