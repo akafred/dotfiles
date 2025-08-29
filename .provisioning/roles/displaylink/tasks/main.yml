@@ -1,5 +1,6 @@
-- name: Install display-link
-  homebrew_cask:
-    name: displaylink
-    accept_external_apps: yes
-  ignore_errors: yes
+# DisplayLink 13.0 crashes, need 1.12.4 but Homebrew only has latest
+# - name: Install display-link
+#   homebrew_cask:
+#     name: displaylink
+#     accept_external_apps: yes
+#   ignore_errors: yes
