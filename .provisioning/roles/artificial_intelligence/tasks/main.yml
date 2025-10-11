@@ -3,12 +3,12 @@
     name:
       - chatgpt
       - claude
+      - claude-code
 
-# Install Claude Code using npm globally as command
-- name: Install Claude Code
-  npm:
-    name: "@anthropic-ai/claude-code"
-    global: true
+- name: Install AI tools
+  homebrew:
+    name:
+      - codex
 
 - name: add entries to .gitignore_global
   lineinfile:
@@ -18,3 +18,4 @@
     - .claude/
     - .serena/
     - CLAUDE.md
+    - AGENTS.md
