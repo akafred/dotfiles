@@ -8,7 +8,7 @@
 # Install github copilot cli
 - name: Install Github Copilot CLI
   npm:
-    name: "@github/copilot-cli"
+    name: "@github/copilot"
     global: true
 
 - name: Install AI tools
