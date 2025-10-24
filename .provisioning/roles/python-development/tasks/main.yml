@@ -3,6 +3,7 @@
     name:
       - "python" # A newer one than the system python
       - "poetry"
+      - uv
 
 
 - name: install anaconda
