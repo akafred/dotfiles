@@ -5,6 +5,12 @@
       - claude
       - claude-code
 
+# Install github copilot cli
+- name: Install Github Copilot CLI
+  npm:
+    name: "@github/copilot-cli"
+    global: true
+
 - name: Install AI tools
   homebrew:
     name:
