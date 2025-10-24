@@ -59,10 +59,16 @@
     name: gradle
   when: ansible_system == 'Darwin'
 
-- name: Function for invoking gradle wrapper
+- name: Function for invoking gradle wrapper - remove old
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     line: "gw() { ./gradlew $@ }"
+  state: absent
+
+- name: Function for invoking gradle wrapper
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    line: "gw() { ./gradlew \"$@\"; }"
 
 #- name: create m2 folder
 #  file:
