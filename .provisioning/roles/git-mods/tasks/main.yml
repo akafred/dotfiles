@@ -127,6 +127,7 @@
     - alias.discard 'checkout --'
     - alias.back 'checkout HEAD~'
     - alias.fwd '!sh -c "git checkout $(git rev-list --topo-order HEAD..$1 | tail -1) --"'
+    - alias.trunk "!git remote show origin | awk '/HEAD branch/ {print $NF}'"
 
 - name: install git up
   homebrew:
