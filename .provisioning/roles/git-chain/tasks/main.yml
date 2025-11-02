@@ -1,0 +1,30 @@
+---
+- name: install rust
+  homebrew:
+    name: rust
+    state: present
+
+- name: ensure projects directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Projects/akafred"
+    state: directory
+    mode: '0755'
+
+- name: clone git-chain repository
+  git:
+    repo: git@github.com:dashed/git-chain.git
+    dest: "{{ ansible_env.HOME }}/Projects/akafred/git-chain"
+    update: yes
+    accept_hostkey: yes
+
+- name: build git-chain
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/Projects/akafred/git-chain"
+    creates: "{{ ansible_env.HOME }}/Projects/akafred/git-chain/target/release/git-chain"
+
+- name: configure git alias for git-chain
+  git_config:
+    name: alias.chain
+    scope: global
+    value: '!~/Projects/akafred/git-chain/target/release/git-chain'
