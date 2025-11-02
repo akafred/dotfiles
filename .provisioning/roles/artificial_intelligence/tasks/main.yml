@@ -23,5 +23,13 @@
   with_items:
     - .claude/
     - .serena/
+
+- name: remove entries from .gitignore_global
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gitignore_global"
+    line: "{{ item }}"
+    state: absent
+  with_items:
     - CLAUDE.md
     - AGENTS.md
+
