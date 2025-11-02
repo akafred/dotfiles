@@ -16,12 +16,13 @@
     dest: "{{ ansible_env.HOME }}/Projects/akafred/git-chain"
     update: yes
     accept_hostkey: yes
+  register: git_chain_clone
 
 - name: build git-chain
   command: make install
   args:
     chdir: "{{ ansible_env.HOME }}/Projects/akafred/git-chain"
-    creates: "{{ ansible_env.HOME }}/Projects/akafred/git-chain/target/release/git-chain"
+  when: git_chain_clone.changed
 
 - name: configure git alias for git-chain
   git_config:
