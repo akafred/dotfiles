@@ -1,22 +1,18 @@
 - name: install Java 17
   homebrew_cask:
     name: temurin@17
-  when: ansible_system == 'Darwin'
 
 - name: install Java 21
   homebrew_cask:
     name: temurin@21
-  when: ansible_system == 'Darwin'
 
 - name: install Java - latest
   homebrew_cask:
     name: temurin
-  when: ansible_system == 'Darwin'
 
 - name: install Javas
   homebrew:
     name: java
-  when: ansible_system == 'Darwin'
 
 #- name: make latest java visible
 #  become: true
@@ -52,12 +48,10 @@
 #- name: Installing maven (have issues with mvn under sdkman)
 #  homebrew:
 #    name: maven
-#  when: ansible_system == 'Darwin'
 
 - name: Installing gradle
   homebrew:
     name: gradle
-  when: ansible_system == 'Darwin'
 
 - name: Function for invoking gradle wrapper - remove old
   lineinfile:
@@ -128,7 +122,6 @@
           export PATH=$JAVA_HOME/bin:$PATH
           java -version
       }
-  when: ansible_system == 'Darwin'
 
 - name: set default java
   lineinfile:
@@ -136,7 +129,6 @@
     insertafter: EOF
     line: "java_use 21"
     regexp: "^java_use"
-  when: ansible_system == 'Darwin'
 
 - name: "git clone tcr - test && commit || revert"
   git:

@@ -137,14 +137,11 @@
     name:
       - git-extras
       - tig
-  become: "{{ ansible_pkg_mgr == 'yum' }}"
-  when: ansible_pkg_mgr != "yum" # We have issues
 
 - name: install DiffMerge
   homebrew_cask:
     name: diffmerge
     install_options: force
-  when: ansible_system == "Darwin"
 
 - name: config diffmerge
   command: git config --global {{ item }}
@@ -154,7 +151,6 @@
     - merge.tool diffmerge
     - mergetool.diffmerge.trustExitCode true
     - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
-  when: ansible_system == "Darwin"
 
 - name: diff-so-fancy install
   homebrew:
@@ -179,22 +175,18 @@
   homebrew_cask:
     name: gitup
     install_options: force
-  when: ansible_system == "Darwin"
 
 - name: tap git-time-metric-stuff
   homebrew_tap:
     name: git-time-metric/gtm
-  when: ansible_system == "Darwin"
 
 - name: install git-time-metric
   homebrew:
     name: gtm
-  when: ansible_system == "Darwin"
 
 - name: install git-secrets
   homebrew:
     name: git-secrets
-  when: ansible_system == "Darwin"
 
 - name: add GnuPG (gpg) terminal setup for passphrase dialog
   blockinfile:
@@ -209,7 +201,6 @@
   homebrew_cask:
     name: gpg-suite-no-mail
     state: absent
-  when: ansible_system == "Darwin"
 
 - name: Install gnupg and pinentry-mac
   homebrew:
