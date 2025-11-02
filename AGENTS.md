@@ -184,10 +184,7 @@ Add configuration to user's shell:
 
 ## Commit Guidelines
 
-Follow the existing commit history style:
-- Use **short, imperative commit subjects** (e.g., "Add uv", "Fix gw() for bash")
-- Group related file updates in a single commit
-- Recent commits show the pattern: descriptive but concise
+See @.github/git-commit-instructions.md for commit guidelines.
 
 ## Important Notes
 
