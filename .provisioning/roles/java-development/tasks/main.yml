@@ -57,12 +57,12 @@
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
     line: "gw() { ./gradlew $@ }"
-  state: absent
+    state: absent
 
 - name: Function for invoking gradle wrapper
   lineinfile:
     dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
-    line: "gw() { ./gradlew \"$@\"; }"
+    line: 'gw() { ./gradlew "$@"; }'
 
 #- name: create m2 folder
 #  file:
