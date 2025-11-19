@@ -46,9 +46,9 @@
     #    - screencasting
     - artificial_intelligence
     - displaylink
-#    - dotnet-development
-#    - machine-learning
-#    - js-development
+    #    - dotnet-development
+    #    - machine-learning
+    - js-development
 #    - cronable
 #    - salty
 #    - asciidoc
