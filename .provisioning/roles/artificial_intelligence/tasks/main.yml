@@ -3,6 +3,10 @@
     name:
       - chatgpt
       - claude
+
+- name: Install AI tools
+  homebrew_cask:
+    name:
       - claude-code
 
 # Install github copilot cli
