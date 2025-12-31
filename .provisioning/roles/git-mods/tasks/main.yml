@@ -243,3 +243,7 @@
 - name: Install git-crypt
   homebrew:
     name: git-crypt
+
+- name: Install pre-commit tool
+  homebrew:
+    name: pre-commit
