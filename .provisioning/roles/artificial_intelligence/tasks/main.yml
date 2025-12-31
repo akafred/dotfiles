@@ -1,25 +1,17 @@
+- name: Install Github Copilot CLI
+  npm:
+    name: "@github/copilot"
+    global: true
+    state: absent
+
 - name: Install AI tools
   homebrew_cask:
     name:
       - chatgpt
       - claude
-
-- name: Install AI tools
-  homebrew_cask:
-    name:
       - claude-code
-
-# Install github copilot cli
-- name: Install Github Copilot CLI
-  npm:
-    name: "@github/copilot"
-    global: true
-
-- name: Install AI tools
-  homebrew:
-    name:
       - codex
-    state: latest
+      - copilot-cli
 
 - name: add entries to .gitignore_global
   lineinfile:
