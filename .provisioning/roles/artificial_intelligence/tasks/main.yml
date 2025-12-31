@@ -19,6 +19,7 @@
   homebrew:
     name:
       - codex
+    state: latest
 
 - name: add entries to .gitignore_global
   lineinfile:
