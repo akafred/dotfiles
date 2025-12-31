@@ -142,16 +142,16 @@
 - name: install DiffMerge
   homebrew_cask:
     name: diffmerge
-    install_options: force
+    state: absent # doesn't work on Apple Silicon without Rosetta 2
 
-- name: config diffmerge
-  command: git config --global {{ item }}
+- name: remove diffmerge config
+  shell: "{{ item }} || true"
   with_items:
-    - diff.tool diffmerge
-    - difftool.diffmerge.cmd '/usr/local/bin/diffmerge "$LOCAL" "$REMOTE"'
-    - merge.tool diffmerge
-    - mergetool.diffmerge.trustExitCode true
-    - mergetool.diffmerge.cmd '/usr/local/bin/diffmerge --merge --result="$MERGED" "$LOCAL" "$BASE" "$REMOTE"'
+    - git config unset --global --value=diffmerge  diff.tool
+    - git config unset --global difftool.diffmerge.cmd
+    - git config unset --global --value=diffmerge merge.tool
+    - git config unset --global mergetool.diffmerge.trustExitCode
+    - git config unset --global mergetool.diffmerge.cmd
 
 - name: diff-so-fancy install
   homebrew:
