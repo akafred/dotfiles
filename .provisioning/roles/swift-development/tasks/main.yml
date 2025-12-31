@@ -1,0 +1,16 @@
+- name: Install Swift tools
+  homebrew:
+    name:
+      - mint
+
+- name: Install tools
+  shell: mint which {{ item }} || mint install {{ item }}
+  with_items:
+    - realm/SwiftLint
+    - stackotter/swift-bundler
+    # - swiftlang/swift-format (?)
+    # - nicklockwood/SwiftFormat
+    # - krzysztofzablocki/Sourcery
+    # - pointfreeco/swift-parsing
+    # - pointfreeco/swift-tagged
+
