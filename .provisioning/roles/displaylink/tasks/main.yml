@@ -1,6 +1,46 @@
-# DisplayLink 13.0 crashes, need 1.12.4 but Homebrew only has latest
-# - name: Install display-link
-#   homebrew_cask:
-#     name: displaylink
-#     accept_external_apps: yes
-#   ignore_errors: yes
+# DisplayLink Manager is no longer in Homebrew - install/upgrade from pkg
+
+- name: Get installed DisplayLink version
+  shell: |
+    if [ -f "/Applications/DisplayLink Manager.app/Contents/Info.plist" ]; then
+      /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "/Applications/DisplayLink Manager.app/Contents/Info.plist"
+    else
+      echo "0"
+    fi
+  register: installed_version
+  changed_when: false
+
+- name: Get latest DisplayLink version from Synaptics
+  shell: |
+    VERSION_CODE=$(curl -s "https://www.synaptics.com/products/displaylink-graphics/downloads/macos" | grep -oE "connectivity-[0-9]+" | head -1 | sed 's/connectivity-//')
+    # Convert 150 -> 15.0, 142 -> 14.2
+    echo "${VERSION_CODE}" | sed 's/\([0-9]*\)\([0-9]\)/\1.\2/'
+  register: latest_version
+  changed_when: false
+
+- name: Get DisplayLink download URL
+  shell: |
+    VERSION_CODE=$(curl -s "https://www.synaptics.com/products/displaylink-graphics/downloads/macos" | grep -oE "connectivity-[0-9]+" | head -1 | sed 's/connectivity-//')
+    PKG_PATH=$(curl -s "https://www.synaptics.com/products/displaylink-manager-graphics-connectivity-${VERSION_CODE}?filetype=exe" | grep -oE 'href="(/sites/default/files/[^"]+\.pkg)"' | head -1 | sed 's/href="//;s/"$//')
+    echo "https://www.synaptics.com${PKG_PATH}"
+  register: download_url
+  changed_when: false
+  when: installed_version.stdout is version(latest_version.stdout, '<')
+
+- name: Download DisplayLink Manager pkg
+  get_url:
+    url: "{{ download_url.stdout }}"
+    dest: /tmp/DisplayLinkManager.pkg
+    mode: '0644'
+  when: installed_version.stdout is version(latest_version.stdout, '<')
+
+- name: Install DisplayLink Manager
+  command: installer -pkg /tmp/DisplayLinkManager.pkg -target /
+  become: yes
+  when: installed_version.stdout is version(latest_version.stdout, '<')
+
+- name: Clean up downloaded pkg
+  file:
+    path: /tmp/DisplayLinkManager.pkg
+    state: absent
+  when: installed_version.stdout is version(latest_version.stdout, '<')
