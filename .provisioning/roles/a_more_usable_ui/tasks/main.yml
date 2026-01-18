@@ -1,10 +1,16 @@
+- name: remove not-Tahoe-compatible version of Ice
+  homebrew_cask:
+    name:
+      - jordanbaird-ice
+    state: absent
+
 - name: install applications
   homebrew_cask:
     name:
       #      - divvy - needs rosetta
       - flycut
       - raycast
-      - jordanbaird-ice
+      - jordanbaird-ice@beta
     install_options: force
 
 - name: install apps from Mac App Store
