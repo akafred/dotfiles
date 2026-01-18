@@ -1,10 +1,10 @@
-- name: Install go 
+- name: Install go
   homebrew: name=go
 
-- name: add go to path
+- name: add go bin path
   become: true
   lineinfile: >
     dest=/etc/paths.d/90-golang-bin
-    line=/usr/local/opt/go/libexec/bin
-    regexp=/usr/local/opt/go/libexec/bin
+    line=$HOME/go/bin
+    regexp=$HOME/go/bin
     create=yes

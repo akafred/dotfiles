@@ -50,19 +50,19 @@
     #    - machine-learning
     - js-development
     - swift-development
-#    - cronable
-#    - salty
-#    - asciidoc
-#    - sublime
-#    - emacs
-#    - r-development
-#    - app-engine-development
-#    - groovy-development
-#    - android-development
-#    - kotlin-development
-#    - scala-development
-#    - clojure-development
-#    - golang-development
+    #    - cronable
+    #    - salty
+    #    - asciidoc
+    #    - sublime
+    #    - emacs
+    #    - r-development
+    #    - app-engine-development
+    #    - groovy-development
+    #    - android-development
+    #    - kotlin-development
+    #    - scala-development
+    #    - clojure-development
+    - golang-development
 #    - ruby-development
 #    - elm-development
 #    - my-sequel
