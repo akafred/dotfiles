@@ -133,6 +133,16 @@
   homebrew:
     name: pygitup
 
+- name: check if git-up is a symlink (because then it is outdated
+  shell: test -L "$(which git-up)"
+  register: gitup_symlink
+  changed_when: false
+  failed_when: false
+
+- name: fix git-up symlink if needed
+  command: brew link --overwrite pygitup
+  when: gitup_symlink.rc != 0
+
 - name: install git extras
   homebrew:
     name:
