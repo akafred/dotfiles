@@ -1,8 +1,13 @@
 
+- name: remove skype
+  homebrew_cask:
+    name:
+      - skype
+    state: absent
+
 - name: install applications
   homebrew_cask:
     name:
-#      - skype
       - slack
 #      - whatsapp
       - zoom
