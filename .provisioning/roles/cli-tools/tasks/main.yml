@@ -17,10 +17,16 @@
 - name: tldr repo
   homebrew_tap:
     name: tldr-pages/tldr
+    state: absent
 
-- name: install tldr
+- name: uninstall tldr (deprecated client)
   homebrew:
     name: tldr
+    state: absent
+
+- name: install tlrc (tldr replacement client)
+  homebrew:
+    name: tlrc
 
 - name: install multiplexers
   homebrew:
