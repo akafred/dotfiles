@@ -2,7 +2,14 @@
 - name: install applications
   homebrew_cask:
     name:
+      - jordanbaird-ice
+    state: absent
+
+- name: install applications
+  homebrew_cask:
+    name:
       - appcleaner
       - grandperspective
       - fluor
+      - jordanbaird-ice@beta
     accept_external_apps: yes
