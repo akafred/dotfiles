@@ -22,6 +22,7 @@
     - personal-bin
     - os-adjustments
     - cli-tools
+    - tmux-config
     - zshell
     - app-storable
     #    - cloudy
