@@ -11,6 +11,7 @@
       - flycut
       - raycast
       - jordanbaird-ice@beta
+      - iterm2
     install_options: force
 
 - name: install apps from Mac App Store

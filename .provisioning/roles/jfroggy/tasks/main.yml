@@ -1,0 +1,12 @@
+- name: Install JFrog CLI
+  homebrew:
+    name: jfrog-cli
+
+- name: Add jfrog OIDC-exports
+  lineinfile:
+    path: ~/.paths_homes_etc
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "export OIDC_USER=$(jf config export | base64 -d | jq -r .user)"
+    - "export OIDC_TOKEN=$(jf config export | base64 -d | jq -r .accessToken)"
