@@ -13,6 +13,7 @@
     HOMEBREW_CASK_OPTS: "--require-sha"
     HOMEBREW_DISPLAY_INSTALL_TIMES: 1
   roles:
+    - jfroggy
     - under-development
     - shell-config
     - perfectly_brewed
