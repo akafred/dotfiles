@@ -4,7 +4,7 @@
     global: true
     state: absent
 
-- name: Install AI tools
+- name: Install AI tools (casks)
   homebrew_cask:
     name:
       - antigravity
@@ -13,6 +13,12 @@
       - claude-code
       - codex
       - copilot-cli
+      - opencode-desktop
+
+- name: Install AI tools (formulae)
+  homebrew:
+    name:
+      - anomalyco/tap/opencode
 
 - name: add entries to .gitignore_global
   lineinfile:
