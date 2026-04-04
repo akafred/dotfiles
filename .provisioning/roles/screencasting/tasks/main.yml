@@ -1,9 +1,9 @@
 - name: install applications
   homebrew_cask:
     name:
-      - obs
+#      - obs
       - elgato-stream-deck
-      - epoccam
+#      - epoccam
       - logitech-camera-settings
       - keycastr
       - elgato-control-center
