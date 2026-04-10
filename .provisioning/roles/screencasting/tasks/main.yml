@@ -4,10 +4,15 @@
 #      - obs
       - elgato-stream-deck
 #      - epoccam
-      - logitech-camera-settings
       - keycastr
       - elgato-control-center
 #    - loopback - costs money
+
+# Manual install: brew install --cask logitech-camera-settings (requires sudo)
+#- name: install applications requiring sudo
+#  homebrew_cask:
+#    name:
+#      - logitech-camera-settings
 
 #- name: install apps from Mac App Store
 #  shell: "mas list | grep \"{{ item }}\" || mas search \"{{ item }}\" | grep \"{{ item }}\" | head -n 1 | awk '{print $1}' | xargs mas install"
