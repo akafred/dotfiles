@@ -30,7 +30,6 @@
     dest: "{{ ansible_env.HOME }}/.gitignore_global"
     line: "{{ item }}"
   with_items:
-    - .claude/
     - .serena/
 
 - name: remove entries from .gitignore_global
@@ -39,6 +38,6 @@
     line: "{{ item }}"
     state: absent
   with_items:
+    - .claude/
     - CLAUDE.md
     - AGENTS.md
-
