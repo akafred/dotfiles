@@ -31,6 +31,7 @@
     line: "{{ item }}"
   with_items:
     - .serena/
+    - .claude/settings.local.json
 
 - name: remove entries from .gitignore_global
   lineinfile:
