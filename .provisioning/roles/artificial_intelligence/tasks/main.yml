@@ -42,3 +42,20 @@
     - .claude/
     - CLAUDE.md
     - AGENTS.md
+
+- name: Create Copilot OTEL directory
+  file:
+    path: "{{ ansible_env.HOME }}/.copilot/otel"
+    state: directory
+    mode: '0755'
+
+# OTEL file export enables 'bunx ccusage copilot daily' to read usage from JSONL files
+- name: Configure Copilot OTEL in shell
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for copilot-otel"
+    content: |
+             export COPILOT_OTEL_ENABLED=true
+             export COPILOT_OTEL_EXPORTER_TYPE=file
+             export COPILOT_OTEL_FILE_EXPORTER_PATH="$HOME/.copilot/otel/copilot-otel-$(date +%Y%m%d-%H%M%S).jsonl"
