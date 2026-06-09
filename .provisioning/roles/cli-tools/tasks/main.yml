@@ -55,6 +55,10 @@
       - gh
       - jq
 
+- name: install bun (for bunx tool runner)
+  homebrew:
+    name: bun
+
 - name: install shellcheck
   homebrew:
     name: shellcheck
