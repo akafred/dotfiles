@@ -1,0 +1,29 @@
+---
+# The Homebrew "ansible" formula bundles community.general and keeps it current
+# on every `brew upgrade`. A separate galaxy-installed copy under
+# ~/.ansible/collections shadows the bundled one and only updates when
+# `ansible-galaxy install -r requirements.yml --force` is re-run by hand, so it
+# silently rots and can break against newer Homebrew (see git-mods/pygitup).
+# Remove the shadowing copy so the bundled collection is always used.
+
+- name: Locate the Homebrew-bundled community.general collection
+  ansible.builtin.shell: >
+    ls -d "$(brew --prefix ansible)"/libexec/lib/python*/site-packages/ansible_collections/community/general
+  register: bundled_community_general
+  changed_when: false
+  failed_when: false
+
+- name: Remove stale user-installed community.general so the bundled one is used
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.ansible/collections/ansible_collections/community/general"
+    state: absent
+  when: bundled_community_general.rc == 0
+  register: stale_community_general_removed
+
+- name: Stop and ask for a rerun now that the stale collection is gone
+  ansible.builtin.fail:
+    msg: >
+      Removed a stale galaxy copy of community.general that was shadowing the
+      Homebrew-bundled one. Ansible loaded the old collection for this run, so
+      please re-run this playbook to provision with the up-to-date collection.
+  when: stale_community_general_removed is changed

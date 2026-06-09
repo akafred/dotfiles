@@ -15,6 +15,7 @@
   roles:
     - jfroggy
     - under-development
+    - ansible-collections
     - shell-config
     - perfectly_brewed
     - git-mods

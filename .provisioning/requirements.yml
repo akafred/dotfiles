@@ -4,7 +4,14 @@
 #
 #    ansible-galaxy install -r requirements.yml --force
 
+# community.general is intentionally NOT installed via galaxy: the Homebrew
+# "ansible" formula bundles it and keeps it current on every `brew upgrade`.
+# A separate galaxy copy under ~/.ansible/collections shadows the bundled one,
+# rots over time, and can break against newer Homebrew. The ansible-collections
+# role removes any such stale copy. Only add collections here that are NOT
+# bundled with brew's ansible.
+#
 # Example:
-collections:
-  - name: community.general
-    version: '*'
+# collections:
+#   - name: community.general
+#     version: '*'
