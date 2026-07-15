@@ -9,6 +9,7 @@
     name:
       - antigravity
       - chatgpt
+      - chatgpt-classic
       - claude
       - claude-code
       - codex

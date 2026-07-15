@@ -11,10 +11,15 @@
     line: "export HOMEBREW_NO_ANALYTICS=1"
     regexp: "export HOMEBREW_NO_ANALYTICS"
 
-- name: update homebrew and upgrade brews
+- name: update homebrew
   homebrew:
     update_homebrew: yes
-    upgrade_all: yes
+    upgrade_all: no
 
-- name: "update casks - if it fails run manually: brew outdated --casks | xargs brew upgrade --force"
-  shell: "brew outdated --casks | xargs brew install"
+- name: "update casks - if it fails run manually: brew outdated --casks | xargs brew upgrade --cask --force"
+  shell: "brew outdated --casks | grep -vE 'spotify|google-chrome' | xargs brew upgrade --cask"
+
+- name: upgrade brews
+  homebrew:
+    update_homebrew: no
+    upgrade_all: yes
