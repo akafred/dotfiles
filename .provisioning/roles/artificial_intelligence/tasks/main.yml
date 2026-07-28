@@ -4,18 +4,28 @@
     global: true
     state: absent
 
+- name: Remove pinned claude-code cask in favor of claude-code@latest
+  homebrew_cask:
+    name: claude-code
+    state: absent
+
 - name: Install AI tools (casks)
   homebrew_cask:
     name:
-      - antigravity
+      #      - antigravity
       - chatgpt
-      - chatgpt-classic
       - claude
-      - claude-code
+      - claude-code@latest
       - codex
       - copilot-cli
       - opencode-desktop
       - superset
+
+- name: Install chatgpt-classic (no sha256 published upstream)
+  homebrew_cask:
+    name: chatgpt-classic
+  environment:
+    HOMEBREW_CASK_OPTS: ""
 
 - name: Tap anomalyco/tap
   homebrew_tap:
@@ -48,7 +58,7 @@
   file:
     path: "{{ ansible_env.HOME }}/.copilot/otel"
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 # OTEL file export enables 'bunx ccusage copilot daily' to read usage from JSONL files
 - name: Configure Copilot OTEL in shell
@@ -57,6 +67,6 @@
     insertafter: EOF
     marker: "# {mark} ANSIBLE MANAGED BLOCK for copilot-otel"
     content: |
-             export COPILOT_OTEL_ENABLED=true
-             export COPILOT_OTEL_EXPORTER_TYPE=file
-             export COPILOT_OTEL_FILE_EXPORTER_PATH="$HOME/.copilot/otel/copilot-otel-$(date +%Y%m%d-%H%M%S).jsonl"
+      export COPILOT_OTEL_ENABLED=true
+      export COPILOT_OTEL_EXPORTER_TYPE=file
+      export COPILOT_OTEL_FILE_EXPORTER_PATH="$HOME/.copilot/otel/copilot-otel-$(date +%Y%m%d-%H%M%S).jsonl"
