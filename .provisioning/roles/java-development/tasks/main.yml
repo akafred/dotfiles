@@ -1,3 +1,8 @@
+- name: remove Java 8
+  homebrew_cask:
+    name: temurin@8
+    state: absent
+
 - name: install Java 17
   homebrew_cask:
     name: temurin@17
