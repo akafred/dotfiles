@@ -5,6 +5,29 @@
       - skype
     state: absent
 
+# Apps installed outside Homebrew may be owned by root, which makes brew shell out
+# to sudo when adopting them. Ansible cannot hand a password to that inner sudo, so
+# take ownership first and let brew adopt without escalating.
+- name: check for pre-existing applications
+  stat:
+    path: "/Applications/{{ item }}"
+  register: collaborative_apps
+  loop:
+    - Slack.app
+    - zoom.us.app
+
+- name: take ownership of pre-existing applications
+  file:
+    path: "{{ item.stat.path }}"
+    owner: "{{ ansible_user_id }}"
+    group: staff
+    recurse: yes
+  become: true
+  loop: "{{ collaborative_apps.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: item.stat.exists and item.stat.pw_name != ansible_user_id
+
 - name: install applications
   homebrew_cask:
     name:
@@ -14,6 +37,10 @@
 #      - mural
 #      - roam-research
     accept_external_apps: yes
+    # Adopt apps already present in /Applications instead of failing on them.
+    # accept_external_apps alone no longer catches it: brew now prefixes the error
+    # with the cask name, which the module's regex does not match.
+    install_options: adopt
 
 ## Install Roam from dmg manually
 #

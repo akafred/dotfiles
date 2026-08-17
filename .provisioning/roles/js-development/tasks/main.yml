@@ -37,3 +37,5 @@
   homebrew_cask:
     name: visual-studio-code
     accept_external_apps: yes
+    # Adopt apps already present in /Applications instead of failing on them.
+    install_options: adopt

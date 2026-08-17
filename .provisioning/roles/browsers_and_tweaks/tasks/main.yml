@@ -9,6 +9,8 @@
 #     - google-chrome does not have sha
 
     accept_external_apps: yes
+    # Adopt apps already present in /Applications instead of failing on them.
+    install_options: adopt
 #- name: add firefox to path
 #  become: true
 #  lineinfile: >

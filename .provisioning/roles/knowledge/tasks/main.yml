@@ -1,6 +1,8 @@
 - name: install applications
   homebrew_cask:
     accept_external_apps: yes
+    # Adopt apps already present in /Applications instead of failing on them.
+    install_options: adopt
     name:
       - freeplane
       - chatgpt
