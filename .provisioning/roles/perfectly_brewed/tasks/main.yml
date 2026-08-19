@@ -16,8 +16,13 @@
     update_homebrew: yes
     upgrade_all: no
 
-- name: "update casks - if it fails run manually: brew outdated --casks | xargs brew upgrade --cask --force"
-  shell: "brew outdated --casks | grep -vE 'spotify|google-chrome' | xargs brew upgrade --cask"
+- name: "update casks - if it fails run manually: brew outdated --casks | xargs brew install --cask --adopt"
+  shell: "brew outdated --casks | grep -vE '^(google-chrome|spotify)$' | xargs brew install --cask --adopt"
+
+- name: "update casks without a sha256 (google-chrome, spotify)"
+  shell: "brew outdated --casks | grep -E '^(google-chrome|spotify)$' | xargs brew install --cask --adopt"
+  environment:
+    HOMEBREW_CASK_OPTS: ""
 
 - name: upgrade brews
   homebrew:
