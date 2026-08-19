@@ -16,7 +16,6 @@
       - chatgpt
       - claude
       - claude-code@latest
-      - codex
       - copilot-cli
       - opencode-desktop
       - superset
