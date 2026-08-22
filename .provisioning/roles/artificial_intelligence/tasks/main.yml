@@ -9,6 +9,11 @@
     name: claude-code
     state: absent
 
+- name: Remove chatgpt-classic - jeg tror den nye er ok.
+  homebrew_cask:
+    name: chatgpt-classic
+    state: absent
+
 - name: Remove codex cask in favor of standalone install
   homebrew_cask:
     name: codex
@@ -19,6 +24,7 @@
     name:
       #      - antigravity
       - chatgpt
+      #      - chatgpt-classic
       - claude
       - claude-code@latest
       - copilot-cli
