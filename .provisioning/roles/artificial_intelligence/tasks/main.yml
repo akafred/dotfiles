@@ -38,12 +38,6 @@
     sh -c "$(curl -fsSL https://chatgpt.com/codex/install.sh)"
     creates={{ ansible_env.HOME }}/.codex/packages/standalone/current/codex
 
-- name: Install chatgpt-classic (no sha256 published upstream)
-  homebrew_cask:
-    name: chatgpt-classic
-  environment:
-    HOMEBREW_CASK_OPTS: ""
-
 - name: Tap anomalyco/tap
   homebrew_tap:
     name: anomalyco/tap
