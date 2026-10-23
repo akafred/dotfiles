@@ -54,7 +54,7 @@
     - displaylink
     #    - dotnet-development
     #    - machine-learning
-    - js-development
+    #    - js-development
 #    - swift-development
 #    - cronable
 #    - salty
