@@ -11,6 +11,10 @@
   homebrew_cask:
     name: temurin@21
 
+- name: install Java 25
+  homebrew_cask:
+    name: temurin@25
+
 - name: install Java - latest
   homebrew_cask:
     name: temurin
