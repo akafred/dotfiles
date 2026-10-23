@@ -45,6 +45,7 @@
     #    - postgresql-y
     #    - dockered_sonarqube
     - tn
+    - snyky
     #    - nav
     #    - remoting
     #    - python-development

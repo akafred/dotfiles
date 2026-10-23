@@ -1,0 +1,2 @@
+# this must be replaced by the real value in files/snyk-env and encrypted with ansible-vault
+export SNYK_TOKEN=00000000-0000-0000-0000-000000000000

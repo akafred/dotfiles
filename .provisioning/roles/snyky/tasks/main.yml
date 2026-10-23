@@ -1,0 +1,6 @@
+- name: Ensure we have Snyk environment info
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.paths_homes_etc"
+    insertbefore: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK for Snyk"
+    block: "{{ lookup('file', 'snyk-env') }}"
