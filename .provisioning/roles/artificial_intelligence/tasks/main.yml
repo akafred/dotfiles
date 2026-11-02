@@ -19,6 +19,10 @@
     name: codex
     state: absent
 
+- name: Tap stablyai/orca
+  homebrew_tap:
+    name: stablyai/orca
+
 - name: Install AI tools (casks)
   homebrew_cask:
     name:
@@ -29,7 +33,12 @@
       - claude-code@latest
       - copilot-cli
       - opencode-desktop
-      - superset
+      - stablyai/orca/orca
+
+- name: Install or remove superset
+  homebrew_cask:
+    name: superset
+    state: "{{ 'present' if install_superset | default(true) else 'absent' }}"
 
 # Homebrew's codex formula does not support `codex remote-control`, which
 # requires the standalone install managed by the official installer.
