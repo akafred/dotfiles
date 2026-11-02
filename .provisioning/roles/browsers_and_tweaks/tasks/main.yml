@@ -3,6 +3,7 @@
   homebrew_cask:
     name:
      - arc
+     - thebrowsercompany-dia
 #     - firefox
 #     - microsoft-edge
 #     - chromium  does not have sha
