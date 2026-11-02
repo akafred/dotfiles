@@ -20,9 +20,10 @@
     state: absent
 
 - name: uninstall tldr (deprecated client)
-  homebrew:
-    name: tldr
-    state: absent
+  # The formula is gone from Homebrew, so the homebrew module can't remove it
+  command: brew uninstall --formula tldr
+  args:
+    removes: /opt/homebrew/Cellar/tldr
 
 - name: install tlrc (tldr replacement client)
   homebrew:
