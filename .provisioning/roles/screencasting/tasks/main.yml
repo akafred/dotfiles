@@ -1,5 +1,6 @@
 - name: install applications
   homebrew_cask:
+    sudo_password: "{{ ansible_become_password | default(omit) }}"
     name:
 #      - obs
       - elgato-stream-deck
