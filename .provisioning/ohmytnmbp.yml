@@ -14,6 +14,7 @@
     HOMEBREW_DISPLAY_INSTALL_TIMES: 1
   vars:
     install_superset: false
+    install_chatgpt: false
   roles:
     - jfroggy
     - under-development

@@ -27,13 +27,16 @@
   homebrew_cask:
     name:
       #      - antigravity
-      - chatgpt
-      #      - chatgpt-classic
       - claude
       - claude-code@latest
       - copilot-cli
       - opencode-desktop
       - stablyai/orca/orca
+
+- name: Install or remove chatgpt
+  homebrew_cask:
+    name: chatgpt
+    state: "{{ 'present' if install_chatgpt | default(true) else 'absent' }}"
 
 - name: Install or remove superset
   homebrew_cask:
