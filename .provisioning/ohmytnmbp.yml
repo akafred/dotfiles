@@ -15,6 +15,7 @@
   vars:
     install_superset: false
     install_chatgpt: false
+    install_vscode: false
   roles:
     - jfroggy
     - under-development

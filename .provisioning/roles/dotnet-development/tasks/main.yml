@@ -15,6 +15,7 @@
       - dotnet-sdk3-1-400
   when: ansible_machine != 'arm64'
 
-- name: visual studio code
+- name: Install or remove visual studio code
   homebrew_cask:
     name: visual-studio-code
+    state: "{{ 'present' if install_vscode | default(true) else 'absent' }}"

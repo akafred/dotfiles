@@ -33,9 +33,10 @@
              [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
              [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-- name: visual studio code
+- name: Install or remove visual studio code
   homebrew_cask:
     name: visual-studio-code
+    state: "{{ 'present' if install_vscode | default(true) else 'absent' }}"
     accept_external_apps: yes
     # Adopt apps already present in /Applications instead of failing on them.
     install_options: adopt
