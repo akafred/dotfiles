@@ -1,0 +1,34 @@
+- name: Create Copilot config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.copilot"
+    state: directory
+
+- name: Install Copilot statusline script
+  copy:
+    src: copilot-statusline.sh
+    dest: "{{ ansible_env.HOME }}/.copilot/statusline.sh"
+    mode: "0755"
+
+- name: Read Copilot settings
+  slurp:
+    src: "{{ ansible_env.HOME }}/.copilot/settings.json"
+  register: copilot_settings_raw
+  failed_when: false
+
+# Copilot owns settings.json, so only touch the statusline keys and write only when they differ.
+- name: Enable Copilot statusline in settings
+  vars:
+    copilot_settings_current: "{{ (copilot_settings_raw.content | b64decode | from_json) if copilot_settings_raw.content is defined else {} }}"
+    copilot_settings_merged: >-
+      {{ copilot_settings_current | combine({
+           'experimental': true,
+           'statusLine': (copilot_settings_current.statusLine | default({})) | combine({
+             'type': 'command',
+             'command': '~/.copilot/statusline.sh',
+             'refreshInterval': 10
+           })
+         }) }}
+  copy:
+    dest: "{{ ansible_env.HOME }}/.copilot/settings.json"
+    content: "{{ copilot_settings_merged | to_nice_json(indent=2) }}\n"
+  when: copilot_settings_merged != copilot_settings_current

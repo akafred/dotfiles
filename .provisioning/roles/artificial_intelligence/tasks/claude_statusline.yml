@@ -1,0 +1,32 @@
+- name: Create Claude config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.claude"
+    state: directory
+
+- name: Install Claude statusline script
+  copy:
+    src: claude-statusline.sh
+    dest: "{{ ansible_env.HOME }}/.claude/statusline.sh"
+    mode: "0755"
+
+- name: Read Claude settings
+  slurp:
+    src: "{{ ansible_env.HOME }}/.claude/settings.json"
+  register: claude_settings_raw
+  failed_when: false
+
+# Claude Code owns settings.json, so only touch the statusLine key and write only when it differs.
+- name: Enable Claude statusline in settings
+  vars:
+    claude_settings_current: "{{ (claude_settings_raw.content | b64decode | from_json) if claude_settings_raw.content is defined else {} }}"
+    claude_settings_merged: >-
+      {{ claude_settings_current | combine({
+           'statusLine': (claude_settings_current.statusLine | default({})) | combine({
+             'type': 'command',
+             'command': '~/.claude/statusline.sh'
+           })
+         }) }}
+  copy:
+    dest: "{{ ansible_env.HOME }}/.claude/settings.json"
+    content: "{{ claude_settings_merged | to_nice_json(indent=2) }}\n"
+  when: claude_settings_merged != claude_settings_current
