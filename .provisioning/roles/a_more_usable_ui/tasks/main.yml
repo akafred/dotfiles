@@ -10,9 +10,20 @@
       #      - divvy - needs rosetta
       - flycut
       - raycast
-      - jordanbaird-ice@beta
       - iterm2
     install_options: force
+
+- name: install Ice beta (needed on macOS 26 Tahoe)
+  homebrew_cask:
+    name: jordanbaird-ice@beta
+    install_options: force
+  when: ansible_distribution_major_version | int < 27
+
+- name: remove Ice beta (not needed from macOS 27)
+  homebrew_cask:
+    name: jordanbaird-ice@beta
+    state: absent
+  when: ansible_distribution_major_version | int >= 27
 
 - name: install apps from Mac App Store
   shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
