@@ -35,14 +35,15 @@
 # Have to install tana manually
 
 - name: install tools from Mac App Store
-  shell: 'mas list | grep "{{ item }}" || mas search "{{ item }}" | grep "{{ item }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
+  # Skip if already installed: mas list misses apps Spotlight has not indexed, so also check /Applications.
+  shell: 'mas list | grep -q "{{ item.name }}" || [ -d "/Applications/{{ item.app }}.app" ] || mas search "{{ item.name }}" | grep "{{ item.name }}" | head -n 1 | awk ''{print $1}'' | xargs mas install'
   args:
     executable: /bin/bash
   with_items:
-    - Kindle
-    - Jojo Transcribe
-    - reMarkable desktop
-    - iA Writer
+    - { name: Kindle, app: Kindle }
+    - { name: Jojo Transcribe, app: Jojo }
+    - { name: reMarkable desktop, app: reMarkable }
+    - { name: iA Writer, app: iA Writer }
 #    - Notability
 #    - Drafts
 #    - Day One
